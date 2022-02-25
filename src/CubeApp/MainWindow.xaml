@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CubeApp"
         xmlns:converters="clr-namespace:CubeApp.Converters"
-        xmlns:GenericHelpers="clr-namespace:CubeApp.GenericHelpers"
+        xmlns:genericHelpers="clr-namespace:CubeApp.GenericHelpers"
         mc:Ignorable="d"
         Title="MainWindow"
         WindowStyle="None"
@@ -17,7 +17,7 @@
     <Window.Resources>
         <converters:ControlSizeToFontSizeConverter x:Key="ControlSizeToFontSizeConverter"/>
     </Window.Resources>
-    <Grid x:Name="MainGrid" ShowGridLines="{x:Static GenericHelpers:IsDebugHelper.IsDebug}">
+    <Grid x:Name="MainGrid" ShowGridLines="{x:Static genericHelpers:IsDebugHelper.IsDebug}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"></ColumnDefinition>
             <ColumnDefinition Width="200"></ColumnDefinition>
