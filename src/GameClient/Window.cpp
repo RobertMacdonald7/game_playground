@@ -1,7 +1,8 @@
 #include "Window.h"
 
 #include <cmath>
-#pragma comment(lib, "d2d1")
+
+#include "Direct2dEngine.h"
 
 GameClient::Window::Window() = default;
 
@@ -49,11 +50,17 @@ HRESULT GameClient::Window::Initialize()
 	auto result = _hwnd ? S_OK : E_FAIL;
 	if (SUCCEEDED(result))
 	{
-		// Create the Engine here
-		_engine = std::make_unique<Engine>(_hwnd);
-		result = _engine->Initialize();
+		try
+		{
+			_game = std::make_unique<Game>(std::make_unique<Engine::Concrete::Direct2dEngine>(_hwnd));
 
-		RETURN_NON_SUCCEEDED(result);
+		}
+		catch (std::exception)
+		{
+			result = E_FAIL;
+		}
+
+		RETURN_FAILED_HRESULT(result);
 
 		ShowWindow(_hwnd, SW_SHOWNORMAL);
 		UpdateWindow(_hwnd);
@@ -83,21 +90,19 @@ void GameClient::Window::Run() const
 		}
 		else
 		{
-			// _gameLogic->Update();
-			_engine->Draw();
-			//Sleep(15);
+			_game->Update();
 		}
 	}
 }
 
 void GameClient::Window::OnResize(const UINT width, const UINT height) const
 {
-	if (_engine)
+	if (_game)
 	{
 		// Note: This method can fail, but it's okay to ignore the
 		// error here, because the error will be returned again
 		// the next time EndDraw is called.
-		_engine->Resize(width, height);
+		_game->OnResize(width, height);
 	}
 }
 

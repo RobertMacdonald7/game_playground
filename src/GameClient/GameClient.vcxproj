@@ -141,13 +141,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="IEngine.h" />
     <ClInclude Include="Window.h" />
-    <ClInclude Include="Engine.h" />
+    <ClInclude Include="Direct2dEngine.h" />
     <ClInclude Include="Macros.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Window.cpp" />
-    <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="Direct2dEngine.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

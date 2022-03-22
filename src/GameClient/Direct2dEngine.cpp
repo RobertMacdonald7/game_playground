@@ -1,19 +1,26 @@
-#include "Engine.h"
+#include "Direct2dEngine.h"
 
 #include "Macros.h"
 
 // ReSharper disable once CppParameterMayBeConst
-GameClient::Engine::Engine(HWND windowHandle):
-_windowHandle(windowHandle)
+GameClient::Engine::Concrete::Direct2dEngine::Direct2dEngine(HWND windowHandle): IEngine(windowHandle)
 { }
 
-GameClient::Engine::~Engine()
+GameClient::Engine::Concrete::Direct2dEngine::~Direct2dEngine()
 {
 	DiscardDeviceIndependentResources();
 	DiscardDeviceResources();
 }
 
-void GameClient::Engine::Resize(const UINT width, const UINT height) const
+HRESULT GameClient::Engine::Concrete::Direct2dEngine::Initialize()
+{
+	// Create a Direct2D factory
+	const auto result = D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &_pDirect2dFactory);
+
+	return result;
+}
+
+void GameClient::Engine::Concrete::Direct2dEngine::Resize(const UINT width, const UINT height) const
 {
 	if (!_pRenderTarget)
 	{
@@ -24,20 +31,12 @@ void GameClient::Engine::Resize(const UINT width, const UINT height) const
 	_pRenderTarget->Resize(size);
 }
 
-HRESULT GameClient::Engine::Initialize()
-{
-	// Create a Direct2D factory
-	const auto result = D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &_pDirect2dFactory);
-
-	return result;
-}
-
-HRESULT GameClient::Engine::Draw()
+HRESULT GameClient::Engine::Concrete::Direct2dEngine::Draw()
 {
 	auto result = S_OK;
 	result = CreateDeviceResources();
 
-	RETURN_NON_SUCCEEDED(result);
+	RETURN_FAILED_HRESULT(result);
 
 	_pRenderTarget->BeginDraw();
 	_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
@@ -63,7 +62,7 @@ HRESULT GameClient::Engine::Draw()
 		_pRenderTarget->DrawLine(
 			D2D1::Point2F(0.0f, static_cast<FLOAT>(y)),
 			D2D1::Point2F(sWidth, static_cast<FLOAT>(y)),
-			_pLightSlateGrayBrush,
+			_pCornflowerBlueBrush,
 			0.5f);
 	}
 
@@ -79,7 +78,7 @@ HRESULT GameClient::Engine::Draw()
 	return result;
 }
 
-HRESULT GameClient::Engine::CreateDeviceResources()
+HRESULT GameClient::Engine::Concrete::Direct2dEngine::CreateDeviceResources()
 {
 	auto result = S_OK;
 
@@ -98,26 +97,25 @@ HRESULT GameClient::Engine::CreateDeviceResources()
 		D2D1::HwndRenderTargetProperties(_windowHandle, size),
 		&_pRenderTarget);
 
-	RETURN_NON_SUCCEEDED(result);
+	RETURN_FAILED_HRESULT(result);
 
 	result = _pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::CornflowerBlue), &_pCornflowerBlueBrush);
 
-	RETURN_NON_SUCCEEDED(result);
+	RETURN_FAILED_HRESULT(result);
 
 	result = _pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::LightGray), &_pLightSlateGrayBrush);
 
 	return result;
 }
 
-void GameClient::Engine::DiscardDeviceIndependentResources()
+void GameClient::Engine::Concrete::Direct2dEngine::DiscardDeviceIndependentResources()
 {
 	SafeRelease(&_pDirect2dFactory);
 }
 
-void GameClient::Engine::DiscardDeviceResources()
+void GameClient::Engine::Concrete::Direct2dEngine::DiscardDeviceResources()
 {
 	SafeRelease(&_pRenderTarget);
 	SafeRelease(&_pCornflowerBlueBrush);
 	SafeRelease(&_pLightSlateGrayBrush);
 }
-

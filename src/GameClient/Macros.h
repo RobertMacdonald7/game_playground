@@ -3,7 +3,6 @@
 // Windows Header Files:
 #include <Windows.h>
 
-#include <d2d1.h>
 #include <dwrite.h>
 #include <wincodec.h>
 
@@ -31,7 +30,7 @@ EXTERN_C IMAGE_DOS_HEADER __ImageBase;
 #define HINST_THISCOMPONENT ((HINSTANCE)&__ImageBase)
 #endif
 
-#ifndef RETURN_NON_SUCCEEDED
-#define RETURN_NON_SUCCEEDED(result) if(!SUCCEEDED((HRESULT)(result))) return result
+#ifndef RETURN_FAILED_HRESULT
+#define RETURN_FAILED_HRESULT(result) if(FAILED((HRESULT)(result))) return result
 #endif
 

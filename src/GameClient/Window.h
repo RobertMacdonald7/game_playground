@@ -3,7 +3,7 @@
 #include <memory>
 #include <Windows.h>
 
-#include "Engine.h"
+#include "Game.h"
 #include "Macros.h"
 
 namespace GameClient
@@ -12,7 +12,7 @@ namespace GameClient
 	{
 	private:
 		HWND _hwnd = nullptr;
-		std::unique_ptr<Engine> _engine = nullptr;
+		std::unique_ptr<Game> _game = nullptr;
 		const FLOAT _defaultDpi = 96.f;
 
 	public:
