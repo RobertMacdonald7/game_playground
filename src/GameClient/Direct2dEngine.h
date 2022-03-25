@@ -6,7 +6,7 @@
 
 #pragma comment(lib, "d2d1")
 
-namespace GameClient::Engine::Concrete
+namespace GameClient::Engine
 {
 	class Direct2dEngine final : public IEngine
 	{

@@ -52,7 +52,7 @@ HRESULT GameClient::Window::Initialize()
 	{
 		try
 		{
-			_game = std::make_unique<Game>(std::make_unique<Engine::Concrete::Direct2dEngine>(_hwnd));
+			_game = std::make_unique<Game>(std::make_unique<Engine::Direct2dEngine>(_hwnd));
 
 		}
 		catch (std::exception)

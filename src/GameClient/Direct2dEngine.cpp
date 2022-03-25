@@ -3,16 +3,16 @@
 #include "Macros.h"
 
 // ReSharper disable once CppParameterMayBeConst
-GameClient::Engine::Concrete::Direct2dEngine::Direct2dEngine(HWND windowHandle): IEngine(windowHandle)
+GameClient::Engine::Direct2dEngine::Direct2dEngine(HWND windowHandle): IEngine(windowHandle)
 { }
 
-GameClient::Engine::Concrete::Direct2dEngine::~Direct2dEngine()
+GameClient::Engine::Direct2dEngine::~Direct2dEngine()
 {
 	DiscardDeviceIndependentResources();
 	DiscardDeviceResources();
 }
 
-HRESULT GameClient::Engine::Concrete::Direct2dEngine::Initialize()
+HRESULT GameClient::Engine::Direct2dEngine::Initialize()
 {
 	// Create a Direct2D factory
 	const auto result = D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &_pDirect2dFactory);
@@ -20,7 +20,7 @@ HRESULT GameClient::Engine::Concrete::Direct2dEngine::Initialize()
 	return result;
 }
 
-void GameClient::Engine::Concrete::Direct2dEngine::Resize(const UINT width, const UINT height) const
+void GameClient::Engine::Direct2dEngine::Resize(const UINT width, const UINT height) const
 {
 	if (!_pRenderTarget)
 	{
@@ -31,7 +31,7 @@ void GameClient::Engine::Concrete::Direct2dEngine::Resize(const UINT width, cons
 	_pRenderTarget->Resize(size);
 }
 
-HRESULT GameClient::Engine::Concrete::Direct2dEngine::Draw()
+HRESULT GameClient::Engine::Direct2dEngine::Draw()
 {
 	auto result = S_OK;
 	result = CreateDeviceResources();
@@ -78,7 +78,7 @@ HRESULT GameClient::Engine::Concrete::Direct2dEngine::Draw()
 	return result;
 }
 
-HRESULT GameClient::Engine::Concrete::Direct2dEngine::CreateDeviceResources()
+HRESULT GameClient::Engine::Direct2dEngine::CreateDeviceResources()
 {
 	auto result = S_OK;
 
@@ -108,12 +108,12 @@ HRESULT GameClient::Engine::Concrete::Direct2dEngine::CreateDeviceResources()
 	return result;
 }
 
-void GameClient::Engine::Concrete::Direct2dEngine::DiscardDeviceIndependentResources()
+void GameClient::Engine::Direct2dEngine::DiscardDeviceIndependentResources()
 {
 	SafeRelease(&_pDirect2dFactory);
 }
 
-void GameClient::Engine::Concrete::Direct2dEngine::DiscardDeviceResources()
+void GameClient::Engine::Direct2dEngine::DiscardDeviceResources()
 {
 	SafeRelease(&_pRenderTarget);
 	SafeRelease(&_pCornflowerBlueBrush);

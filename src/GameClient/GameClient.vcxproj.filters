@@ -16,9 +16,6 @@
     <Filter Include="Header Files\Engine">
       <UniqueIdentifier>{f503c901-3d1e-4452-9547-bccee6dd6073}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Engine\Concrete">
-      <UniqueIdentifier>{7dc54c4c-d7e8-441a-a6b3-d8423e4ea525}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Engine">
       <UniqueIdentifier>{d16daade-8019-4355-89b7-ed07bf553dae}</UniqueIdentifier>
     </Filter>
@@ -36,11 +33,11 @@
     <ClInclude Include="IEngine.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Direct2dEngine.h">
-      <Filter>Header Files\Engine\Concrete</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Direct2dEngine.h">
+      <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
