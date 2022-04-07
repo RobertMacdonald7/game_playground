@@ -3,6 +3,7 @@
 #include <d2d1.h>
 
 #include "IEngine.h"
+#include "Snake.h"
 
 #pragma comment(lib, "d2d1")
 
@@ -16,6 +17,8 @@ namespace GameClient::Engine
 		ID2D1SolidColorBrush* _pLightSlateGrayBrush = nullptr;
 		ID2D1SolidColorBrush* _pCornflowerBlueBrush = nullptr;
 
+		int _offSet = 0;
+
 	public:
 		explicit Direct2dEngine(HWND windowHandle);
 		~Direct2dEngine() override;
@@ -28,7 +31,7 @@ namespace GameClient::Engine
 
 		HRESULT Initialize() override;
 		void Resize(UINT width, UINT height) const override;
-		HRESULT Draw() override;
+		HRESULT Draw(std::shared_ptr<GameObjects::Snake>& snake) override;
 
 	private:
 		HRESULT CreateDeviceResources();

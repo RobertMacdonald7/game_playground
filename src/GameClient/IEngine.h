@@ -1,6 +1,9 @@
 #pragma once
 
+#include <memory>
 #include <Windows.h>
+
+#include "Snake.h"
 
 namespace GameClient::Engine
 {
@@ -19,6 +22,6 @@ namespace GameClient::Engine
 
 		virtual HRESULT Initialize() = 0;
 		virtual void Resize(UINT width, UINT height) const = 0;
-		virtual HRESULT Draw() = 0;
+		virtual HRESULT Draw(std::shared_ptr<GameObjects::Snake>& snake) = 0;
 	};
 }

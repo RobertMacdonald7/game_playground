@@ -13,6 +13,8 @@ _engine(std::move(engine))
 		// TODO - More precise exception
 		throw std::exception(message.c_str());
 	}
+
+	_snake = std::make_shared<GameObjects::Snake>();
 }
 
 GameClient::Game::~Game() = default;
@@ -24,5 +26,6 @@ void GameClient::Game::OnResize(const UINT width, const UINT height) const
 
 void GameClient::Game::Update()
 {
-	_engine->Draw();
+	_snake->OnUpdate();
+	_engine->Draw(_snake);
 }

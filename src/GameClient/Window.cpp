@@ -1,6 +1,7 @@
 #include "Window.h"
 
 #include <cmath>
+#include <chrono>
 
 #include "Direct2dEngine.h"
 
@@ -72,24 +73,21 @@ HRESULT GameClient::Window::Initialize()
 void GameClient::Window::Run() const
 {
 	MSG message;
+	message.message = WM_NULL;
+	int fps = 70;
+	auto nextFrame = std::chrono::steady_clock::now();
+	nextFrame += std::chrono::milliseconds(1);
 
-	bool running = true;
-	while (running)
+	while (message.message != WM_QUIT)
 	{
 		if (PeekMessage(&message, nullptr, 0, 0, PM_REMOVE))
 		{
-			if (message.message == WM_QUIT)
-			{
-				running = false;
-			}
-			else
-			{
-				TranslateMessage(&message);
-				DispatchMessage(&message);
-			}
+			TranslateMessage(&message);
+			DispatchMessage(&message);
 		}
 		else
 		{
+			
 			_game->Update();
 		}
 	}

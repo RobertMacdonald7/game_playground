@@ -31,10 +31,14 @@ void GameClient::Engine::Direct2dEngine::Resize(const UINT width, const UINT hei
 	_pRenderTarget->Resize(size);
 }
 
-HRESULT GameClient::Engine::Direct2dEngine::Draw()
+HRESULT GameClient::Engine::Direct2dEngine::Draw(std::shared_ptr<GameObjects::Snake>& snake)
 {
 	auto result = S_OK;
 	result = CreateDeviceResources();
+
+	RETURN_FAILED_HRESULT(result);
+
+	result = snake->CreateDeviceResources(_pRenderTarget);
 
 	RETURN_FAILED_HRESULT(result);
 
@@ -42,29 +46,7 @@ HRESULT GameClient::Engine::Direct2dEngine::Draw()
 	_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 	_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
 
-	const auto [sWidth, sHeight] = _pRenderTarget->GetSize();
-
-	// Draw a Grid
-	const auto width = static_cast<int>(sWidth);
-	const auto height = static_cast<int>(sHeight);
-
-	for (auto x = 0; x < width; x += 10)
-	{
-		_pRenderTarget->DrawLine(
-			D2D1::Point2F(static_cast<FLOAT>(x), 0.0f),
-			D2D1::Point2F(static_cast<FLOAT>(x), sHeight),
-			_pLightSlateGrayBrush,
-			0.5f);
-	}
-
-	for (auto y = 0; y < height; y += 10)
-	{
-		_pRenderTarget->DrawLine(
-			D2D1::Point2F(0.0f, static_cast<FLOAT>(y)),
-			D2D1::Point2F(sWidth, static_cast<FLOAT>(y)),
-			_pCornflowerBlueBrush,
-			0.5f);
-	}
+	snake->Draw(_pRenderTarget);
 
 	result = _pRenderTarget->EndDraw();
 
@@ -73,6 +55,7 @@ HRESULT GameClient::Engine::Direct2dEngine::Draw()
 		// Resources will be recreated next Draw()
 		result = S_OK;
 		DiscardDeviceResources();
+		snake->DiscardDeviceResources();
 	}
 
 	return result;
