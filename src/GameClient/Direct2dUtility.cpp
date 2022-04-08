@@ -3,7 +3,7 @@
 namespace GameClient::Utility {
 	D2D1_RECT_F Direct2dUtility::CreateUnitRectangle(FLOAT xOffset, FLOAT yOffset, FLOAT x, FLOAT y)
 	{
-		auto rectangle = D2D1::RectF(
+		const auto rectangle = D2D1::RectF(
 			xOffset + (UNIT_SIZE * x),
 			yOffset + (UNIT_SIZE * y),
 			xOffset + (UNIT_SIZE * x) + UNIT_SIZE,
