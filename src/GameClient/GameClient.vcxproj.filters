@@ -25,6 +25,12 @@
     <Filter Include="Header Files\GameObjects">
       <UniqueIdentifier>{e5af893e-ef3e-4b45-8d2f-2053cab4d718}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Utility">
+      <UniqueIdentifier>{4250477e-0fd7-49ec-9775-f9dcb8fef033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility">
+      <UniqueIdentifier>{508151ca-7cc6-4ef0-8b6f-aeac55e4b991}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -51,6 +57,9 @@
     <ClInclude Include="GameDefinitions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Direct2dUtility.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp">
@@ -67,6 +76,9 @@
     </ClCompile>
     <ClCompile Include="Snake.cpp">
       <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct2dUtility.cpp">
+      <Filter>Source Files\Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

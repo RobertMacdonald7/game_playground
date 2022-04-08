@@ -21,10 +21,14 @@ namespace GameClient::GameObjects
 		Right
 	};
 
+	enum class PlayArea {
+		BackGround
+	};
+
 	class Snake
 	{
 	private:
-		int _playArea[GRID_SIZE][GRID_SIZE];
+		std::vector<std::vector<PlayArea>> _playArea;
 
 		Direction _direction = Direction::Right;
 		std::vector<Position> _segments;

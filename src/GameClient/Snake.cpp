@@ -2,8 +2,8 @@
 
 #include <chrono>
 
-#include "GameDefinitions.h"
 #include "Macros.h"
+#include "Direct2dUtility.h"
 
 GameClient::GameObjects::Snake::Snake()
 {
@@ -72,14 +72,14 @@ void GameClient::GameObjects::Snake::Draw(ID2D1HwndRenderTarget* renderTarget)
 	{
 		for (auto y = 0; y < GRID_SIZE; ++y)
 		{
-			auto rectangle = D2D1::RectF(UNIT_SIZE * x, UNIT_SIZE * y, UNIT_SIZE * x + UNIT_SIZE, UNIT_SIZE * y + UNIT_SIZE);
+			auto rectangle = GameClient::Utility::Direct2dUtility::CreateUnitRectangle(0, 0, static_cast<FLOAT>(x), static_cast<FLOAT>(y));
 			renderTarget->FillRectangle(&rectangle, _playAreaBrush);
 		}
 	}
 
 	for (const auto& segment : _segments)
 	{
-		auto rectangle = D2D1::RectF(UNIT_SIZE * segment.x, UNIT_SIZE * segment.y, UNIT_SIZE * segment.x + UNIT_SIZE, UNIT_SIZE * segment.y + UNIT_SIZE);
+		auto rectangle = GameClient::Utility::Direct2dUtility::CreateUnitRectangle(0, 0, static_cast<FLOAT>(segment.x), static_cast<FLOAT>(segment.y));
 		renderTarget->FillRectangle(&rectangle, _snakeBrush);
 	}
 }
