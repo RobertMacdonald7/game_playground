@@ -31,6 +31,9 @@
     <Filter Include="Source Files\Utility">
       <UniqueIdentifier>{508151ca-7cc6-4ef0-8b6f-aeac55e4b991}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Input">
+      <UniqueIdentifier>{12bb5067-4cbb-43a9-baae-3b65a5f44fed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -59,6 +62,9 @@
     </ClInclude>
     <ClInclude Include="Direct2dUtility.h">
       <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Keys.h">
+      <Filter>Header Files\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

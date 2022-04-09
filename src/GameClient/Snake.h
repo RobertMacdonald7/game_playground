@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "GameDefinitions.h"
+#include "Keys.h"
 
 namespace GameClient::GameObjects
 {
@@ -28,7 +29,7 @@ namespace GameClient::GameObjects
 	class Snake
 	{
 	private:
-		std::vector<std::vector<PlayArea>> _playArea;
+		std::vector<std::vector<PlayArea>> _playArea{GRID_SIZE, std::vector<PlayArea>(GRID_SIZE)};
 
 		Direction _direction = Direction::Right;
 		std::vector<Position> _segments;
@@ -38,12 +39,10 @@ namespace GameClient::GameObjects
 
 		int _growSnake = 5;
 
-		std::chrono::steady_clock::time_point _lastUpdateTime = std::chrono::steady_clock::now();
-		const std::chrono::milliseconds _tickRateMs = std::chrono::milliseconds(200);
-
 	public:
 		Snake();
 		~Snake();
+		void OnInput(Input::Keys pressedKey, bool keyChanged);
 
 		Snake(Snake& copyOther) = delete;
 		Snake operator=(Snake& copyOther) = delete;

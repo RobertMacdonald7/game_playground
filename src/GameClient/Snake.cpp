@@ -9,6 +9,15 @@ GameClient::GameObjects::Snake::Snake()
 {
 	constexpr auto initialSnake = Position{ 2, 2 };
 	_segments.push_back(initialSnake);
+
+	for (auto x = 0; x < GRID_SIZE; ++x)
+	{
+		for (auto y = 0; y < GRID_SIZE; ++y)
+		{
+
+			_playArea[x][y] = PlayArea::BackGround;
+		}
+	}
 }
 
 GameClient::GameObjects::Snake::~Snake()
@@ -16,18 +25,34 @@ GameClient::GameObjects::Snake::~Snake()
 	DiscardDeviceResources();
 }
 
+void GameClient::GameObjects::Snake::OnInput(Input::Keys pressedKey, bool keyChanged)
+{
+	switch (pressedKey)  // NOLINT(clang-diagnostic-switch-enum)
+	{
+	case Input::Keys::UpArrow:
+		if (_direction == Direction::Down) break;
+		_direction = Direction::Up;
+		break;
+	case Input::Keys::DownArrow:
+		if (_direction == Direction::Up) break;
+		_direction = Direction::Down;
+		break;
+	case Input::Keys::LeftArrow:
+		if (_direction == Direction::Right) break;
+		_direction = Direction::Left;
+		break;
+	case Input::Keys::RightArrow:
+		if (_direction == Direction::Left) break;
+		_direction = Direction::Right;
+		break;
+	default:
+		break;
+	}
+}
+
 void GameClient::GameObjects::Snake::OnUpdate()
 {
-	// Game speed dependent updates!
-	const auto now = std::chrono::steady_clock::now();
-	if (const auto nextUpdate = _lastUpdateTime + _tickRateMs; now > nextUpdate)
-	{
-		MoveSnake();
-		_lastUpdateTime = now;
-	}
-
-	// Game speed independent updates!
-	// CHECK COLLISION HERE
+	MoveSnake();
 }
 
 void GameClient::GameObjects::Snake::MoveSnake()
@@ -68,6 +93,7 @@ void GameClient::GameObjects::Snake::MoveSnake()
 
 void GameClient::GameObjects::Snake::Draw(ID2D1HwndRenderTarget* renderTarget)
 {
+	// TODO - Move "PlayArea" into its own "Drawable" class
 	for (auto x = 0; x < GRID_SIZE; ++x)
 	{
 		for (auto y = 0; y < GRID_SIZE; ++y)
@@ -105,4 +131,5 @@ HRESULT GameClient::GameObjects::Snake::CreateDeviceResources(ID2D1HwndRenderTar
 void GameClient::GameObjects::Snake::DiscardDeviceResources()
 {
 	SafeRelease(&_snakeBrush);
+	SafeRelease(&_playAreaBrush);
 }

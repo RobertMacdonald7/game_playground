@@ -88,7 +88,7 @@ void GameClient::Window::Run() const
 		else
 		{
 			
-			_game->Update();
+			_game->ProcessFrame();
 		}
 	}
 }
