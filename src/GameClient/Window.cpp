@@ -4,12 +4,13 @@
 #include <chrono>
 
 #include "Direct2dEngine.h"
+#include "resource.h"
 
 GameClient::Window::Window() = default;
 
 GameClient::Window::~Window() = default;
 
-HRESULT GameClient::Window::Initialize()
+HRESULT GameClient::Window::Initialize(HINSTANCE hInstance)
 {
 	// Register the window class.
 	WNDCLASSEX windowClassEx = { };
@@ -23,6 +24,7 @@ HRESULT GameClient::Window::Initialize()
 	windowClassEx.lpszMenuName = nullptr;
 	windowClassEx.hCursor = LoadCursor(nullptr, IDI_APPLICATION);
 	windowClassEx.lpszClassName = L"Window";
+	windowClassEx.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_SNAKE));
 
 	RegisterClassEx(&windowClassEx);
 
@@ -43,7 +45,7 @@ HRESULT GameClient::Window::Initialize()
 	_hwnd = CreateWindowEx(
 		0,
 		L"Window",
-		L"Direct2D Game Client",
+		L"Snake",
 		windowStyle,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,

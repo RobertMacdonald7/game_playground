@@ -26,7 +26,7 @@ namespace GameClient
 		~Window();
 
 		// Register the window class and call methods for instantiating drawing resources
-		HRESULT Initialize();
+		HRESULT Initialize(HINSTANCE hInstance);
 
 		// Process and dispatch messages
 		void Run() const;
