@@ -32,16 +32,23 @@ HRESULT GameClient::Window::Initialize()
 	const auto dpiX = static_cast<FLOAT>(GetDpiForWindow(GetDesktopWindow()));
 	const auto dpiY = dpiX;
 
-	// Create the window.
+	// Adjust the window to fit desired resolution
+	constexpr DWORD windowStyle = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX;
+	RECT windowRectangle = { 0, 0, game_width_pixels, game_height_pixels };
+	AdjustWindowRectEx(&windowRectangle, windowStyle, FALSE, 0);
+
+	// Create the window
+	const auto windowHeight = static_cast<float>(windowRectangle.bottom - windowRectangle.top);
+	const auto windowWidth = static_cast<float>(windowRectangle.right - windowRectangle.left);
 	_hwnd = CreateWindowEx(
 		0,
 		L"Window",
 		L"Direct2D Game Client",
-		WS_OVERLAPPEDWINDOW,
+		windowStyle,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
-		static_cast<int>(ceil(640.f * dpiX / _defaultDpi)),
-		static_cast<int>(ceil(480.f * dpiY / _defaultDpi)),
+		static_cast<int>(ceil(windowWidth * dpiX / _defaultDpi)),
+		static_cast<int>(ceil(windowHeight * dpiY / _defaultDpi)),
 		nullptr,
 		nullptr,
 		HINST_THISCOMPONENT,

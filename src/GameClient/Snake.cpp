@@ -10,12 +10,12 @@ GameClient::GameObjects::Snake::Snake()
 	constexpr auto initialSnake = Position{ 2, 2 };
 	_segments.push_back(initialSnake);
 
-	for (auto x = 0; x < GRID_SIZE; ++x)
+	for (auto x = 0; x < game_width_units; ++x)
 	{
-		for (auto y = 0; y < GRID_SIZE; ++y)
+		for (auto y = 0; y < game_height_units; ++y)
 		{
-
-			_playArea[x][y] = PlayArea::BackGround;
+			const auto isBoundary = IsBoundary(x, y);
+			_playArea[x][y] = isBoundary ? PlayArea::Wall : PlayArea::BackGround;
 		}
 	}
 }
@@ -25,7 +25,7 @@ GameClient::GameObjects::Snake::~Snake()
 	DiscardDeviceResources();
 }
 
-void GameClient::GameObjects::Snake::OnInput(Input::Keys pressedKey, bool keyChanged)
+void GameClient::GameObjects::Snake::OnInput(GameClient::Input::Keys pressedKey)
 {
 	switch (pressedKey)  // NOLINT(clang-diagnostic-switch-enum)
 	{
@@ -75,6 +75,8 @@ void GameClient::GameObjects::Snake::MoveSnake()
 	case Direction::Up:
 		--deltaY;
 		break;
+	default:
+		throw std::out_of_range("Direction was not a handled value");
 	}
 
 	const auto newHead = Position{ headPosition.x + deltaX, headPosition.y + deltaY };
@@ -94,12 +96,13 @@ void GameClient::GameObjects::Snake::MoveSnake()
 void GameClient::GameObjects::Snake::Draw(ID2D1HwndRenderTarget* renderTarget)
 {
 	// TODO - Move "PlayArea" into its own "Drawable" class
-	for (auto x = 0; x < GRID_SIZE; ++x)
+	for (auto x = 0; x < game_width_units; ++x)
 	{
-		for (auto y = 0; y < GRID_SIZE; ++y)
+		for (auto y = 0; y < game_height_units; ++y)
 		{
 			auto rectangle = GameClient::Utility::Direct2dUtility::CreateUnitRectangle(0, 0, static_cast<FLOAT>(x), static_cast<FLOAT>(y));
-			renderTarget->FillRectangle(&rectangle, _playAreaBrush);
+			const auto brush = GetPlayAreaBrush(_playArea[x][y]);
+			renderTarget->FillRectangle(&rectangle, brush);
 		}
 	}
 
@@ -112,7 +115,7 @@ void GameClient::GameObjects::Snake::Draw(ID2D1HwndRenderTarget* renderTarget)
 
 HRESULT GameClient::GameObjects::Snake::CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget)
 {
-	HRESULT result = S_OK;
+	auto result = S_OK;
 	if (!_snakeBrush)
 	{
 		result = renderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::Blue), &_snakeBrush);
@@ -125,6 +128,12 @@ HRESULT GameClient::GameObjects::Snake::CreateDeviceResources(ID2D1HwndRenderTar
 		RETURN_FAILED_HRESULT(result);
 	}
 
+	if (!_playAreaBoundaryBrush)
+	{
+		result = renderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::DarkRed), &_playAreaBoundaryBrush);
+		RETURN_FAILED_HRESULT(result);
+	}
+
 	return result;
 }
 
@@ -132,4 +141,23 @@ void GameClient::GameObjects::Snake::DiscardDeviceResources()
 {
 	SafeRelease(&_snakeBrush);
 	SafeRelease(&_playAreaBrush);
+	SafeRelease(&_playAreaBoundaryBrush);
+}
+
+bool GameClient::GameObjects::Snake::IsBoundary(const int x, const int y)
+{
+	return x == 0 || x == game_width_units - 1 || y == 0 || y == game_height_units - 1;
+}
+
+ID2D1SolidColorBrush* GameClient::GameObjects::Snake::GetPlayAreaBrush(const PlayArea area) const
+{
+	switch (area)
+	{
+	case PlayArea::BackGround:
+		return _playAreaBrush;
+	case PlayArea::Wall:
+		return _playAreaBoundaryBrush;
+	default:
+		throw std::out_of_range("PlayArea was not a handled value");
+	}
 }

@@ -1,13 +1,10 @@
 #pragma once
 
-#ifndef UNIT_SIZE
-#define UNIT_SIZE 20
-#endif
+constexpr int unit_size_pixels = 10;
+constexpr int game_width_pixels = 800;
+constexpr int game_height_pixels = 600;
 
-#ifndef AREA_SIZE
-#define AREA_SIZE 500
-#endif
+constexpr int game_area_pixels = game_width_pixels * game_height_pixels;
 
-#ifndef GRID_SIZE
-#define GRID_SIZE (AREA_SIZE/UNIT_SIZE)
-#endif
+constexpr int game_width_units = game_width_pixels / unit_size_pixels;
+constexpr int game_height_units = game_height_pixels / unit_size_pixels;

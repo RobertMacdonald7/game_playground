@@ -23,26 +23,28 @@ namespace GameClient::GameObjects
 	};
 
 	enum class PlayArea {
-		BackGround
+		BackGround,
+		Wall
 	};
 
 	class Snake
 	{
 	private:
-		std::vector<std::vector<PlayArea>> _playArea{GRID_SIZE, std::vector<PlayArea>(GRID_SIZE)};
+		std::vector<std::vector<PlayArea>> _playArea{game_width_units, std::vector<PlayArea>(game_height_units)};
 
 		Direction _direction = Direction::Right;
 		std::vector<Position> _segments;
 
 		ID2D1SolidColorBrush* _snakeBrush = nullptr;
 		ID2D1SolidColorBrush* _playAreaBrush = nullptr;
+		ID2D1SolidColorBrush* _playAreaBoundaryBrush = nullptr;
 
 		int _growSnake = 5;
 
 	public:
 		Snake();
 		~Snake();
-		void OnInput(Input::Keys pressedKey, bool keyChanged);
+		void OnInput(Input::Keys pressedKey);
 
 		Snake(Snake& copyOther) = delete;
 		Snake operator=(Snake& copyOther) = delete;
@@ -60,6 +62,10 @@ namespace GameClient::GameObjects
 		HRESULT CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget);
 
 		void DiscardDeviceResources();
+
+	private:
+		static bool IsBoundary(int x, int y);
+		ID2D1SolidColorBrush* GetPlayAreaBrush(PlayArea area) const;
 	};
 	
 }

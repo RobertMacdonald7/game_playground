@@ -46,7 +46,7 @@ void GameClient::Game::HandleInput()
 	}
 
 	const auto keyChanged = _previousKey != pressedKey;
-	_snake->OnInput(pressedKey, keyChanged);
+	_snake->OnInput(pressedKey);
 
 	_previousKey = pressedKey;
 }
