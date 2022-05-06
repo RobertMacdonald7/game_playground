@@ -27,23 +27,31 @@ GameClient::GameObjects::Snake::~Snake()
 
 void GameClient::GameObjects::Snake::OnInput(GameClient::Input::Keys pressedKey)
 {
+	// Can't change the snake's direction if it has already been changed and hasn't moved yet.
+	if (_directionInputReceived)
+		return;
+
 	switch (pressedKey)  // NOLINT(clang-diagnostic-switch-enum)
 	{
 	case Input::Keys::UpArrow:
 		if (_direction == Direction::Down) break;
 		_direction = Direction::Up;
+		_directionInputReceived = true;
 		break;
 	case Input::Keys::DownArrow:
 		if (_direction == Direction::Up) break;
 		_direction = Direction::Down;
+		_directionInputReceived = true;
 		break;
 	case Input::Keys::LeftArrow:
 		if (_direction == Direction::Right) break;
 		_direction = Direction::Left;
+		_directionInputReceived = true;
 		break;
 	case Input::Keys::RightArrow:
 		if (_direction == Direction::Left) break;
 		_direction = Direction::Right;
+		_directionInputReceived = true;
 		break;
 	default:
 		break;
@@ -91,6 +99,8 @@ void GameClient::GameObjects::Snake::MoveSnake()
 	{
 		_segments.pop_back();
 	}
+
+	_directionInputReceived = false;
 }
 
 void GameClient::GameObjects::Snake::Draw(ID2D1HwndRenderTarget* renderTarget)

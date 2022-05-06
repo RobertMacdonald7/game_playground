@@ -41,6 +41,8 @@ namespace GameClient::GameObjects
 
 		int _growSnake = 5;
 
+		bool _directionInputReceived = false;
+
 	public:
 		Snake();
 		~Snake();

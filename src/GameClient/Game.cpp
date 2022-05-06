@@ -45,7 +45,6 @@ void GameClient::Game::HandleInput()
 		pressedKey = Input::Keys::RightArrow;
 	}
 
-	const auto keyChanged = _previousKey != pressedKey;
 	_snake->OnInput(pressedKey);
 
 	_previousKey = pressedKey;
@@ -59,13 +58,12 @@ void GameClient::Game::ProcessFrame()
 	_lastUpdateTime = currentTime;
 	unsigned short numberOfUpdates = 0;
 
+	HandleInput();
+
 	while (numberOfUpdates < _maxUpdatesPerFrame && _accumulatedFrameTime > _timeStep)
 	{
 		_accumulatedFrameTime -= _timeStep;
-
-		HandleInput();
 		_snake->OnUpdate();
-
 		++numberOfUpdates;
 	}
 	
