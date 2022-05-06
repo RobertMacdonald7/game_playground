@@ -12,6 +12,8 @@ namespace GameClient::GameObjects
 	{
 		int x;
 		int y;
+
+		bool operator==(const Position& rhs) const = default;
 	};
 
 	enum class Direction
@@ -39,9 +41,10 @@ namespace GameClient::GameObjects
 		ID2D1SolidColorBrush* _playAreaBrush = nullptr;
 		ID2D1SolidColorBrush* _playAreaBoundaryBrush = nullptr;
 
-		int _growSnake = 5;
+		int _growSnake = 0;
 
 		bool _directionInputReceived = false;
+		bool _gameOver = false;
 
 	public:
 		Snake();
@@ -65,9 +68,14 @@ namespace GameClient::GameObjects
 
 		void DiscardDeviceResources();
 
+		void Reset();
+
 	private:
+		void CreatePlayer();
+		void CreatePlayArea();
 		static bool IsBoundary(int x, int y);
-		ID2D1SolidColorBrush* GetPlayAreaBrush(PlayArea area) const;
+		[[nodiscard]] ID2D1SolidColorBrush* GetPlayAreaBrush(PlayArea area) const;
+		bool IsColliding(int x, int y);
 	};
 	
 }

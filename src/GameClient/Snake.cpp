@@ -7,17 +7,8 @@
 
 GameClient::GameObjects::Snake::Snake()
 {
-	constexpr auto initialSnake = Position{ 2, 2 };
-	_segments.push_back(initialSnake);
-
-	for (auto x = 0; x < game_width_units; ++x)
-	{
-		for (auto y = 0; y < game_height_units; ++y)
-		{
-			const auto isBoundary = IsBoundary(x, y);
-			_playArea[x][y] = isBoundary ? PlayArea::Wall : PlayArea::BackGround;
-		}
-	}
+	CreatePlayer();
+	CreatePlayArea();
 }
 
 GameClient::GameObjects::Snake::~Snake()
@@ -27,6 +18,11 @@ GameClient::GameObjects::Snake::~Snake()
 
 void GameClient::GameObjects::Snake::OnInput(GameClient::Input::Keys pressedKey)
 {
+	if (pressedKey == Input::Keys::SpaceBar)
+	{
+		Reset();
+	}
+
 	// Can't change the snake's direction if it has already been changed and hasn't moved yet.
 	if (_directionInputReceived)
 		return;
@@ -65,6 +61,13 @@ void GameClient::GameObjects::Snake::OnUpdate()
 
 void GameClient::GameObjects::Snake::MoveSnake()
 {
+	_directionInputReceived = false;
+
+	// TODO - replace this with a "game over" state.
+	if (_gameOver)
+	{
+		return;
+	}
 	const Position& headPosition = _segments.front();
 
 	int deltaX = 0;
@@ -88,6 +91,13 @@ void GameClient::GameObjects::Snake::MoveSnake()
 	}
 
 	const auto newHead = Position{ headPosition.x + deltaX, headPosition.y + deltaY };
+
+	if (const auto isColliding = IsColliding(newHead.x, newHead.y))
+	{
+		_gameOver = true;
+		return;
+	}
+
 	_segments.insert(_segments.begin(), newHead);
 
 	// If we need to grow the snake don't pop the back element.
@@ -99,8 +109,6 @@ void GameClient::GameObjects::Snake::MoveSnake()
 	{
 		_segments.pop_back();
 	}
-
-	_directionInputReceived = false;
 }
 
 void GameClient::GameObjects::Snake::Draw(ID2D1HwndRenderTarget* renderTarget)
@@ -110,7 +118,8 @@ void GameClient::GameObjects::Snake::Draw(ID2D1HwndRenderTarget* renderTarget)
 	{
 		for (auto y = 0; y < game_height_units; ++y)
 		{
-			auto rectangle = GameClient::Utility::Direct2dUtility::CreateUnitRectangle(0, 0, static_cast<FLOAT>(x), static_cast<FLOAT>(y));
+			auto rectangle = GameClient::Utility::Direct2dUtility::CreateUnitRectangle(
+				0, 0, static_cast<FLOAT>(x), static_cast<FLOAT>(y));
 			const auto brush = GetPlayAreaBrush(_playArea[x][y]);
 			renderTarget->FillRectangle(&rectangle, brush);
 		}
@@ -154,6 +163,43 @@ void GameClient::GameObjects::Snake::DiscardDeviceResources()
 	SafeRelease(&_playAreaBoundaryBrush);
 }
 
+void GameClient::GameObjects::Snake::Reset()
+{
+	_segments.clear();
+
+	CreatePlayer();
+
+	_direction = Direction::Right;
+	_growSnake = 0;
+	_directionInputReceived = false;
+	_gameOver = false;
+}
+
+void GameClient::GameObjects::Snake::CreatePlayer()
+{
+	constexpr auto initialX = 10;
+	constexpr auto initialSnakeHead = Position{ initialX, game_height_units/2 };
+	_segments.push_back(initialSnakeHead);
+
+	for(auto x = initialX - 1; x > initialX - 5; --x)
+	{
+		auto segment = Position{ x, game_height_units / 2 };
+		_segments.push_back(segment);
+	}
+}
+
+void GameClient::GameObjects::Snake::CreatePlayArea()
+{
+	for (auto x = 0; x < game_width_units; ++x)
+	{
+		for (auto y = 0; y < game_height_units; ++y)
+		{
+			const auto isBoundary = IsBoundary(x, y);
+			_playArea[x][y] = isBoundary ? PlayArea::Wall : PlayArea::BackGround;
+		}
+	}
+}
+
 bool GameClient::GameObjects::Snake::IsBoundary(const int x, const int y)
 {
 	return x == 0 || x == game_width_units - 1 || y == 0 || y == game_height_units - 1;
@@ -170,4 +216,22 @@ ID2D1SolidColorBrush* GameClient::GameObjects::Snake::GetPlayAreaBrush(const Pla
 	default:
 		throw std::out_of_range("PlayArea was not a handled value");
 	}
+}
+
+bool GameClient::GameObjects::Snake::IsColliding(const int x, const int y)
+{
+	// Out of bounds
+	if (x < 0 || y < 0 || x > game_width_units || y > game_height_units)
+		return true;
+
+	// Self collision
+	const auto findIt = std::ranges::find(_segments, Position{x, y});
+	if (auto isCollidingWithSelf = findIt != _segments.end())
+		return true;
+
+	// Wall collision
+	if (_playArea[x][y] == PlayArea::Wall)
+		return true;
+
+	return false;
 }

@@ -10,7 +10,6 @@ _engine(std::move(engine))
 	if (FAILED(result))
 	{
 		const auto message = "Engine failed to initialize: " + std::to_string(result);
-		// TODO - More precise exception
 		throw std::exception(message.c_str());
 	}
 
@@ -44,6 +43,10 @@ void GameClient::Game::HandleInput()
 	{
 		pressedKey = Input::Keys::RightArrow;
 	}
+	if (GetAsyncKeyState(VK_SPACE))
+	{
+		pressedKey = Input::Keys::SpaceBar;
+	}
 
 	_snake->OnInput(pressedKey);
 
@@ -58,6 +61,7 @@ void GameClient::Game::ProcessFrame()
 	_lastUpdateTime = currentTime;
 	unsigned short numberOfUpdates = 0;
 
+	// TODO - Input buffering
 	HandleInput();
 
 	while (numberOfUpdates < _maxUpdatesPerFrame && _accumulatedFrameTime > _timeStep)
