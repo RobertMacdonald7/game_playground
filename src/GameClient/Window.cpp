@@ -72,9 +72,8 @@ HRESULT GameClient::Window::Initialize()
 
 void GameClient::Window::Run() const
 {
-	MSG message;
+	MSG message{};
 	message.message = WM_NULL;
-	int fps = 70;
 	auto nextFrame = std::chrono::steady_clock::now();
 	nextFrame += std::chrono::milliseconds(1);
 
@@ -104,6 +103,33 @@ void GameClient::Window::OnResize(const UINT width, const UINT height) const
 	}
 }
 
+std::tuple<LRESULT, bool> GameClient::Window::OnSize(const Window& pClient, const LPARAM lParam)
+{
+	const UINT width = LOWORD(lParam);
+	const UINT height = HIWORD(lParam);
+	pClient.OnResize(width, height);
+
+	return std::make_tuple(0, true);
+}
+
+std::tuple<LRESULT, bool> GameClient::Window::OnDisplayChange(HWND hWnd)
+{
+	InvalidateRect(hWnd, nullptr, false);
+	return std::make_tuple(0, true);
+}
+
+std::tuple<LRESULT, bool> GameClient::Window::OnPaint(HWND hWnd)
+{
+	ValidateRect(hWnd, nullptr);
+	return std::make_tuple(0, true);
+}
+
+std::tuple<LRESULT, bool> GameClient::Window::OnDestroy()
+{
+	PostQuitMessage(0);
+	return std::make_tuple(0, true);
+}
+
 LRESULT CALLBACK GameClient::Window::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 {
 	LRESULT result = 0;
@@ -125,43 +151,27 @@ LRESULT CALLBACK GameClient::Window::WndProc(HWND hWnd, UINT message, WPARAM wPa
 
 		if (pClient)
 		{
+			std::tuple<LRESULT, bool> ret;
 			switch (message)
 			{
 			case WM_SIZE:
-				{
-					const UINT width = LOWORD(lParam);
-					const UINT height = HIWORD(lParam);
-					pClient->OnResize(width, height);
-					result = 0;
-					wasHandled = true;
-					break;
-				}
+				ret = OnSize(*pClient, lParam);
+				break;
 			case WM_DISPLAYCHANGE:
-				{
-					InvalidateRect(hWnd, nullptr, false);
-					result = 0;
-					wasHandled = true;
-					break;
-				}
+				ret = OnDisplayChange(hWnd);
+				break;
 			case WM_PAINT:
-				{
-					ValidateRect(hWnd, nullptr);
-					result = 0;
-					wasHandled = true;
-					break;
-				}
+				ret = OnPaint(hWnd);
+				break;
 			case WM_DESTROY:
-				{
-					PostQuitMessage(0);
-					result = 0;
-					wasHandled = true;
-					break;
-				}
+				ret = OnDestroy();
+				break;
 			default:
-				{
-					wasHandled = false;
-				}
+				ret = std::make_tuple(0, false);
 			}
+
+			result = std::get<0>(ret);
+			wasHandled = std::get<1>(ret);
 		}
 
 		if (!wasHandled)

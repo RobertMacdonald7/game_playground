@@ -38,6 +38,11 @@ namespace GameClient
 			UINT height
 		) const;
 
+		static std::tuple<LRESULT, bool> OnSize(const Window& pClient, LPARAM lParam);
+		static std::tuple<LRESULT, bool> OnDisplayChange(HWND hWnd);
+		static std::tuple<LRESULT, bool> OnPaint(HWND hWnd);
+		static std::tuple<LRESULT, bool> OnDestroy();
+
 		// The windows procedure.
 		static LRESULT CALLBACK WndProc(
 			HWND hWnd,
