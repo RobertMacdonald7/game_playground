@@ -2,8 +2,8 @@
 #include <memory>
 #include <chrono>
 
-#include "GameDefinitions.h"
 #include "IEngine.h"
+#include "IGameState.h"
 
 namespace GameClient
 {
@@ -11,8 +11,9 @@ namespace GameClient
 	{
 	private:
 		std::unique_ptr<Engine::IEngine> _engine;
-		std::shared_ptr<GameObjects::Snake> _snake;
-		Input::Keys _previousKey = Input::Keys::RightArrow;
+		std::unique_ptr<GameState::IGameState> _currentState;
+
+		Input::Keys _previousKey = Input::Keys::None;
 
 		std::chrono::steady_clock::time_point _lastUpdateTime = std::chrono::steady_clock::now();
 		std::chrono::nanoseconds _accumulatedFrameTime = std::chrono::nanoseconds(0);

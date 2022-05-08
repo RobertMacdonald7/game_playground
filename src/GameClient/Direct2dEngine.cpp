@@ -31,7 +31,7 @@ void GameClient::Engine::Direct2dEngine::Resize(const UINT width, const UINT hei
 	_pRenderTarget->Resize(size);
 }
 
-HRESULT GameClient::Engine::Direct2dEngine::Draw(std::shared_ptr<GameObjects::Snake>& snake)
+HRESULT GameClient::Engine::Direct2dEngine::Draw(const std::shared_ptr<GameObjects::Snake> snake)
 {
 	auto result = S_OK;
 	result = CreateDeviceResources();

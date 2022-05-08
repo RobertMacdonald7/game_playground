@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "Playing.h"
+
 GameClient::Game::Game(std::unique_ptr<Engine::IEngine> engine):
 _engine(std::move(engine))
 {
@@ -13,7 +15,7 @@ _engine(std::move(engine))
 		throw std::exception(message.c_str());
 	}
 
-	_snake = std::make_shared<GameObjects::Snake>();
+	_currentState = std::make_unique<GameState::Playing>();
 }
 
 GameClient::Game::~Game() = default;
@@ -48,7 +50,7 @@ void GameClient::Game::HandleInput()
 		pressedKey = Input::Keys::SpaceBar;
 	}
 
-	_snake->OnInput(pressedKey);
+	_currentState->OnInput(pressedKey);
 
 	_previousKey = pressedKey;
 }
@@ -67,9 +69,9 @@ void GameClient::Game::ProcessFrame()
 	while (numberOfUpdates < _maxUpdatesPerFrame && _accumulatedFrameTime > _timeStep)
 	{
 		_accumulatedFrameTime -= _timeStep;
-		_snake->OnUpdate();
+		_currentState->OnUpdate();
 		++numberOfUpdates;
 	}
 	
-	_engine->Draw(_snake);
+	_engine->Draw(_currentState->GetDrawableEntities());
 }
