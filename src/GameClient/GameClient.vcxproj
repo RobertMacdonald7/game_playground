@@ -150,6 +150,10 @@
     <ClInclude Include="Direct2dUtility.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameDefinitions.h" />
+    <ClInclude Include="GameOver.h" />
+    <ClInclude Include="GameStateBase.h" />
+    <ClInclude Include="GameStateMachine.h" />
+    <ClInclude Include="GameStateType.h" />
     <ClInclude Include="IDrawable.h" />
     <ClInclude Include="IEngine.h" />
     <ClInclude Include="IGameState.h" />
@@ -164,6 +168,9 @@
   <ItemGroup>
     <ClCompile Include="Direct2dUtility.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameOver.cpp" />
+    <ClCompile Include="GameStateBase.cpp" />
+    <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="Playing.cpp" />
     <ClCompile Include="Snake.cpp" />
     <ClCompile Include="Window.cpp" />

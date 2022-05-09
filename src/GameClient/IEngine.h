@@ -9,8 +9,11 @@ namespace GameClient::Engine
 {
 	class IEngine // NOLINT(cppcoreguidelines-special-member-functions)
 	{
-	protected:
+	private:
 		HWND _windowHandle = nullptr;
+
+	protected:
+		[[nodiscard]] HWND GetWindowHandle() const;
 
 		// ReSharper disable once CppParameterMayBeConst
 		explicit IEngine(HWND windowHandle) :
@@ -24,4 +27,9 @@ namespace GameClient::Engine
 		virtual void Resize(UINT width, UINT height) const = 0;
 		virtual HRESULT Draw(const std::vector<std::shared_ptr<IDrawable>>& drawables) = 0;
 	};
+
+	inline HWND IEngine::GetWindowHandle() const
+	{
+		return _windowHandle;
+	}
 }

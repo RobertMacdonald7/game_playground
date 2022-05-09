@@ -81,6 +81,18 @@
     <ClInclude Include="IDrawable.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="GameStateMachine.h">
+      <Filter>Header Files\State</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>Header Files\State</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateBase.h">
+      <Filter>Header Files\State</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateType.h">
+      <Filter>Header Files\State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp">
@@ -102,6 +114,15 @@
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
     <ClCompile Include="Playing.cpp">
+      <Filter>Source Files\State</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateMachine.cpp">
+      <Filter>Source Files\State</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateBase.cpp">
+      <Filter>Source Files\State</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
       <Filter>Source Files\State</Filter>
     </ClCompile>
   </ItemGroup>

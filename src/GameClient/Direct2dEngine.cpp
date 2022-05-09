@@ -80,13 +80,13 @@ HRESULT GameClient::Engine::Direct2dEngine::CreateDeviceResources()
 	}
 
 	RECT rect;
-	GetClientRect(_windowHandle, &rect);
+	GetClientRect(GetWindowHandle(), &rect);
 
 	const D2D1_SIZE_U size = D2D1::SizeU(rect.right - rect.left, rect.bottom - rect.top);
 
 	result = _pDirect2dFactory->CreateHwndRenderTarget(
 		D2D1::RenderTargetProperties(),
-		D2D1::HwndRenderTargetProperties(_windowHandle, size),
+		D2D1::HwndRenderTargetProperties(GetWindowHandle(), size),
 		&_pRenderTarget);
 
 	RETURN_FAILED_HRESULT(result);

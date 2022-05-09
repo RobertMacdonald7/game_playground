@@ -4,6 +4,7 @@
 
 #include "Macros.h"
 #include "Direct2dUtility.h"
+#include "GameStateMachine.h"
 
 GameClient::GameObjects::Snake::Snake()
 {
@@ -16,7 +17,7 @@ GameClient::GameObjects::Snake::~Snake()
 	Snake::DiscardDeviceResources();
 }
 
-void GameClient::GameObjects::Snake::OnInput(GameClient::Input::Keys pressedKey)
+void GameClient::GameObjects::Snake::OnInput(Input::Keys pressedKey)
 {
 	if (pressedKey == Input::Keys::SpaceBar)
 	{
@@ -63,11 +64,6 @@ void GameClient::GameObjects::Snake::MoveSnake()
 {
 	_directionInputReceived = false;
 
-	// TODO - replace this with a "game over" state.
-	if (_gameOver)
-	{
-		return;
-	}
 	const Position& headPosition = _segments.front();
 
 	int deltaX = 0;
@@ -92,9 +88,9 @@ void GameClient::GameObjects::Snake::MoveSnake()
 
 	const auto newHead = Position{ headPosition.x + deltaX, headPosition.y + deltaY };
 
-	if (const auto isColliding = IsColliding(newHead.x, newHead.y))
+	if (IsColliding(newHead.x, newHead.y))
 	{
-		_gameOver = true;
+		State::GameStateMachine::GetInstance().ChangeState(State::GameStateType::GameOver);
 		return;
 	}
 
@@ -118,7 +114,7 @@ void GameClient::GameObjects::Snake::Draw(ID2D1HwndRenderTarget* renderTarget)
 	{
 		for (auto y = 0; y < game_height_units; ++y)
 		{
-			auto rectangle = GameClient::Utility::Direct2dUtility::CreateUnitRectangle(
+			auto rectangle = Utility::Direct2dUtility::CreateUnitRectangle(
 				0, 0, static_cast<FLOAT>(x), static_cast<FLOAT>(y));
 			const auto brush = GetPlayAreaBrush(_playArea[x][y]);
 			renderTarget->FillRectangle(&rectangle, brush);
@@ -127,7 +123,7 @@ void GameClient::GameObjects::Snake::Draw(ID2D1HwndRenderTarget* renderTarget)
 
 	for (const auto& segment : _segments)
 	{
-		auto rectangle = GameClient::Utility::Direct2dUtility::CreateUnitRectangle(0, 0, static_cast<FLOAT>(segment.x), static_cast<FLOAT>(segment.y));
+		auto rectangle = Utility::Direct2dUtility::CreateUnitRectangle(0, 0, static_cast<FLOAT>(segment.x), static_cast<FLOAT>(segment.y));
 		renderTarget->FillRectangle(&rectangle, _snakeBrush);
 	}
 }

@@ -16,7 +16,7 @@ HRESULT GameClient::Window::Initialize(HINSTANCE hInstance)
 	WNDCLASSEX windowClassEx = { };
 	windowClassEx.cbSize = sizeof(WNDCLASSEX);
 	windowClassEx.style = CS_HREDRAW | CS_VREDRAW;
-	windowClassEx.lpfnWndProc = Window::WndProc;
+	windowClassEx.lpfnWndProc = WndProc;
 	windowClassEx.cbClsExtra = 0;
 	windowClassEx.cbWndExtra = sizeof(LONG_PTR);
 	windowClassEx.hInstance = HINST_THISCOMPONENT;
@@ -148,13 +148,13 @@ LRESULT CALLBACK GameClient::Window::WndProc(HWND hWnd, UINT message, WPARAM wPa
 		const auto pcs = std::bit_cast<LPCREATESTRUCT>(lParam);
 		const auto pClient = static_cast<Window*>(pcs->lpCreateParams);
 
-		::SetWindowLongPtrW(hWnd, GWLP_USERDATA, std::bit_cast<LONG_PTR>(pClient));
+		SetWindowLongPtrW(hWnd, GWLP_USERDATA, std::bit_cast<LONG_PTR>(pClient));
 
 		result = 0;
 	}
 	else
 	{
-		const auto pClient = std::bit_cast<Window*>(::GetWindowLongPtrW(hWnd, GWLP_USERDATA));
+		const auto pClient = std::bit_cast<Window*>(GetWindowLongPtrW(hWnd, GWLP_USERDATA));
 
 		auto wasHandled = false;
 

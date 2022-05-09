@@ -1,14 +1,13 @@
 #pragma once
-#include "IGameState.h"
+#include "GameStateBase.h"
 #include "Snake.h"
 
 namespace GameClient::State
 {
-	class Playing final : public IGameState
+	class Playing final : public GameStateBase
 	{
 	private:
 		std::shared_ptr<GameObjects::Snake> _snake;
-		std::vector<std::shared_ptr<Engine::IDrawable>> _drawables;
 
 	public:
 		explicit Playing();
@@ -20,8 +19,9 @@ namespace GameClient::State
 		Playing operator=(Playing&& moveOther) = delete;
 		Playing(Playing&& moveOther) = delete;
 
+		GameStateType GetType() override;
+		void Enter(std::shared_ptr<IGameState> previousState) override;
 		void OnUpdate() override;
 		void OnInput(Input::Keys input) override;
-		std::vector<std::shared_ptr<Engine::IDrawable>>& GetDrawableEntities() override;
 	};
 }
