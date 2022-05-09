@@ -37,7 +37,7 @@ void GameClient::State::GameOver::Enter(const std::shared_ptr<IGameState> previo
 	}
 
 	// Save the last playing state's drawable entities so that they can be drawn in the background still.
-	for (auto const& drawableEntity : _previousPlayingState->GetDrawableEntities())
+	for (auto const& drawableEntity : _previousPlayingState->GetDrawables())
 	{
 		GetDrawables().push_back(drawableEntity);
 	}

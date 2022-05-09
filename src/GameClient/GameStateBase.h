@@ -8,9 +8,6 @@ namespace GameClient::State
 	private:
 		std::vector<std::shared_ptr<Engine::IDrawable>> _drawables = {};
 
-	protected:
-		std::vector<std::shared_ptr<Engine::IDrawable>>& GetDrawables();
-
 	public:
 		GameStateBase() = default;
 		~GameStateBase() override = default;
@@ -26,6 +23,6 @@ namespace GameClient::State
 		void Leave() override;
 		void OnUpdate() override;
 		void OnInput(Input::Keys input) override;
-		std::vector<std::shared_ptr<Engine::IDrawable>>& GetDrawableEntities() override;
+		std::vector<std::shared_ptr<Engine::IDrawable>>& GetDrawables() override;
 	};
 }

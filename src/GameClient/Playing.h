@@ -7,6 +7,7 @@ namespace GameClient::State
 	class Playing final : public GameStateBase
 	{
 	private:
+		std::shared_ptr<GameObjects::PlayArea> _playArea;
 		std::shared_ptr<GameObjects::Snake> _snake;
 
 	public:

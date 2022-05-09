@@ -21,6 +21,6 @@ namespace GameClient::State
 		virtual void OnUpdate() = 0;
 		virtual void OnInput(Input::Keys input) = 0;
 
-		virtual std::vector<std::shared_ptr<Engine::IDrawable>>& GetDrawableEntities() = 0;
+		virtual std::vector<std::shared_ptr<Engine::IDrawable>>& GetDrawables() = 0;
 	};
 }

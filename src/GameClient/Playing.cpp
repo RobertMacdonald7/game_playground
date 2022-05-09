@@ -2,8 +2,11 @@
 
 GameClient::State::Playing::Playing()
 {
-	_snake = std::make_unique<GameObjects::Snake>();
-	GetDrawables().push_back(_snake);
+	_playArea = std::make_shared<GameObjects::PlayArea>();
+	_snake = std::make_shared<GameObjects::Snake>(_playArea);
+
+	GameStateBase::GetDrawables().push_back(_playArea);
+	GameStateBase::GetDrawables().push_back(_snake);
 };
 
 GameClient::State::GameStateType GameClient::State::Playing::GetType()
