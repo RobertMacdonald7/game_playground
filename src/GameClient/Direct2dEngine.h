@@ -29,7 +29,7 @@ namespace GameClient::Engine
 
 		HRESULT Initialize() override;
 		void Resize(UINT width, UINT height) const override;
-		HRESULT Draw(std::shared_ptr<GameObjects::Snake> snake) override;
+		HRESULT Draw(const std::vector<std::shared_ptr<IDrawable>>& drawables) override;
 
 	private:
 		HRESULT CreateDeviceResources();

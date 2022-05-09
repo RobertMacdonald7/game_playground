@@ -31,14 +31,17 @@ void GameClient::Engine::Direct2dEngine::Resize(const UINT width, const UINT hei
 	_pRenderTarget->Resize(size);
 }
 
-HRESULT GameClient::Engine::Direct2dEngine::Draw(const std::shared_ptr<GameObjects::Snake> snake)
+HRESULT GameClient::Engine::Direct2dEngine::Draw(const std::vector<std::shared_ptr<IDrawable>>& drawables)
 {
 	auto result = S_OK;
 	result = CreateDeviceResources();
-
 	RETURN_FAILED_HRESULT(result);
 
-	result = snake->CreateDeviceResources(_pRenderTarget);
+	for (auto& drawable : drawables)
+	{
+		result = drawable->CreateDeviceResources(_pRenderTarget);
+		RETURN_FAILED_HRESULT(result);
+	}
 
 	RETURN_FAILED_HRESULT(result);
 
@@ -46,7 +49,10 @@ HRESULT GameClient::Engine::Direct2dEngine::Draw(const std::shared_ptr<GameObjec
 	_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 	_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
 
-	snake->Draw(_pRenderTarget);
+	for (auto& drawable : drawables)
+	{
+		drawable->Draw(_pRenderTarget);
+	}
 
 	result = _pRenderTarget->EndDraw();
 
@@ -55,7 +61,10 @@ HRESULT GameClient::Engine::Direct2dEngine::Draw(const std::shared_ptr<GameObjec
 		// Resources will be recreated next Draw()
 		result = S_OK;
 		DiscardDeviceResources();
-		snake->DiscardDeviceResources();
+		for (auto& drawable : drawables)
+		{
+			drawable->DiscardDeviceResources();
+		}
 	}
 
 	return result;

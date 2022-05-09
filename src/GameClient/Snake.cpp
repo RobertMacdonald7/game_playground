@@ -13,7 +13,7 @@ GameClient::GameObjects::Snake::Snake()
 
 GameClient::GameObjects::Snake::~Snake()
 {
-	DiscardDeviceResources();
+	Snake::DiscardDeviceResources();
 }
 
 void GameClient::GameObjects::Snake::OnInput(GameClient::Input::Keys pressedKey)

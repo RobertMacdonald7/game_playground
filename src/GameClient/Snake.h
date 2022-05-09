@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "GameDefinitions.h"
+#include "IDrawable.h"
 #include "Keys.h"
 
 namespace GameClient::GameObjects
@@ -29,7 +30,7 @@ namespace GameClient::GameObjects
 		Wall
 	};
 
-	class Snake
+	class Snake final : public Engine::IDrawable
 	{
 	private:
 		std::vector<std::vector<PlayArea>> _playArea{game_width_units, std::vector<PlayArea>(game_height_units)};
@@ -48,7 +49,7 @@ namespace GameClient::GameObjects
 
 	public:
 		Snake();
-		~Snake();
+		~Snake() override;
 		void OnInput(Input::Keys pressedKey);
 
 		Snake(Snake& copyOther) = delete;
@@ -59,14 +60,14 @@ namespace GameClient::GameObjects
 
 		void OnUpdate();
 
-		//TEMP, use an interface for "Updatable"
+		// TODO - use an interface for "Updatable"
 		void MoveSnake();
 
-		void Draw(ID2D1HwndRenderTarget* renderTarget);
+		void Draw(ID2D1HwndRenderTarget* renderTarget) override;
 
-		HRESULT CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget);
+		HRESULT CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget) override;
 
-		void DiscardDeviceResources();
+		void DiscardDeviceResources() override;
 
 		void Reset();
 

@@ -22,6 +22,6 @@ namespace GameClient::Engine
 
 		virtual HRESULT Initialize() = 0;
 		virtual void Resize(UINT width, UINT height) const = 0;
-		virtual HRESULT Draw(std::shared_ptr<GameObjects::Snake> snake) = 0;
+		virtual HRESULT Draw(const std::vector<std::shared_ptr<IDrawable>>& drawables) = 0;
 	};
 }

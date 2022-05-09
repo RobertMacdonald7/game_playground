@@ -1,14 +1,12 @@
 #pragma once
 #include "Keys.h"
 #include "Snake.h"
+#include "IDrawable.h"
 
 namespace GameClient::GameState
 {
-	class IGameState  // NOLINT(cppcoreguidelines-special-member-functions)
+	class IGameState
 	{
-	protected:
-		explicit IGameState() = default;
-
 	public:
 		virtual ~IGameState() = default;
 
@@ -16,6 +14,6 @@ namespace GameClient::GameState
 		virtual void OnInput(Input::Keys input) = 0;
 
 		// TODO - Make IDrawable
-		virtual std::shared_ptr<GameObjects::Snake> GetDrawableEntities() = 0;
+		virtual std::vector<std::shared_ptr<GameClient::Engine::IDrawable>>& GetDrawableEntities() = 0;
 	};
 }

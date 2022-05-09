@@ -8,6 +8,7 @@ namespace GameClient::GameState
 	{
 	private:
 		std::shared_ptr<GameObjects::Snake> _snake;
+		std::vector<std::shared_ptr<Engine::IDrawable>> _drawables;
 
 	public:
 		explicit Playing();
@@ -21,6 +22,6 @@ namespace GameClient::GameState
 
 		void OnUpdate() override;
 		void OnInput(Input::Keys input) override;
-		std::shared_ptr<GameObjects::Snake> GetDrawableEntities() override;
+		std::vector<std::shared_ptr<GameClient::Engine::IDrawable>>& GetDrawableEntities() override;
 	};
 }

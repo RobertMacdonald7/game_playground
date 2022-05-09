@@ -150,6 +150,7 @@
     <ClInclude Include="Direct2dUtility.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameDefinitions.h" />
+    <ClInclude Include="IDrawable.h" />
     <ClInclude Include="IEngine.h" />
     <ClInclude Include="IGameState.h" />
     <ClInclude Include="Keys.h" />
