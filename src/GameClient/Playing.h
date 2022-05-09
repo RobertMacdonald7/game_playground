@@ -2,7 +2,7 @@
 #include "IGameState.h"
 #include "Snake.h"
 
-namespace GameClient::GameState
+namespace GameClient::State
 {
 	class Playing final : public IGameState
 	{
@@ -22,6 +22,6 @@ namespace GameClient::GameState
 
 		void OnUpdate() override;
 		void OnInput(Input::Keys input) override;
-		std::vector<std::shared_ptr<GameClient::Engine::IDrawable>>& GetDrawableEntities() override;
+		std::vector<std::shared_ptr<Engine::IDrawable>>& GetDrawableEntities() override;
 	};
 }

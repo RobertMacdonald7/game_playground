@@ -34,10 +34,10 @@
     <Filter Include="Header Files\Input">
       <UniqueIdentifier>{12bb5067-4cbb-43a9-baae-3b65a5f44fed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\GameState">
+    <Filter Include="Header Files\State">
       <UniqueIdentifier>{88435059-9305-4740-b35c-ea6cf6a077e3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameState">
+    <Filter Include="Source Files\State">
       <UniqueIdentifier>{cced579c-74f0-4f23-aef5-f62b91d5aa6f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -73,10 +73,10 @@
       <Filter>Header Files\Input</Filter>
     </ClInclude>
     <ClInclude Include="Playing.h">
-      <Filter>Header Files\GameState</Filter>
+      <Filter>Header Files\State</Filter>
     </ClInclude>
     <ClInclude Include="IGameState.h">
-      <Filter>Header Files\GameState</Filter>
+      <Filter>Header Files\State</Filter>
     </ClInclude>
     <ClInclude Include="IDrawable.h">
       <Filter>Header Files\Engine</Filter>
@@ -102,7 +102,7 @@
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
     <ClCompile Include="Playing.cpp">
-      <Filter>Source Files\GameState</Filter>
+      <Filter>Source Files\State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

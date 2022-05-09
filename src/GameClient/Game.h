@@ -11,7 +11,7 @@ namespace GameClient
 	{
 	private:
 		std::unique_ptr<Engine::IEngine> _engine;
-		std::unique_ptr<GameState::IGameState> _currentState;
+		std::unique_ptr<State::IGameState> _currentState;
 
 		Input::Keys _previousKey = Input::Keys::None;
 

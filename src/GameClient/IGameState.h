@@ -3,7 +3,7 @@
 #include "Snake.h"
 #include "IDrawable.h"
 
-namespace GameClient::GameState
+namespace GameClient::State
 {
 	class IGameState
 	{
@@ -13,7 +13,6 @@ namespace GameClient::GameState
 		virtual void OnUpdate() = 0;
 		virtual void OnInput(Input::Keys input) = 0;
 
-		// TODO - Make IDrawable
-		virtual std::vector<std::shared_ptr<GameClient::Engine::IDrawable>>& GetDrawableEntities() = 0;
+		virtual std::vector<std::shared_ptr<Engine::IDrawable>>& GetDrawableEntities() = 0;
 	};
 }

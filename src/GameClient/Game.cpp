@@ -15,7 +15,7 @@ _engine(std::move(engine))
 		throw std::exception(message.c_str());
 	}
 
-	_currentState = std::make_unique<GameState::Playing>();
+	_currentState = std::make_unique<State::Playing>();
 }
 
 GameClient::Game::~Game() = default;
