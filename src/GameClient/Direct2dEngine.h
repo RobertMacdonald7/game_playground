@@ -14,8 +14,6 @@ namespace GameClient::Engine
 	private:
 		ID2D1Factory* _pDirect2dFactory = nullptr;
 		ID2D1HwndRenderTarget* _pRenderTarget = nullptr;
-		ID2D1SolidColorBrush* _pLightSlateGrayBrush = nullptr;
-		ID2D1SolidColorBrush* _pCornflowerBlueBrush = nullptr;
 
 	public:
 		explicit Direct2dEngine(HWND windowHandle);

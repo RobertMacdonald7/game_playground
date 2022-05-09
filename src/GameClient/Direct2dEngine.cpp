@@ -91,12 +91,6 @@ HRESULT GameClient::Engine::Direct2dEngine::CreateDeviceResources()
 
 	RETURN_FAILED_HRESULT(result);
 
-	result = _pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::CornflowerBlue), &_pCornflowerBlueBrush);
-
-	RETURN_FAILED_HRESULT(result);
-
-	result = _pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::LightGray), &_pLightSlateGrayBrush);
-
 	return result;
 }
 
@@ -108,6 +102,4 @@ void GameClient::Engine::Direct2dEngine::DiscardDeviceIndependentResources()
 void GameClient::Engine::Direct2dEngine::DiscardDeviceResources()
 {
 	SafeRelease(&_pRenderTarget);
-	SafeRelease(&_pCornflowerBlueBrush);
-	SafeRelease(&_pLightSlateGrayBrush);
 }
