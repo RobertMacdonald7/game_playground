@@ -19,6 +19,8 @@ namespace GameClient
 		unsigned short _maxUpdatesPerFrame = 1;
 		std::chrono::milliseconds _timeStep = std::chrono::milliseconds(100);
 
+		int _previousKeyboardState;
+
 	public:
 		explicit Game(std::unique_ptr<Engine::IEngine> engine);
 		~Game();

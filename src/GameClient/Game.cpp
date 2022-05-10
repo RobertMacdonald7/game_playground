@@ -26,31 +26,33 @@ void GameClient::Game::OnResize(const UINT width, const UINT height) const
 // TODO - use the message loop for this instead?
 void GameClient::Game::HandleInput()
 {
-	auto pressedKey = Input::Keys::None;
+	auto currentKeyboardState = 0;
 	if (GetAsyncKeyState(VK_UP))
 	{
-		pressedKey = Input::Keys::UpArrow;
+		currentKeyboardState |= static_cast<int>(Input::Keys::UpArrow);
 	}
 	if (GetAsyncKeyState(VK_DOWN))
 	{
-		pressedKey = Input::Keys::DownArrow;
+		currentKeyboardState |= static_cast<int>(Input::Keys::DownArrow);
 	}
 	if (GetAsyncKeyState(VK_LEFT))
 	{
-		pressedKey = Input::Keys::LeftArrow;
+		currentKeyboardState |= static_cast<int>(Input::Keys::LeftArrow);
 	}
 	if (GetAsyncKeyState(VK_RIGHT))
 	{
-		pressedKey = Input::Keys::RightArrow;
+		currentKeyboardState |= static_cast<int>(Input::Keys::RightArrow);
 	}
 	if (GetAsyncKeyState(VK_SPACE))
 	{
-		pressedKey = Input::Keys::SpaceBar;
+		currentKeyboardState |= static_cast<int>(Input::Keys::SpaceBar);
 	}
 
-	State::GameStateMachine::GetInstance().OnInput(pressedKey);
+	const auto changedKeys = currentKeyboardState ^ _previousKeyboardState;
+	const auto keysDown = static_cast<Input::Keys>(currentKeyboardState & changedKeys);
 
-	_previousKey = pressedKey;
+	State::GameStateMachine::GetInstance().OnInput(keysDown);
+	_previousKeyboardState = currentKeyboardState;
 }
 
 void GameClient::Game::ProcessFrame()

@@ -2,20 +2,11 @@
 
 #include "GameStateMachine.h"
 
-void GameClient::State::GameOver::OnInput(const Input::Keys input)
+void GameClient::State::GameOver::OnInput(const Input::Keys keysDown)
 {
-	switch (input)
+	if (static_cast<int>(keysDown) & static_cast<int>(Input::Keys::SpaceBar))
 	{
-	case Input::Keys::SpaceBar:
 		GameStateMachine::GetInstance().ChangeState(GameStateType::Playing);
-		break;
-	case Input::Keys::None:
-	case Input::Keys::UpArrow:
-	case Input::Keys::DownArrow:
-	case Input::Keys::LeftArrow:
-	case Input::Keys::RightArrow:
-	default:
-		break;
 	}
 }
 

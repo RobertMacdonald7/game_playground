@@ -22,13 +22,14 @@ void GameClient::GameObjects::Food::OnUpdate()
 	}
 }
 
-bool GameClient::GameObjects::Food::OnInput(const Input::Keys input)
+bool GameClient::GameObjects::Food::OnInput(const Input::Keys keysDown)
 {
-	if (input != Input::Keys::SpaceBar)
-		return false;
-
-	Reset();
-	return true;
+	if (static_cast<int>(keysDown) & static_cast<int>(Input::Keys::SpaceBar))
+	{
+		Reset();
+		return true;
+	}
+	return false;
 }
 
 void GameClient::GameObjects::Food::Reset()

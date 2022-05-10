@@ -2,7 +2,7 @@
 
 namespace GameClient::GameObjects::Collision
 {
-	enum class CollidableName : std::uint8_t
+	enum class CollidableName : int
 	{
 		PlayArea	= 1 << 0,
 		Snake		= 1 << 1,

@@ -47,7 +47,7 @@ namespace GameClient::GameObjects
 		Snake(Snake&& moveOther) = delete;
 		Snake operator=(Snake&& moveOther) = delete;
 
-		bool OnInput(Input::Keys pressedKey);
+		bool OnInput(Input::Keys keysDown);
 		void OnUpdate();
 
 		void Draw(ID2D1HwndRenderTarget* renderTarget) override;

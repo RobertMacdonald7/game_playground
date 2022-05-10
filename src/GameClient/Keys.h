@@ -8,6 +8,7 @@ namespace GameClient::Input
 		DownArrow = 1 << 1,
 		LeftArrow = 1 << 2,
 		RightArrow = 1 << 3,
-		SpaceBar = 1 << 4
+		SpaceBar = 1 << 4,
+		G = 1 << 5
 	};
 }

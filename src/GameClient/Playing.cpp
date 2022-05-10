@@ -41,15 +41,15 @@ void GameClient::State::Playing::OnUpdate()
 	_food->OnUpdate();
 }
 
-void GameClient::State::Playing::OnInput(const Input::Keys input)
+void GameClient::State::Playing::OnInput(const Input::Keys keysDown)
 {
 	if (_blockInputUntilNextUpdate)
 	{
 		return;
 	}
 
-	const auto snakeHandledInput = _snake->OnInput(input);
-	const auto foodHandledInput = _food->OnInput(input);
+	const auto snakeHandledInput = _snake->OnInput(keysDown);
+	const auto foodHandledInput = _food->OnInput(keysDown);
 
 	_blockInputUntilNextUpdate = snakeHandledInput || foodHandledInput;
 }

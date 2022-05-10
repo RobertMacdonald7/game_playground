@@ -22,7 +22,7 @@ namespace GameClient::GameObjects
 		Food();
 		~Food() override;
 		void OnUpdate();
-		bool OnInput(Input::Keys input);
+		bool OnInput(Input::Keys keysDown);
 
 		Food(Food& copyOther) = delete;
 		Food operator=(Food& copyOther) = delete;
