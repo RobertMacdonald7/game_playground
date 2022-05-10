@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "GameDefinitions.h"
+#include "ICollidable.h"
 #include "IDrawable.h"
 
 namespace GameClient::GameObjects
@@ -11,7 +12,7 @@ namespace GameClient::GameObjects
 		Wall
 	};
 
-	class PlayArea final : public Engine::IDrawable
+	class PlayArea final : public Engine::IDrawable, public Collision::ICollidable
 	{
 	private:
 		std::vector<std::vector<PlayAreaTile>> _playArea{ game_width_units, std::vector<PlayAreaTile>(game_height_units) };
@@ -31,7 +32,9 @@ namespace GameClient::GameObjects
 		void Draw(ID2D1HwndRenderTarget* renderTarget) override;
 		HRESULT CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget) override;
 		void DiscardDeviceResources() override;
-		[[nodiscard]] bool IsColliding(int x, int y) const;
+
+		Collision::CollidableName GetCollidableName() override;
+		[[nodiscard]] bool IsColliding(int x, int y, Collision::CollidableName source) override;
 
 	private:
 		void CreatePlayArea();

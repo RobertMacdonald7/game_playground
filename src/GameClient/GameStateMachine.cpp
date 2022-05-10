@@ -10,7 +10,7 @@ GameClient::State::GameStateMachine::GameStateMachine()
 	ChangeState(GameStateType::Playing);
 }
 
-void GameClient::State::GameStateMachine::OnInput(Input::Keys input) const
+void GameClient::State::GameStateMachine::OnInput(const Input::Keys input) const
 {
 	_currentState->OnInput(input);
 }

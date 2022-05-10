@@ -1,4 +1,5 @@
 #pragma once
+#include "Food.h"
 #include "GameStateBase.h"
 #include "Snake.h"
 
@@ -8,7 +9,10 @@ namespace GameClient::State
 	{
 	private:
 		std::shared_ptr<GameObjects::PlayArea> _playArea;
+		std::shared_ptr<GameObjects::Food> _food;
 		std::shared_ptr<GameObjects::Snake> _snake;
+
+		bool _blockInputUntilNextUpdate = false;
 
 	public:
 		explicit Playing();
@@ -22,6 +26,7 @@ namespace GameClient::State
 
 		GameStateType GetType() override;
 		void Enter(std::shared_ptr<IGameState> previousState) override;
+		void Leave() override;
 		void OnUpdate() override;
 		void OnInput(Input::Keys input) override;
 	};

@@ -3,6 +3,8 @@
 #include <d2d1.h>
 #include <vector>
 
+#include "Food.h"
+#include "ICollidable.h"
 #include "IDrawable.h"
 #include "Keys.h"
 #include "PlayArea.h"
@@ -25,20 +27,18 @@ namespace GameClient::GameObjects
 		Right
 	};
 
-	class Snake final : public Engine::IDrawable
+	class Snake final : public Engine::IDrawable, public Collision::ICollidable
 	{
 	private:
 		Direction _direction = Direction::Right;
 		std::vector<Position> _segments;
 		ID2D1SolidColorBrush* _snakeBrush = nullptr;
 
-		const std::shared_ptr<PlayArea> _playArea;
-
+		bool _growNextUpdate = false;
 		int _growSnake = 0;
-		bool _directionInputReceived = false;
 
 	public:
-		explicit Snake(std::shared_ptr<PlayArea> playArea);
+		Snake();
 		~Snake() override;
 
 		Snake(Snake& copyOther) = delete;
@@ -47,7 +47,7 @@ namespace GameClient::GameObjects
 		Snake(Snake&& moveOther) = delete;
 		Snake operator=(Snake&& moveOther) = delete;
 
-		void OnInput(Input::Keys pressedKey);
+		bool OnInput(Input::Keys pressedKey);
 		void OnUpdate();
 
 		void Draw(ID2D1HwndRenderTarget* renderTarget) override;
@@ -56,10 +56,13 @@ namespace GameClient::GameObjects
 
 		void Reset();
 
+		Collision::CollidableName GetCollidableName() override;
+		[[nodiscard]] bool IsColliding(int x, int y, Collision::CollidableName source) override;
+
 	private:
+		bool AteFood(int x, int y);
 		void MoveSnake();
 		void CreatePlayer();
-		bool IsColliding(int x, int y);
 	};
 	
 }

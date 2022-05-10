@@ -22,7 +22,7 @@ void GameClient::GameObjects::PlayArea::Draw(ID2D1HwndRenderTarget* renderTarget
 		for (auto y = 0; y < game_height_units; ++y)
 		{
 			auto rectangle = Utility::Direct2dUtility::CreateUnitRectangle(
-				0, 0, static_cast<FLOAT>(x), static_cast<FLOAT>(y));
+				0, 0, static_cast<FLOAT>(x), static_cast<FLOAT>(y), 0, 0);
 			const auto brush = GetPlayAreaBrush(_playArea[x][y]);
 			renderTarget->FillRectangle(&rectangle, brush);
 		}
@@ -53,7 +53,12 @@ void GameClient::GameObjects::PlayArea::DiscardDeviceResources()
 	SafeRelease(&_playAreaBoundaryBrush);
 }
 
-bool GameClient::GameObjects::PlayArea::IsColliding(const int x, const int y) const
+GameClient::GameObjects::Collision::CollidableName GameClient::GameObjects::PlayArea::GetCollidableName()
+{
+	return Collision::CollidableName::PlayArea;
+}
+
+bool GameClient::GameObjects::PlayArea::IsColliding(const int x, const int y, Collision::CollidableName source)
 {
 	// Out of bounds
 	if (x < 0 || y < 0 || x > game_width_units || y > game_height_units)

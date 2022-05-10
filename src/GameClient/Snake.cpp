@@ -2,12 +2,12 @@
 
 #include <chrono>
 
+#include "CollisionDetector.h"
 #include "Macros.h"
 #include "Direct2dUtility.h"
 #include "GameStateMachine.h"
 
-GameClient::GameObjects::Snake::Snake(std::shared_ptr<PlayArea> playArea) :
-	_playArea(std::move(playArea))
+GameClient::GameObjects::Snake::Snake()
 {
 	CreatePlayer();
 }
@@ -17,46 +17,45 @@ GameClient::GameObjects::Snake::~Snake()
 	DiscardDeviceResources();
 }
 
-void GameClient::GameObjects::Snake::OnInput(const Input::Keys pressedKey)
+bool GameClient::GameObjects::Snake::OnInput(const Input::Keys pressedKey)
 {
-	if (pressedKey == Input::Keys::SpaceBar)
-	{
-		Reset();
-	}
-
-	// Can't change the snake's direction if it has already been changed and hasn't moved yet.
-	if (_directionInputReceived)
-		return;
-
-	switch (pressedKey)  // NOLINT(clang-diagnostic-switch-enum)
+	switch (pressedKey)
 	{
 	case Input::Keys::UpArrow:
-		if (_direction == Direction::Down) break;
+		if (_direction == Direction::Down) return false;
 		_direction = Direction::Up;
-		_directionInputReceived = true;
 		break;
 	case Input::Keys::DownArrow:
-		if (_direction == Direction::Up) break;
+		if (_direction == Direction::Up) return false;
 		_direction = Direction::Down;
-		_directionInputReceived = true;
 		break;
 	case Input::Keys::LeftArrow:
-		if (_direction == Direction::Right) break;
+		if (_direction == Direction::Right) return false;
 		_direction = Direction::Left;
-		_directionInputReceived = true;
 		break;
 	case Input::Keys::RightArrow:
-		if (_direction == Direction::Left) break;
+		if (_direction == Direction::Left) return false;
 		_direction = Direction::Right;
-		_directionInputReceived = true;
 		break;
+	case Input::Keys::SpaceBar:
+		Reset();
+		break;
+	case Input::Keys::None:
 	default:
-		break;
+		return false;
 	}
+
+	return true;
 }
 
 void GameClient::GameObjects::Snake::OnUpdate()
 {
+	if (_growNextUpdate)
+	{
+		++_growSnake;
+		_growNextUpdate = false;
+	}
+
 	MoveSnake();
 }
 
@@ -64,7 +63,7 @@ void GameClient::GameObjects::Snake::Draw(ID2D1HwndRenderTarget* renderTarget)
 {
 	for (const auto& segment : _segments)
 	{
-		auto rectangle = Utility::Direct2dUtility::CreateUnitRectangle(0, 0, static_cast<FLOAT>(segment.x), static_cast<FLOAT>(segment.y));
+		auto rectangle = Utility::Direct2dUtility::CreateUnitRectangle(0, 0, static_cast<FLOAT>(segment.x), static_cast<FLOAT>(segment.y), 0, 0);
 		renderTarget->FillRectangle(&rectangle, _snakeBrush);
 	}
 }
@@ -94,14 +93,20 @@ void GameClient::GameObjects::Snake::Reset()
 
 	_direction = Direction::Right;
 	_growSnake = 0;
-	_directionInputReceived = false;
+}
+
+GameClient::GameObjects::Collision::CollidableName GameClient::GameObjects::Snake::GetCollidableName()
+{
+	return Collision::CollidableName::Snake;
+}
+
+bool GameClient::GameObjects::Snake::AteFood(const int x, const int y)
+{
+	return Collision::CollisionDetector::GetInstance().IsColliding(x, y, GetCollidableName(), Collision::CollidableName::Food);
 }
 
 void GameClient::GameObjects::Snake::MoveSnake()
 {
-	_directionInputReceived = false;
-
-
 	int deltaX = 0;
 	int deltaY = 0;
 	switch (_direction)
@@ -127,10 +132,15 @@ void GameClient::GameObjects::Snake::MoveSnake()
 	const auto newHead = Position{ x + deltaX, y + deltaY };
 
 	// Check collision
-	if (IsColliding(newHead.x, newHead.y))
+	if (Collision::CollisionDetector::GetInstance().IsColliding(newHead.x, newHead.y, GetCollidableName(), Collision::CollidableName::PlayArea | Collision::CollidableName::Snake))
 	{
 		State::GameStateMachine::GetInstance().ChangeState(State::GameStateType::GameOver);
 		return;
+	}
+
+	if (AteFood(newHead.x, newHead.y))
+	{
+		_growNextUpdate = true;
 	}
 
 	_segments.insert(_segments.begin(), newHead);
@@ -159,15 +169,8 @@ void GameClient::GameObjects::Snake::CreatePlayer()
 	}
 }
 
-bool GameClient::GameObjects::Snake::IsColliding(const int x, const int y)
+bool GameClient::GameObjects::Snake::IsColliding(const int x, const int y, Collision::CollidableName source)
 {
-	// PlayArea collision
-	if (_playArea->IsColliding(x, y))
-	{
-		return true;
-	}
-
-	// Self collision
 	if (const auto findIt = std::ranges::find(_segments, Position{ x, y }); findIt != _segments.end())
 		return true;
 

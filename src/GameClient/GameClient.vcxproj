@@ -147,7 +147,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ICollidable.h" />
+    <ClInclude Include="CollisionDetector.h" />
     <ClInclude Include="Direct2dUtility.h" />
+    <ClInclude Include="Food.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameDefinitions.h" />
     <ClInclude Include="GameOver.h" />
@@ -167,7 +170,9 @@
     <ClInclude Include="Macros.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CollisionDetector.cpp" />
     <ClCompile Include="Direct2dUtility.cpp" />
+    <ClCompile Include="Food.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GameStateBase.cpp" />
