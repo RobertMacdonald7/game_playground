@@ -1,13 +1,11 @@
 #include "Food.h"
 
+#include "CollisionDetector.h"
 #include "Direct2dUtility.h"
 #include "Macros.h"
 
 GameClient::GameObjects::Food::Food()
 {
-	std::random_device randomDevice;
-	_rng = std::mt19937(randomDevice());
-
 	PlaceFoodAtValidCoordinates();
 }
 
@@ -82,8 +80,22 @@ bool GameClient::GameObjects::Food::IsColliding(const int x, const int y, const 
 
 void GameClient::GameObjects::Food::PlaceFoodAtValidCoordinates()
 {
-	auto x = _xDistribution(_rng);
-	auto y = _yDistribution(_rng);
+	auto validCoordinates = false;
+
+	UINT x = 0;
+	UINT y = 0;
+	while (!validCoordinates)
+	{
+		x = _xDistribution(_rng);
+		y = _yDistribution(_rng);
+
+		validCoordinates = !Collision::CollisionDetector::GetInstance()
+		.IsColliding(
+			x, y, GetCollidableName(),
+			Collision::CollidableName::PlayArea | Collision::CollidableName::Snake
+		);
+	}
+	
 	_coordinates = { x, y };
 	_eaten = false;
 }
