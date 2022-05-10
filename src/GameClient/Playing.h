@@ -13,6 +13,7 @@ namespace GameClient::State
 		std::shared_ptr<GameObjects::Snake> _snake;
 
 		bool _blockInputUntilNextUpdate = false;
+		Input::Keys _cachedInput = Input::Keys::None;
 
 	public:
 		explicit Playing();
@@ -28,6 +29,6 @@ namespace GameClient::State
 		void Enter(std::shared_ptr<IGameState> previousState) override;
 		void Leave() override;
 		void OnUpdate() override;
-		void OnInput(Input::Keys keysDown) override;
+		void OnInput(Input::Keys input) override;
 	};
 }

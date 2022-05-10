@@ -31,6 +31,8 @@ namespace GameClient
 		// Process and dispatch messages
 		void Run() const;
 
+		void OnKeyDown(Input::Keys pressedKey) const;
+
 	private:
 		// Resize the render target.
 		void OnResize(
@@ -42,6 +44,7 @@ namespace GameClient
 		static std::tuple<LRESULT, bool> OnDisplayChange(HWND hWnd);
 		static std::tuple<LRESULT, bool> OnPaint(HWND hWnd);
 		static std::tuple<LRESULT, bool> OnDestroy();
+		static std::tuple<LRESULT, bool> OnKeyDown(const Window& pClient, WPARAM wParam);
 
 		// The windows procedure.
 		static LRESULT CALLBACK WndProc(

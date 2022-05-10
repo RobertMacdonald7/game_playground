@@ -17,41 +17,40 @@ GameClient::GameObjects::Snake::~Snake()
 	DiscardDeviceResources();
 }
 
-bool GameClient::GameObjects::Snake::OnInput(const Input::Keys keysDown)
+bool GameClient::GameObjects::Snake::OnInput(const Input::Keys input)
 {
-	if (static_cast<int>(keysDown) & static_cast<int>(Input::Keys::SpaceBar))
+	if (input == Input::Keys::SpaceBar)
 	{
 		Reset();
 		return true;
 	}
-	const auto originalDirection = _direction;
-	switch (_direction)
+#ifdef _DEBUG
+	if (input == Input::Keys::G)
 	{
-	case Direction::Down:
-	case Direction::Up:
-		if (static_cast<int>(keysDown) & static_cast<int>(Input::Keys::LeftArrow))
-		{
-			_direction = Direction::Left;
-		}
-		else if (static_cast<int>(keysDown) & static_cast<int>(Input::Keys::RightArrow))
-		{
-			_direction = Direction::Right;
-		}
+		_growNextUpdate = true;
+	}
+#endif
+	const auto originalDirection = _direction;
+	switch (input)
+	{
+	case Input::Keys::UpArrow:
+		if (_direction == Direction::Down) return false;
+		_direction = Direction::Up;
 		break;
-
-	case Direction::Left:
-	case Direction::Right:
-		if (static_cast<int>(keysDown) & static_cast<int>(Input::Keys::UpArrow))
-		{
-			if (_direction != Direction::Down)
-				_direction = Direction::Up;
-		}
-		if (static_cast<int>(keysDown) & static_cast<int>(Input::Keys::DownArrow))
-		{
-			if (_direction != Direction::Up)
-				_direction = Direction::Down;
-		}
+	case Input::Keys::DownArrow:
+		if (_direction == Direction::Up) return false;
+		_direction = Direction::Down;
 		break;
+	case Input::Keys::LeftArrow:
+		if (_direction == Direction::Right) return false;
+		_direction = Direction::Left;
+		break;
+	case Input::Keys::RightArrow:
+		if (_direction == Direction::Left) return false;
+		_direction = Direction::Right;
+		break;
+	default:
+		return false;
 	}
 
 	return _direction != originalDirection;

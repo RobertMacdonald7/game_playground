@@ -12,20 +12,16 @@ namespace GameClient
 	private:
 		std::unique_ptr<Engine::IEngine> _engine;
 
-		Input::Keys _previousKey = Input::Keys::None;
-
 		std::chrono::steady_clock::time_point _lastUpdateTime = std::chrono::steady_clock::now();
 		std::chrono::nanoseconds _accumulatedFrameTime = std::chrono::nanoseconds(0);
 		unsigned short _maxUpdatesPerFrame = 1;
 		std::chrono::milliseconds _timeStep = std::chrono::milliseconds(100);
 
-		int _previousKeyboardState;
-
 	public:
 		explicit Game(std::unique_ptr<Engine::IEngine> engine);
 		~Game();
 		void OnResize(UINT width, UINT height) const;
-		void HandleInput();
+		static void OnInput(Input::Keys input);
 
 		Game(Game& copyOther) = delete;
 		Game operator=(Game& copyOther) = delete;

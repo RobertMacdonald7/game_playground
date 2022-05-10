@@ -22,7 +22,7 @@ namespace GameClient::State
 		void Enter(std::shared_ptr<IGameState> previousState) override;
 		void Leave() override;
 		void OnUpdate() override;
-		void OnInput(Input::Keys keysDown) override;
+		void OnInput(Input::Keys input) override;
 		std::vector<std::shared_ptr<Engine::IDrawable>>& GetDrawables() override;
 	};
 }

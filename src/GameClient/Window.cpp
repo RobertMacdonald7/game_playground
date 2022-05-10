@@ -101,6 +101,14 @@ void GameClient::Window::Run() const
 	}
 }
 
+void GameClient::Window::OnKeyDown(const Input::Keys pressedKey) const
+{
+	if (_game)
+	{
+		_game->OnInput(pressedKey);
+	}
+}
+
 void GameClient::Window::OnResize(const UINT width, const UINT height) const
 {
 	if (_game)
@@ -139,6 +147,37 @@ std::tuple<LRESULT, bool> GameClient::Window::OnDestroy()
 	return std::make_tuple(0, true);
 }
 
+std::tuple<LRESULT, bool> GameClient::Window::OnKeyDown(const Window& pClient, WPARAM wParam)
+{
+	auto pressedKey = Input::Keys::None;
+	switch (wParam)
+	{
+	case VK_SPACE:
+		pressedKey = Input::Keys::SpaceBar;
+		break;
+	case VK_UP:
+		pressedKey = Input::Keys::UpArrow;
+		break;
+	case VK_DOWN:
+		pressedKey = Input::Keys::DownArrow;
+		break;
+	case VK_LEFT:
+		pressedKey = Input::Keys::LeftArrow;
+		break;
+	case VK_RIGHT:
+		pressedKey = Input::Keys::RightArrow;
+		break;
+	case 0x47:
+		pressedKey = Input::Keys::G;
+		break;
+	default:
+		return std::make_tuple(0, false);
+	}
+
+	pClient.OnKeyDown(pressedKey);
+	return std::make_tuple(0, true);
+}
+
 LRESULT CALLBACK GameClient::Window::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 {
 	LRESULT result = 0;
@@ -174,6 +213,12 @@ LRESULT CALLBACK GameClient::Window::WndProc(HWND hWnd, UINT message, WPARAM wPa
 				break;
 			case WM_DESTROY:
 				ret = OnDestroy();
+				break;
+			case WM_KEYDOWN:
+				ret = OnKeyDown(*pClient, wParam);
+				break;
+			case WM_CHAR:
+				ret = OnKeyDown(*pClient, wParam);
 				break;
 			default:
 				ret = std::make_tuple(0, false);

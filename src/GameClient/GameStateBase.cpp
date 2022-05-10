@@ -20,7 +20,7 @@ void GameClient::State::GameStateBase::OnUpdate()
 	// NoOp
 }
 
-void GameClient::State::GameStateBase::OnInput(const Input::Keys keysDown)
+void GameClient::State::GameStateBase::OnInput(const Input::Keys input)
 {
 	// NoOp
 }
