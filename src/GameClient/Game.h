@@ -17,7 +17,7 @@ namespace GameClient
 		std::chrono::steady_clock::time_point _lastUpdateTime = std::chrono::steady_clock::now();
 		std::chrono::nanoseconds _accumulatedFrameTime = std::chrono::nanoseconds(0);
 		unsigned short _maxUpdatesPerFrame = 1;
-		std::chrono::milliseconds _timeStep = std::chrono::milliseconds(200);
+		std::chrono::milliseconds _timeStep = std::chrono::milliseconds(100);
 
 	public:
 		explicit Game(std::unique_ptr<Engine::IEngine> engine);
