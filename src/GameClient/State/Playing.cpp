@@ -1,6 +1,6 @@
 #include "Playing.h"
 
-#include "CollisionDetector.h"
+#include "../GameObjects/Collision/CollisionDetector.h"
 
 GameClient::State::Playing::Playing()
 {

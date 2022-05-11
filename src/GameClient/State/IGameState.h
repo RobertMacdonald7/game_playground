@@ -3,8 +3,8 @@
 #include <vector>
 
 #include "GameStateType.h"
-#include "Input.h"
-#include "IDrawable.h"
+#include "../Input/Input.h"
+#include "../Engine/IDrawable.h"
 
 namespace GameClient::State
 {

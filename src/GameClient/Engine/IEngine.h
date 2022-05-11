@@ -1,9 +1,10 @@
 #pragma once
 
 #include <memory>
+#include <vector>
 #include <Windows.h>
 
-#include "Snake.h"
+#include "IDrawable.h"
 
 namespace GameClient::Engine
 {

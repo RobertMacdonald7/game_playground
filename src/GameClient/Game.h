@@ -2,8 +2,8 @@
 #include <memory>
 #include <chrono>
 
-#include "IEngine.h"
-#include "IGameState.h"
+#include "Engine/IEngine.h"
+#include "State/IGameState.h"
 
 namespace GameClient
 {

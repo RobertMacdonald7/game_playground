@@ -1,6 +1,6 @@
 #include "Direct2dEngine.h"
 
-#include "Macros.h"
+#include "../Macros.h"
 
 // ReSharper disable once CppParameterMayBeConst
 GameClient::Engine::Direct2dEngine::Direct2dEngine(HWND windowHandle): IEngine(windowHandle)
@@ -33,8 +33,7 @@ void GameClient::Engine::Direct2dEngine::Resize(const UINT width, const UINT hei
 
 HRESULT GameClient::Engine::Direct2dEngine::Draw(const std::vector<std::shared_ptr<IDrawable>>& drawables)
 {
-	auto result = S_OK;
-	result = CreateDeviceResources();
+	auto result = CreateDeviceResources();
 	RETURN_FAILED_HRESULT(result);
 
 	for (auto& drawable : drawables)

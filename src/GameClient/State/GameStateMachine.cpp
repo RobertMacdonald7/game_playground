@@ -1,5 +1,7 @@
 #include "GameStateMachine.h"
 
+#include <stdexcept>
+
 GameClient::State::GameStateMachine GameClient::State::GameStateMachine::_instance;
 
 GameClient::State::GameStateMachine::GameStateMachine()

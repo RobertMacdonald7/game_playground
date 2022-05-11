@@ -3,9 +3,10 @@
 #include <cmath>
 #include <chrono>
 
-#include "Direct2dEngine.h"
-#include "resource.h"
-#include "VirtualKeyCodes.h"
+#include "GameDefinitions.h"
+#include "Engine/Direct2dEngine.h"
+#include "Resource/resource.h"
+#include "Input/VirtualKeyCodes.h"
 
 GameClient::Window::Window() = default;
 

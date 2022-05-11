@@ -40,11 +40,11 @@
     <Filter Include="Source Files\State">
       <UniqueIdentifier>{cced579c-74f0-4f23-aef5-f62b91d5aa6f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Collision">
-      <UniqueIdentifier>{965ef3a7-2dac-4bf8-8ec1-c7d948bf42ea}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\GameObjects\Collision">
       <UniqueIdentifier>{99d4046b-cc28-47f6-adc1-887024d9dd62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Collision">
+      <UniqueIdentifier>{965ef3a7-2dac-4bf8-8ec1-c7d948bf42ea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -57,62 +57,68 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IEngine.h">
+    <ClInclude Include="Engine\IEngine.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="Resource\resource.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="Direct2dEngine.h">
+    <ClInclude Include="Engine\Direct2dEngine.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Snake.h">
+    <ClInclude Include="GameObjects\Snake.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="GameDefinitions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Direct2dUtility.h">
+    <ClInclude Include="Utility\Direct2dUtility.h">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
+    <ClInclude Include="Input\Input.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Playing.h">
+    <ClInclude Include="State\Playing.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
-    <ClInclude Include="IGameState.h">
+    <ClInclude Include="State\IGameState.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
-    <ClInclude Include="IDrawable.h">
+    <ClInclude Include="Engine\IDrawable.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="GameStateMachine.h">
+    <ClInclude Include="State\GameStateMachine.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
-    <ClInclude Include="GameOver.h">
+    <ClInclude Include="State\GameOver.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
-    <ClInclude Include="GameStateBase.h">
+    <ClInclude Include="State\GameStateBase.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
-    <ClInclude Include="GameStateType.h">
+    <ClInclude Include="State\GameStateType.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
-    <ClInclude Include="PlayArea.h">
+    <ClInclude Include="GameObjects\PlayArea.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Food.h">
+    <ClInclude Include="GameObjects\Food.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionDetector.h">
+    <ClInclude Include="GameObjects\Collision\CollisionDetector.h">
       <Filter>Header Files\GameObjects\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="ICollidable.h">
+    <ClInclude Include="GameObjects\Collision\ICollidable.h">
       <Filter>Header Files\GameObjects\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="VirtualKeyCodes.h">
+    <ClInclude Include="Input\VirtualKeyCodes.h">
       <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\GameObjects.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="State\GameStates.h">
+      <Filter>Header Files\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -122,47 +128,47 @@
     <ClCompile Include="WinMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Direct2dEngine.cpp">
+    <ClCompile Include="Engine\Direct2dEngine.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Snake.cpp">
+    <ClCompile Include="GameObjects\Snake.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Direct2dUtility.cpp">
+    <ClCompile Include="Utility\Direct2dUtility.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="Playing.cpp">
+    <ClCompile Include="State\Playing.cpp">
       <Filter>Source Files\State</Filter>
     </ClCompile>
-    <ClCompile Include="GameStateMachine.cpp">
+    <ClCompile Include="State\GameStateMachine.cpp">
       <Filter>Source Files\State</Filter>
     </ClCompile>
-    <ClCompile Include="GameStateBase.cpp">
+    <ClCompile Include="State\GameStateBase.cpp">
       <Filter>Source Files\State</Filter>
     </ClCompile>
-    <ClCompile Include="GameOver.cpp">
+    <ClCompile Include="State\GameOver.cpp">
       <Filter>Source Files\State</Filter>
     </ClCompile>
-    <ClCompile Include="PlayArea.cpp">
+    <ClCompile Include="GameObjects\PlayArea.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Food.cpp">
+    <ClCompile Include="GameObjects\Food.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionDetector.cpp">
-      <Filter>Source Files\Collision</Filter>
+    <ClCompile Include="GameObjects\Collision\CollisionDetector.cpp">
+      <Filter>Source Files\GameObjects\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="GameClient.rc">
+    <ResourceCompile Include="Resource\GameClient.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="snake.ico">
+    <Image Include="Resource\snake.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
