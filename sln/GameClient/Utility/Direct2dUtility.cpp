@@ -2,7 +2,7 @@
 
 #include <stdexcept>
 
-#include "GameDefinitions.h"
+#include "../GameDefinitions.h"
 
 	D2D1_RECT_F GameClient::Utility::Direct2dUtility::CreateUnitRectangle(FLOAT xOffset, FLOAT yOffset, FLOAT x, FLOAT y, FLOAT xScale, FLOAT yScale)
 	{

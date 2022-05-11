@@ -1,8 +1,7 @@
 #pragma once
-#include "GameOver.h"
 #include "GameStateType.h"
 #include "IGameState.h"
-#include "Playing.h"
+#include "GameStates.h"
 
 namespace GameClient::State
 {

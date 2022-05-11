@@ -2,8 +2,8 @@
 
 #include <stdexcept>
 
-#include "Direct2dUtility.h"
-#include "Macros.h"
+#include "../Macros.h"
+#include "../Utility/Direct2dUtility.h"
 
 GameClient::GameObjects::PlayArea::PlayArea()
 {

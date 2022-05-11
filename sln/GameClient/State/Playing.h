@@ -1,7 +1,6 @@
 #pragma once
-#include "Food.h"
 #include "GameStateBase.h"
-#include "Snake.h"
+#include "../GameObjects/GameObjects.h"
 
 namespace GameClient::State
 {

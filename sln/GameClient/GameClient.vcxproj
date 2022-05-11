@@ -147,49 +147,51 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="VirtualKeyCodes.h" />
-    <ClInclude Include="ICollidable.h" />
-    <ClInclude Include="CollisionDetector.h" />
-    <ClInclude Include="Direct2dUtility.h" />
-    <ClInclude Include="Food.h" />
+    <ClInclude Include="GameObjects\GameObjects.h" />
+    <ClInclude Include="State\GameStates.h" />
+    <ClInclude Include="Input\VirtualKeyCodes.h" />
+    <ClInclude Include="GameObjects\Collision\ICollidable.h" />
+    <ClInclude Include="GameObjects\Collision\CollisionDetector.h" />
+    <ClInclude Include="Utility\Direct2dUtility.h" />
+    <ClInclude Include="GameObjects\Food.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameDefinitions.h" />
-    <ClInclude Include="GameOver.h" />
-    <ClInclude Include="GameStateBase.h" />
-    <ClInclude Include="GameStateMachine.h" />
-    <ClInclude Include="GameStateType.h" />
-    <ClInclude Include="IDrawable.h" />
-    <ClInclude Include="IEngine.h" />
-    <ClInclude Include="IGameState.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="PlayArea.h" />
-    <ClInclude Include="Playing.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="Snake.h" />
+    <ClInclude Include="State\GameOver.h" />
+    <ClInclude Include="State\GameStateBase.h" />
+    <ClInclude Include="State\GameStateMachine.h" />
+    <ClInclude Include="State\GameStateType.h" />
+    <ClInclude Include="Engine\IDrawable.h" />
+    <ClInclude Include="Engine\IEngine.h" />
+    <ClInclude Include="State\IGameState.h" />
+    <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="GameObjects\PlayArea.h" />
+    <ClInclude Include="State\Playing.h" />
+    <ClInclude Include="Resource\resource.h" />
+    <ClInclude Include="GameObjects\Snake.h" />
     <ClInclude Include="Window.h" />
-    <ClInclude Include="Direct2dEngine.h" />
+    <ClInclude Include="Engine\Direct2dEngine.h" />
     <ClInclude Include="Macros.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CollisionDetector.cpp" />
-    <ClCompile Include="Direct2dUtility.cpp" />
-    <ClCompile Include="Food.cpp" />
+    <ClCompile Include="GameObjects\Collision\CollisionDetector.cpp" />
+    <ClCompile Include="Utility\Direct2dUtility.cpp" />
+    <ClCompile Include="GameObjects\Food.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameOver.cpp" />
-    <ClCompile Include="GameStateBase.cpp" />
-    <ClCompile Include="GameStateMachine.cpp" />
-    <ClCompile Include="PlayArea.cpp" />
-    <ClCompile Include="Playing.cpp" />
-    <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="State\GameOver.cpp" />
+    <ClCompile Include="State\GameStateBase.cpp" />
+    <ClCompile Include="State\GameStateMachine.cpp" />
+    <ClCompile Include="GameObjects\PlayArea.cpp" />
+    <ClCompile Include="State\Playing.cpp" />
+    <ClCompile Include="GameObjects\Snake.cpp" />
     <ClCompile Include="Window.cpp" />
-    <ClCompile Include="Direct2dEngine.cpp" />
+    <ClCompile Include="Engine\Direct2dEngine.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="GameClient.rc" />
+    <ResourceCompile Include="Resource\GameClient.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="snake.ico" />
+    <Image Include="Resource\snake.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

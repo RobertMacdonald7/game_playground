@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "GameStateMachine.h"
+#include "State/GameStateMachine.h"
 
 GameClient::Game::Game(std::unique_ptr<Engine::IEngine> engine):
 _engine(std::move(engine))

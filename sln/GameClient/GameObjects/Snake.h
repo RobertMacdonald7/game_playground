@@ -3,11 +3,9 @@
 #include <d2d1.h>
 #include <vector>
 
-#include "Food.h"
-#include "ICollidable.h"
-#include "IDrawable.h"
-#include "Input.h"
-#include "PlayArea.h"
+#include "../Engine/IDrawable.h"
+#include "../Input/Input.h"
+#include "./Collision/ICollidable.h"
 
 namespace GameClient::GameObjects
 {

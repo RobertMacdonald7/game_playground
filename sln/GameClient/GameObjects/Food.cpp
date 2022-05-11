@@ -1,8 +1,8 @@
 #include "Food.h"
 
-#include "CollisionDetector.h"
-#include "Direct2dUtility.h"
-#include "Macros.h"
+#include "../Macros.h"
+#include "../Utility/Direct2dUtility.h"
+#include "Collision/CollisionDetector.h"
 
 GameClient::GameObjects::Food::Food()
 {

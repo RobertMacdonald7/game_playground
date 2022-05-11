@@ -1,10 +1,10 @@
 #pragma once
 #include <random>
 
-#include "GameDefinitions.h"
-#include "ICollidable.h"
-#include "IDrawable.h"
-#include "Input.h"
+#include "../GameDefinitions.h"
+#include "../Engine/IDrawable.h"
+#include "../Input/Input.h"
+#include "Collision/ICollidable.h"
 
 namespace GameClient::GameObjects
 {

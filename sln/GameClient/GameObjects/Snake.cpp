@@ -2,10 +2,10 @@
 
 #include <chrono>
 
-#include "CollisionDetector.h"
-#include "Macros.h"
-#include "Direct2dUtility.h"
-#include "GameStateMachine.h"
+#include "Collision/CollisionDetector.h"
+#include "../Macros.h"
+#include "../Utility/Direct2dUtility.h"
+#include "../State/GameStateMachine.h"
 
 GameClient::GameObjects::Snake::Snake()
 {

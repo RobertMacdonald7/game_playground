@@ -2,8 +2,8 @@
 
 #include <d2d1.h>
 
+#include "IDrawable.h"
 #include "IEngine.h"
-#include "Snake.h"
 
 #pragma comment(lib, "d2d1")
 

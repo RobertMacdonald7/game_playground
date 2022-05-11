@@ -1,9 +1,9 @@
 #pragma once
 #include <vector>
 
-#include "GameDefinitions.h"
-#include "ICollidable.h"
-#include "IDrawable.h"
+#include "../GameDefinitions.h"
+#include "../Engine/IDrawable.h"
+#include "./Collision/ICollidable.h"
 
 namespace GameClient::GameObjects
 {
