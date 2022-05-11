@@ -27,14 +27,34 @@ void GameClient::GameObjects::PlayArea::Draw(ID2D1HwndRenderTarget* renderTarget
 			renderTarget->FillRectangle(&rectangle, brush);
 		}
 	}
+
+	for (auto x = 0; x < game_width_pixels; x+=unit_size_pixels)
+	{
+		renderTarget->DrawLine(
+				D2D1::Point2F(static_cast<FLOAT>(x), 0.0f),
+				D2D1::Point2F(static_cast<FLOAT>(x), game_height_pixels),
+				_playAreaGridBrush,
+				0.2f
+		);
+	}
+
+	for (auto y = 0; y < game_height_pixels; y+=unit_size_pixels)
+	{
+		renderTarget->DrawLine(
+					D2D1::Point2F(0.0f, static_cast<FLOAT>(y)),
+					D2D1::Point2F(game_width_pixels, static_cast<FLOAT>(y)),
+					_playAreaGridBrush,
+					0.2f
+		);
+	}
 }
 
 HRESULT GameClient::GameObjects::PlayArea::CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget)
 {
 	auto result = S_OK;
-	if (!_playAreaBrush)
+	if (!_playAreaBackgroundBrush)
 	{
-		result = renderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::Gray), &_playAreaBrush);
+		result = renderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::White), &_playAreaBackgroundBrush);
 		RETURN_FAILED_HRESULT(result);
 	}
 
@@ -44,13 +64,20 @@ HRESULT GameClient::GameObjects::PlayArea::CreateDeviceResources(ID2D1HwndRender
 		RETURN_FAILED_HRESULT(result);
 	}
 
+	if (!_playAreaGridBrush)
+	{
+		result = renderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::Gray), &_playAreaGridBrush);
+		RETURN_FAILED_HRESULT(result);
+	}
+
 	return result;
 }
 
 void GameClient::GameObjects::PlayArea::DiscardDeviceResources()
 {
-	SafeRelease(&_playAreaBrush);
+	SafeRelease(&_playAreaBackgroundBrush);
 	SafeRelease(&_playAreaBoundaryBrush);
+	SafeRelease(&_playAreaGridBrush);
 }
 
 GameClient::GameObjects::Collision::CollidableName GameClient::GameObjects::PlayArea::GetCollidableName()
@@ -93,7 +120,7 @@ ID2D1SolidColorBrush* GameClient::GameObjects::PlayArea::GetPlayAreaBrush(const 
 	switch (area)
 	{
 	case PlayAreaTile::BackGround:
-		return _playAreaBrush;
+		return _playAreaBackgroundBrush;
 	case PlayAreaTile::Wall:
 		return _playAreaBoundaryBrush;
 	default:

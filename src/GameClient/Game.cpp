@@ -23,8 +23,23 @@ void GameClient::Game::OnResize(const UINT width, const UINT height) const
 	_engine->Resize(width, height);
 }
 
-void GameClient::Game::OnInput(const Input::Keys input)
+void GameClient::Game::OnInput(const Input::Input input)
 {
+	switch (input)
+	{
+	case Input::Input::One:
+		_timeStep = std::chrono::milliseconds(_slow);
+		break;
+	case Input::Input::Two:
+		_timeStep = std::chrono::milliseconds(_normal);
+
+		break;
+	case Input::Input::Three:
+		_timeStep = std::chrono::milliseconds(_fast);
+		break;
+	default:
+		break;
+	}
 	State::GameStateMachine::GetInstance().OnInput(input);
 }
 

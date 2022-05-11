@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="VirtualKeyCodes.h" />
     <ClInclude Include="ICollidable.h" />
     <ClInclude Include="CollisionDetector.h" />
     <ClInclude Include="Direct2dUtility.h" />
@@ -160,7 +161,7 @@
     <ClInclude Include="IDrawable.h" />
     <ClInclude Include="IEngine.h" />
     <ClInclude Include="IGameState.h" />
-    <ClInclude Include="Keys.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="PlayArea.h" />
     <ClInclude Include="Playing.h" />
     <ClInclude Include="resource.h" />

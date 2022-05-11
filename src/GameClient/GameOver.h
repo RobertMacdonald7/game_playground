@@ -11,7 +11,7 @@ namespace GameClient::State
 		GameStateType GetType() override;
 		void Enter(std::shared_ptr<IGameState> previousState) override;
 		void Leave() override;
-		void OnInput(Input::Keys input) override;
+		void OnInput(Input::Input input) override;
 	};
 }
 

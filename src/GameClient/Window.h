@@ -31,7 +31,7 @@ namespace GameClient
 		// Process and dispatch messages
 		void Run() const;
 
-		void OnKeyDown(Input::Keys pressedKey) const;
+		void OnKeyDown(Input::Input pressedKey) const;
 
 	private:
 		// Resize the render target.

@@ -22,9 +22,9 @@ void GameClient::GameObjects::Food::OnUpdate()
 	}
 }
 
-bool GameClient::GameObjects::Food::OnInput(const Input::Keys input)
+bool GameClient::GameObjects::Food::OnInput(const Input::Input input)
 {
-	if (input == Input::Keys::SpaceBar)
+	if (input == Input::Input::SpaceBar)
 	{
 		Reset();
 		return true;

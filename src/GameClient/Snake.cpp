@@ -17,15 +17,15 @@ GameClient::GameObjects::Snake::~Snake()
 	DiscardDeviceResources();
 }
 
-bool GameClient::GameObjects::Snake::OnInput(const Input::Keys input)
+bool GameClient::GameObjects::Snake::OnInput(const Input::Input input)
 {
-	if (input == Input::Keys::SpaceBar)
+	if (input == Input::Input::SpaceBar)
 	{
 		Reset();
 		return true;
 	}
 #ifdef _DEBUG
-	if (input == Input::Keys::G)
+	if (input == Input::Input::G)
 	{
 		_growNextUpdate = true;
 	}
@@ -33,19 +33,19 @@ bool GameClient::GameObjects::Snake::OnInput(const Input::Keys input)
 	const auto originalDirection = _direction;
 	switch (input)
 	{
-	case Input::Keys::UpArrow:
+	case Input::Input::Up:
 		if (_direction == Direction::Down) return false;
 		_direction = Direction::Up;
 		break;
-	case Input::Keys::DownArrow:
+	case Input::Input::Down:
 		if (_direction == Direction::Up) return false;
 		_direction = Direction::Down;
 		break;
-	case Input::Keys::LeftArrow:
+	case Input::Input::Left:
 		if (_direction == Direction::Right) return false;
 		_direction = Direction::Left;
 		break;
-	case Input::Keys::RightArrow:
+	case Input::Input::Right:
 		if (_direction == Direction::Left) return false;
 		_direction = Direction::Right;
 		break;

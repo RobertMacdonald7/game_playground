@@ -75,7 +75,7 @@
     <ClInclude Include="Direct2dUtility.h">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Keys.h">
+    <ClInclude Include="Input.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
     <ClInclude Include="Playing.h">
@@ -110,6 +110,9 @@
     </ClInclude>
     <ClInclude Include="ICollidable.h">
       <Filter>Header Files\GameObjects\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="VirtualKeyCodes.h">
+      <Filter>Header Files\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

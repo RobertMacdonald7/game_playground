@@ -4,7 +4,7 @@
 #include "GameDefinitions.h"
 #include "ICollidable.h"
 #include "IDrawable.h"
-#include "Keys.h"
+#include "Input.h"
 
 namespace GameClient::GameObjects
 {
@@ -22,7 +22,7 @@ namespace GameClient::GameObjects
 		Food();
 		~Food() override;
 		void OnUpdate();
-		bool OnInput(Input::Keys input);
+		bool OnInput(Input::Input input);
 
 		Food(Food& copyOther) = delete;
 		Food operator=(Food& copyOther) = delete;

@@ -30,7 +30,7 @@ namespace GameClient::State
 
 		void ChangeState(GameStateType state);
 
-		void OnInput(Input::Keys input) const;
+		void OnInput(Input::Input input) const;
 		void OnUpdate() const;
 		[[nodiscard]] std::vector<std::shared_ptr<Engine::IDrawable>>& GetDrawableEntities() const;
 	};

@@ -6,7 +6,7 @@
 #include "Food.h"
 #include "ICollidable.h"
 #include "IDrawable.h"
-#include "Keys.h"
+#include "Input.h"
 #include "PlayArea.h"
 
 namespace GameClient::GameObjects
@@ -47,7 +47,7 @@ namespace GameClient::GameObjects
 		Snake(Snake&& moveOther) = delete;
 		Snake operator=(Snake&& moveOther) = delete;
 
-		bool OnInput(Input::Keys input);
+		bool OnInput(Input::Input input);
 		void OnUpdate();
 
 		void Draw(ID2D1HwndRenderTarget* renderTarget) override;

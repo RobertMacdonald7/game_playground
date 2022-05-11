@@ -40,17 +40,17 @@ void GameClient::State::Playing::OnUpdate()
 	_snake->OnUpdate();
 	_food->OnUpdate();
 
-	if (_cachedInput != Input::Keys::None)
+	if (_cachedInput != Input::Input::None)
 	{
 		_snake->OnInput(_cachedInput);
 		_food->OnInput(_cachedInput);
 
-		_cachedInput = Input::Keys::None;
+		_cachedInput = Input::Input::None;
 		_blockInputUntilNextUpdate = true;
 	}
 }
 
-void GameClient::State::Playing::OnInput(const Input::Keys input)
+void GameClient::State::Playing::OnInput(const Input::Input input)
 {
 	if (_blockInputUntilNextUpdate)
 	{

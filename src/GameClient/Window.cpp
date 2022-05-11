@@ -5,6 +5,7 @@
 
 #include "Direct2dEngine.h"
 #include "resource.h"
+#include "VirtualKeyCodes.h"
 
 GameClient::Window::Window() = default;
 
@@ -101,7 +102,7 @@ void GameClient::Window::Run() const
 	}
 }
 
-void GameClient::Window::OnKeyDown(const Input::Keys pressedKey) const
+void GameClient::Window::OnKeyDown(const Input::Input pressedKey) const
 {
 	if (_game)
 	{
@@ -147,28 +148,44 @@ std::tuple<LRESULT, bool> GameClient::Window::OnDestroy()
 	return std::make_tuple(0, true);
 }
 
-std::tuple<LRESULT, bool> GameClient::Window::OnKeyDown(const Window& pClient, WPARAM wParam)
+std::tuple<LRESULT, bool> GameClient::Window::OnKeyDown(const Window& pClient, const WPARAM wParam)
 {
-	auto pressedKey = Input::Keys::None;
+	auto pressedKey = Input::Input::None;
 	switch (wParam)
 	{
 	case VK_SPACE:
-		pressedKey = Input::Keys::SpaceBar;
+		pressedKey = Input::Input::SpaceBar;
 		break;
+	case VK_W:
 	case VK_UP:
-		pressedKey = Input::Keys::UpArrow;
+		pressedKey = Input::Input::Up;
 		break;
+	case VK_S:
 	case VK_DOWN:
-		pressedKey = Input::Keys::DownArrow;
+		pressedKey = Input::Input::Down;
 		break;
+	case VK_A:
 	case VK_LEFT:
-		pressedKey = Input::Keys::LeftArrow;
+		pressedKey = Input::Input::Left;
 		break;
+	case VK_D:
 	case VK_RIGHT:
-		pressedKey = Input::Keys::RightArrow;
+		pressedKey = Input::Input::Right;
 		break;
-	case 0x47:
-		pressedKey = Input::Keys::G;
+	case VK_G:
+		pressedKey = Input::Input::G;
+		break;
+	case VK_1:
+	case VK_NUMPAD1:
+		pressedKey = Input::Input::One;
+		break;
+	case VK_2:
+	case VK_NUMPAD2:
+		pressedKey = Input::Input::Two;
+		break;
+	case VK_3:
+	case VK_NUMPAD3:
+		pressedKey = Input::Input::Three;
 		break;
 	default:
 		return std::make_tuple(0, false);
@@ -178,7 +195,7 @@ std::tuple<LRESULT, bool> GameClient::Window::OnKeyDown(const Window& pClient, W
 	return std::make_tuple(0, true);
 }
 
-LRESULT CALLBACK GameClient::Window::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
+LRESULT CALLBACK GameClient::Window::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	LRESULT result = 0;
 
@@ -215,9 +232,6 @@ LRESULT CALLBACK GameClient::Window::WndProc(HWND hWnd, UINT message, WPARAM wPa
 				ret = OnDestroy();
 				break;
 			case WM_KEYDOWN:
-				ret = OnKeyDown(*pClient, wParam);
-				break;
-			case WM_CHAR:
 				ret = OnKeyDown(*pClient, wParam);
 				break;
 			default:

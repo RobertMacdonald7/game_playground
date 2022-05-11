@@ -16,8 +16,9 @@ namespace GameClient::GameObjects
 	{
 	private:
 		std::vector<std::vector<PlayAreaTile>> _playArea{ game_width_units, std::vector<PlayAreaTile>(game_height_units) };
-		ID2D1SolidColorBrush* _playAreaBrush = nullptr;
+		ID2D1SolidColorBrush* _playAreaBackgroundBrush = nullptr;
 		ID2D1SolidColorBrush* _playAreaBoundaryBrush = nullptr;
+		ID2D1SolidColorBrush* _playAreaGridBrush = nullptr;
 
 	public:
 		PlayArea();

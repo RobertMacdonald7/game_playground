@@ -2,9 +2,9 @@
 
 #include "GameStateMachine.h"
 
-void GameClient::State::GameOver::OnInput(const Input::Keys input)
+void GameClient::State::GameOver::OnInput(const Input::Input input)
 {
-	if (static_cast<int>(input) & static_cast<int>(Input::Keys::SpaceBar))
+	if (static_cast<int>(input) & static_cast<int>(Input::Input::SpaceBar))
 	{
 		GameStateMachine::GetInstance().ChangeState(GameStateType::Playing);
 	}

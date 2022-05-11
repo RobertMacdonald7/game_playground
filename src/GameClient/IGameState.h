@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "GameStateType.h"
-#include "Keys.h"
+#include "Input.h"
 #include "IDrawable.h"
 
 namespace GameClient::State
@@ -19,7 +19,7 @@ namespace GameClient::State
 		virtual void Leave() = 0;
 
 		virtual void OnUpdate() = 0;
-		virtual void OnInput(Input::Keys input) = 0;
+		virtual void OnInput(Input::Input input) = 0;
 
 		virtual std::vector<std::shared_ptr<Engine::IDrawable>>& GetDrawables() = 0;
 	};
