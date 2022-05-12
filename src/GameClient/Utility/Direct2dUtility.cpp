@@ -4,7 +4,7 @@
 
 #include "../GameDefinitions.h"
 
-	D2D1_RECT_F GameClient::Utility::Direct2dUtility::CreateUnitRectangle(Engine::Coordinate2d offset, Engine::Coordinate2d position, Engine::Coordinate2dF scale)
+	D2D1_RECT_F GameClient::Utility::Direct2dUtility::CreateUnitRectangle(const Engine::Coordinate2d offset, const Engine::Coordinate2d position, const Engine::Coordinate2dF scale)
 	{
 		if (!(scale.x >= 0 && scale.x < .5f) || !(scale.y >= 0 && scale.y < .5f))
 		{

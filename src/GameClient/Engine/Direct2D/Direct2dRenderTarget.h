@@ -33,7 +33,6 @@ namespace GameClient::Engine::Direct2D
 		void Resize(Size size) override;
 
 	private:
-		ID2D1SolidColorBrush* GetBrush(Colour colour);
 		HRESULT CreateAndAddBrush(Colour colour);
 	};
 }

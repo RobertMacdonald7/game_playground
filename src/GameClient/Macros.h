@@ -25,7 +25,7 @@ void SafeRelease(Interface** ppInterfaceToRelease)
 #endif
 
 #ifndef HINST_THISCOMPONENT
-EXTERN_C const IMAGE_DOS_HEADER __ImageBase;
+EXTERN_C const IMAGE_DOS_HEADER __ImageBase;  // NOLINT(clang-diagnostic-reserved-identifier, bugprone-reserved-identifier)
 #define HINST_THISCOMPONENT ((HINSTANCE)&__ImageBase)
 #endif
 

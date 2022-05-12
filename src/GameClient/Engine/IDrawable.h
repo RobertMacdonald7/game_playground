@@ -6,7 +6,7 @@
 
 namespace GameClient::Engine
 {
-	class IDrawable
+	class IDrawable  // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	public:
 		virtual ~IDrawable() = default;

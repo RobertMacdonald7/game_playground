@@ -1,8 +1,5 @@
 #include "Window.h"
 
-#include <cmath>
-#include <chrono>
-
 #include "GameDefinitions.h"
 #include "Engine/Direct2D/Direct2dEngine.h"
 #include "Resource/resource.h"
@@ -67,7 +64,7 @@ HRESULT GameClient::Window::Initialize(HINSTANCE hInstance)
 			_game = std::make_unique<Game>(std::make_unique<Engine::Direct2D::Direct2dEngine>(_hwnd));
 
 		}
-		catch (std::exception)
+		catch (std::exception const&)
 		{
 			result = E_FAIL;
 		}
@@ -151,7 +148,7 @@ std::tuple<LRESULT, bool> GameClient::Window::OnDestroy()
 
 std::tuple<LRESULT, bool> GameClient::Window::OnKeyDown(const Window& pClient, const WPARAM wParam)
 {
-	auto pressedKey = Input::Input::None;
+	Input::Input pressedKey;
 	switch (wParam)
 	{
 	case VK_SPACE:

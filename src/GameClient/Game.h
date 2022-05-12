@@ -25,7 +25,7 @@ namespace GameClient
 	public:
 		explicit Game(std::unique_ptr<Engine::IEngine> engine);
 		~Game();
-		void OnResize(const int width, const int height) const;
+		void OnResize(int width, int height) const;
 		void OnInput(Input::Input input);
 
 		Game(Game& copyOther) = delete;

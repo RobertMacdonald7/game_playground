@@ -8,7 +8,7 @@
 
 namespace GameClient::Engine
 {
-	class IEngine
+	class IEngine  // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	private:
 		HWND _windowHandle = nullptr;
@@ -24,7 +24,7 @@ namespace GameClient::Engine
 		virtual ~IEngine() = default;
 
 		virtual HRESULT Initialize() = 0;
-		virtual void Resize(const int width, const int height) const = 0;
+		virtual void Resize(int width, int height) const = 0;
 		virtual HRESULT Draw(const std::vector<std::shared_ptr<IDrawable>>& drawables) = 0;
 	};
 

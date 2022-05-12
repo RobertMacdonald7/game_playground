@@ -34,7 +34,7 @@ namespace GameClient
 
 	private:
 		// Resize the render target.
-		void OnResize(const int width, const int height) const;
+		void OnResize(int width, int height) const;
 
 		static std::tuple<LRESULT, bool> OnSize(const Window& pClient, LPARAM lParam);
 		static std::tuple<LRESULT, bool> OnDisplayChange(HWND hWnd);

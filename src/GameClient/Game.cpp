@@ -7,9 +7,7 @@
 GameClient::Game::Game(std::unique_ptr<Engine::IEngine> engine):
 _engine(std::move(engine))
 {
-	const HRESULT result = _engine->Initialize();
-
-	if (FAILED(result))
+	if (const HRESULT result = _engine->Initialize(); FAILED(result))
 	{
 		const auto message = "Engine failed to initialize: " + std::to_string(result);
 		throw std::exception(message.c_str());

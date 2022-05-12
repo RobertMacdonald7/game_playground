@@ -11,6 +11,10 @@ GameClient::Engine::Direct2D::Direct2dRenderTarget::Direct2dRenderTarget(ID2D1Hw
 GameClient::Engine::Direct2D::Direct2dRenderTarget::~Direct2dRenderTarget()
 {
 	SafeRelease(&_pRenderTarget);
+	for (auto& [colour, brush] : _brushes)
+	{
+		SafeRelease(&brush);
+	}
 }
 
 HRESULT GameClient::Engine::Direct2D::Direct2dRenderTarget::CreateDeviceResources()

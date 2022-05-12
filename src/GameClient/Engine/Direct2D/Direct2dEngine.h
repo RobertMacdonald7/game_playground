@@ -25,7 +25,7 @@ namespace GameClient::Engine::Direct2D
 		Direct2dEngine(Direct2dEngine&& moveOther) = delete;
 
 		HRESULT Initialize() override;
-		void Resize(const int width, const int height) const override;
+		void Resize(int width, int height) const override;
 		HRESULT Draw(const std::vector<std::shared_ptr<IDrawable>>& drawables) override;
 
 	private:

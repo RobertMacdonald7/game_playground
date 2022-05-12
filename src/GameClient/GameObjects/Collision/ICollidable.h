@@ -25,7 +25,7 @@ namespace GameClient::GameObjects::Collision
 			);
 	}
 
-	class ICollidable
+	class ICollidable  // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	public:
 		virtual ~ICollidable() = default;
