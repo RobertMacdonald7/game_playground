@@ -2,7 +2,6 @@
 
 #include "Direct2dColour.h"
 #include "../../Utility/Direct2dUtility.h"
-#include "../../Macros.h"
 
 GameClient::Engine::Direct2D::Direct2dRenderTarget::Direct2dRenderTarget(ID2D1HwndRenderTarget* renderTarget):
 	_pRenderTarget(renderTarget)

@@ -10,10 +10,6 @@ GameClient::GameObjects::Snake::Snake()
 	CreatePlayer();
 }
 
-GameClient::GameObjects::Snake::~Snake()
-{
-}
-
 bool GameClient::GameObjects::Snake::OnInput(const Input::Input input)
 {
 	if (input == Input::Input::SpaceBar)

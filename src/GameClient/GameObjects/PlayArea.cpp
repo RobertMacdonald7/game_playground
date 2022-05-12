@@ -2,15 +2,9 @@
 
 #include <stdexcept>
 
-#include "../Macros.h"
-
 GameClient::GameObjects::PlayArea::PlayArea()
 {
 	CreatePlayArea();
-}
-
-GameClient::GameObjects::PlayArea::~PlayArea()
-{
 }
 
 void GameClient::GameObjects::PlayArea::Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget)

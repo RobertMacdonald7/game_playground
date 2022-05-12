@@ -2,7 +2,6 @@
 
 #include <d2d1.h>
 
-#include "Direct2dRenderTarget.h"
 #include "../IEngine.h"
 
 #pragma comment(lib, "d2d1")

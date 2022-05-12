@@ -7,10 +7,6 @@ GameClient::GameObjects::Food::Food()
 	PlaceFoodAtValidCoordinates();
 }
 
-GameClient::GameObjects::Food::~Food()
-{
-}
-
 void GameClient::GameObjects::Food::OnUpdate()
 {
 	if (_eaten)

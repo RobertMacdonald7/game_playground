@@ -1,10 +1,9 @@
 #pragma once
 
-#include <Windows.h>
-
 #include "Colour.h"
 #include "Coordinate2d.h"
 #include "Size.h"
+#include "../Macros.h"
 
 namespace GameClient::Engine
 {

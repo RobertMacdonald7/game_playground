@@ -2,9 +2,9 @@
 
 #include <memory>
 #include <vector>
-#include <Windows.h>
 
 #include "IDrawable.h"
+#include "../Macros.h"
 
 namespace GameClient::Engine
 {

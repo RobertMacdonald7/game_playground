@@ -19,7 +19,7 @@ namespace GameClient::GameObjects
 
 	public:
 		PlayArea();
-		~PlayArea() override;
+		~PlayArea() override = default;
 
 		PlayArea(PlayArea& copyOther) = delete;
 		PlayArea operator=(PlayArea& copyOther) = delete;

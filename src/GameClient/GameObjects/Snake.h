@@ -1,6 +1,5 @@
 #pragma once
 #include <chrono>
-#include <d2d1.h>
 #include <vector>
 
 #include "../Engine/IDrawable.h"
@@ -29,7 +28,7 @@ namespace GameClient::GameObjects
 
 	public:
 		Snake();
-		~Snake() override;
+		~Snake() override = default;
 
 		Snake(Snake& copyOther) = delete;
 		Snake operator=(Snake& copyOther) = delete;

@@ -1,8 +1,6 @@
 #include "Direct2dEngine.h"
 
 #include "Direct2dRenderTarget.h"
-#include "../../Macros.h"
-#include "../../Utility/Direct2dUtility.h"
 
 // ReSharper disable once CppParameterMayBeConst
 GameClient::Engine::Direct2D::Direct2dEngine::Direct2dEngine(HWND windowHandle): IEngine(windowHandle)

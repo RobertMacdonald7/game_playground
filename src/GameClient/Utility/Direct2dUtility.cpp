@@ -6,7 +6,6 @@
 
 	D2D1_RECT_F GameClient::Utility::Direct2dUtility::CreateUnitRectangle(Engine::Coordinate2d offset, Engine::Coordinate2d position, Engine::Coordinate2dF scale)
 	{
-		// TODO - Make scale actually "scale" rather than add/subtract a multiple of unit_size_pixels;
 		if (!(scale.x >= 0 && scale.x < .5f) || !(scale.y >= 0 && scale.y < .5f))
 		{
 			throw std::out_of_range("Scaling factor was not valid");

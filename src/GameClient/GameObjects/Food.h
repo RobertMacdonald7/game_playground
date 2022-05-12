@@ -19,7 +19,7 @@ namespace GameClient::GameObjects
 
 	public:
 		Food();
-		~Food() override;
+		~Food() override = default;
 		void OnUpdate();
 		bool OnInput(Input::Input input);
 
