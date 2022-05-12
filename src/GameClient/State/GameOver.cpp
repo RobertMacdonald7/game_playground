@@ -4,7 +4,7 @@
 
 void GameClient::State::GameOver::OnInput(const Input::Input input)
 {
-	if (static_cast<int>(input) & static_cast<int>(Input::Input::SpaceBar))
+	if (input == Input::Input::SpaceBar)
 	{
 		GameStateMachine::GetInstance().ChangeState(GameStateType::Playing);
 	}

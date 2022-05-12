@@ -1,17 +1,16 @@
 #pragma once
-#include <d2d1.h>
+
+#include <memory>
+
+#include "IRenderTarget.h"
 
 namespace GameClient::Engine
 {
-	class IDrawable
+	class IDrawable  // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	public:
 		virtual ~IDrawable() = default;
 
-		virtual void Draw(ID2D1HwndRenderTarget* renderTarget) = 0;
-
-		virtual HRESULT CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget) = 0;
-
-		virtual void DiscardDeviceResources() = 0;
+		virtual void Draw(const std::shared_ptr<IRenderTarget>& renderTarget) = 0;
 	};
 }

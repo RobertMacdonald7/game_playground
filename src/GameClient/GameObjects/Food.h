@@ -11,16 +11,15 @@ namespace GameClient::GameObjects
 	class Food final : public Engine::IDrawable, public Collision::ICollidable
 	{
 	private:
-		std::pair<UINT, UINT> _coordinates;
-		ID2D1SolidColorBrush* _foodBrush = nullptr;
+		Engine::Coordinate2d _coordinates{ 0, 0 };
 		bool _eaten = false;
-		std::mt19937 _rng{std::random_device{}()};
+		std::mt19937 _rng{ std::random_device{}() };
 		std::uniform_int_distribution<int> _xDistribution{ 1, game_width_units - 2 };
 		std::uniform_int_distribution<int> _yDistribution{ 1, game_height_units - 2 };
 
 	public:
 		Food();
-		~Food() override;
+		~Food() override = default;
 		void OnUpdate();
 		bool OnInput(Input::Input input);
 
@@ -33,9 +32,7 @@ namespace GameClient::GameObjects
 		void Reset();
 
 		// IDrawable
-		void Draw(ID2D1HwndRenderTarget* renderTarget) override;
-		HRESULT CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget) override;
-		void DiscardDeviceResources() override;
+		void Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget) override;
 
 		// ICollidable
 		Collision::CollidableName GetCollidableName() override;

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <memory>
-#include <Windows.h>
 
 #include "Game.h"
 #include "Macros.h"
@@ -13,7 +12,7 @@ namespace GameClient
 	private:
 		HWND _hwnd = nullptr;
 		std::unique_ptr<Game> _game = nullptr;
-		const FLOAT _defaultDpi = 96.f;
+		const float _defaultDpi = 96.f;
 
 	public:
 		Window();
@@ -35,10 +34,7 @@ namespace GameClient
 
 	private:
 		// Resize the render target.
-		void OnResize(
-			UINT width,
-			UINT height
-		) const;
+		void OnResize(int width, int height) const;
 
 		static std::tuple<LRESULT, bool> OnSize(const Window& pClient, LPARAM lParam);
 		static std::tuple<LRESULT, bool> OnDisplayChange(HWND hWnd);

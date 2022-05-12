@@ -147,7 +147,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\Direct2D\Direct2dRenderTarget.h" />
+    <ClInclude Include="Engine\Colour.h" />
+    <ClInclude Include="Engine\Direct2D\Direct2dColour.h" />
+    <ClInclude Include="Engine\IRenderTarget.h" />
+    <ClInclude Include="Engine\Size.h" />
     <ClInclude Include="GameObjects\GameObjects.h" />
+    <ClInclude Include="Engine\Coordinate2d.h" />
     <ClInclude Include="State\GameStates.h" />
     <ClInclude Include="Input\VirtualKeyCodes.h" />
     <ClInclude Include="GameObjects\Collision\ICollidable.h" />
@@ -169,10 +175,12 @@
     <ClInclude Include="Resource\resource.h" />
     <ClInclude Include="GameObjects\Snake.h" />
     <ClInclude Include="Window.h" />
-    <ClInclude Include="Engine\Direct2dEngine.h" />
+    <ClInclude Include="Engine\Direct2D\Direct2dEngine.h" />
     <ClInclude Include="Macros.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\Direct2D\Direct2dRenderTarget.cpp" />
+    <ClCompile Include="Engine\Direct2D\Direct2dColour.cpp" />
     <ClCompile Include="GameObjects\Collision\CollisionDetector.cpp" />
     <ClCompile Include="Utility\Direct2dUtility.cpp" />
     <ClCompile Include="GameObjects\Food.cpp" />
@@ -184,7 +192,7 @@
     <ClCompile Include="State\Playing.cpp" />
     <ClCompile Include="GameObjects\Snake.cpp" />
     <ClCompile Include="Window.cpp" />
-    <ClCompile Include="Engine\Direct2dEngine.cpp" />
+    <ClCompile Include="Engine\Direct2D\Direct2dEngine.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>

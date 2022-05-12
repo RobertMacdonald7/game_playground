@@ -8,7 +8,7 @@
 
 namespace GameClient::State
 {
-	class IGameState
+	class IGameState  // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	public:
 		virtual ~IGameState() = default;

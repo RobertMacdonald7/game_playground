@@ -1,10 +1,7 @@
 #include "Window.h"
 
-#include <cmath>
-#include <chrono>
-
 #include "GameDefinitions.h"
-#include "Engine/Direct2dEngine.h"
+#include "Engine/Direct2D/Direct2dEngine.h"
 #include "Resource/resource.h"
 #include "Input/VirtualKeyCodes.h"
 
@@ -33,7 +30,7 @@ HRESULT GameClient::Window::Initialize(HINSTANCE hInstance)
 
 	// Because the CreateWindow function takes its size in pixels,
 	// obtain the system DPI and use it to scale the window size.
-	const auto dpiX = static_cast<FLOAT>(GetDpiForWindow(GetDesktopWindow()));
+	const auto dpiX = static_cast<float>(GetDpiForWindow(GetDesktopWindow()));
 	const auto dpiY = dpiX;
 
 	// Adjust the window to fit desired resolution
@@ -64,10 +61,10 @@ HRESULT GameClient::Window::Initialize(HINSTANCE hInstance)
 	{
 		try
 		{
-			_game = std::make_unique<Game>(std::make_unique<Engine::Direct2dEngine>(_hwnd));
+			_game = std::make_unique<Game>(std::make_unique<Engine::Direct2D::Direct2dEngine>(_hwnd));
 
 		}
-		catch (std::exception)
+		catch (std::exception const&)
 		{
 			result = E_FAIL;
 		}
@@ -111,7 +108,7 @@ void GameClient::Window::OnKeyDown(const Input::Input pressedKey) const
 	}
 }
 
-void GameClient::Window::OnResize(const UINT width, const UINT height) const
+void GameClient::Window::OnResize(const int width, const int height) const
 {
 	if (_game)
 	{
@@ -124,8 +121,8 @@ void GameClient::Window::OnResize(const UINT width, const UINT height) const
 
 std::tuple<LRESULT, bool> GameClient::Window::OnSize(const Window& pClient, const LPARAM lParam)
 {
-	const UINT width = LOWORD(lParam);
-	const UINT height = HIWORD(lParam);
+	const int width = LOWORD(lParam);
+	const int height = HIWORD(lParam);
 	pClient.OnResize(width, height);
 
 	return std::make_tuple(0, true);
@@ -151,7 +148,7 @@ std::tuple<LRESULT, bool> GameClient::Window::OnDestroy()
 
 std::tuple<LRESULT, bool> GameClient::Window::OnKeyDown(const Window& pClient, const WPARAM wParam)
 {
-	auto pressedKey = Input::Input::None;
+	Input::Input pressedKey;
 	switch (wParam)
 	{
 	case VK_SPACE:

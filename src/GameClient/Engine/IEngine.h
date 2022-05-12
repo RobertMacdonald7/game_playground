@@ -2,13 +2,13 @@
 
 #include <memory>
 #include <vector>
-#include <Windows.h>
 
 #include "IDrawable.h"
+#include "../Macros.h"
 
 namespace GameClient::Engine
 {
-	class IEngine
+	class IEngine  // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	private:
 		HWND _windowHandle = nullptr;
@@ -16,7 +16,6 @@ namespace GameClient::Engine
 	protected:
 		[[nodiscard]] HWND GetWindowHandle() const;
 
-		// ReSharper disable once CppParameterMayBeConst
 		explicit IEngine(HWND windowHandle) :
 			_windowHandle(windowHandle)
 		{ }
@@ -25,7 +24,7 @@ namespace GameClient::Engine
 		virtual ~IEngine() = default;
 
 		virtual HRESULT Initialize() = 0;
-		virtual void Resize(UINT width, UINT height) const = 0;
+		virtual void Resize(int width, int height) const = 0;
 		virtual HRESULT Draw(const std::vector<std::shared_ptr<IDrawable>>& drawables) = 0;
 	};
 

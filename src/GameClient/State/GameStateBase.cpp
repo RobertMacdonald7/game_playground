@@ -1,10 +1,5 @@
 #include "GameStateBase.h"
 
-GameClient::State::GameStateType GameClient::State::GameStateBase::GetType()
-{
-	throw std::exception("GameStateBase does not have a type");
-}
-
 void GameClient::State::GameStateBase::Enter(const std::shared_ptr<IGameState> previousState)
 {
 	// NoOp
