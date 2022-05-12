@@ -18,7 +18,7 @@ _engine(std::move(engine))
 
 GameClient::Game::~Game() = default;
 
-void GameClient::Game::OnResize(const UINT width, const UINT height) const
+void GameClient::Game::OnResize(const int width, const int height) const
 {
 	_engine->Resize(width, height);
 }
@@ -49,7 +49,7 @@ void GameClient::Game::ProcessFrame()
 	const auto frameTime = currentTime - _lastUpdateTime;
 	_accumulatedFrameTime += frameTime;
 	_lastUpdateTime = currentTime;
-	unsigned short numberOfUpdates = 0;
+	int numberOfUpdates = 0;
 
 	while (numberOfUpdates < _maxUpdatesPerFrame && _accumulatedFrameTime > _timeStep)
 	{
@@ -57,6 +57,6 @@ void GameClient::Game::ProcessFrame()
 		State::GameStateMachine::GetInstance().OnUpdate();
 		++numberOfUpdates;
 	}
-	
+
 	_engine->Draw(State::GameStateMachine::GetInstance().GetDrawableEntities());
 }

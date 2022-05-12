@@ -16,7 +16,6 @@ namespace GameClient::Engine
 	protected:
 		[[nodiscard]] HWND GetWindowHandle() const;
 
-		// ReSharper disable once CppParameterMayBeConst
 		explicit IEngine(HWND windowHandle) :
 			_windowHandle(windowHandle)
 		{ }
@@ -25,7 +24,7 @@ namespace GameClient::Engine
 		virtual ~IEngine() = default;
 
 		virtual HRESULT Initialize() = 0;
-		virtual void Resize(UINT width, UINT height) const = 0;
+		virtual void Resize(const int width, const int height) const = 0;
 		virtual HRESULT Draw(const std::vector<std::shared_ptr<IDrawable>>& drawables) = 0;
 	};
 

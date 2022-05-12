@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Engine">
-      <UniqueIdentifier>{f503c901-3d1e-4452-9547-bccee6dd6073}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Engine">
       <UniqueIdentifier>{d16daade-8019-4355-89b7-ed07bf553dae}</UniqueIdentifier>
     </Filter>
@@ -46,6 +43,15 @@
     <Filter Include="Source Files\GameObjects\Collision">
       <UniqueIdentifier>{965ef3a7-2dac-4bf8-8ec1-c7d948bf42ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine\Direct2D">
+      <UniqueIdentifier>{1e1e6ac7-33d2-4af8-a60d-616bb7251ea2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine">
+      <UniqueIdentifier>{9d2d6a7c-042b-4e8d-81a8-78bb0fd85334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Direct2D">
+      <UniqueIdentifier>{7cee228b-9b8e-491c-9e47-9ff09e6b7ef5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -57,14 +63,8 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\IEngine.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Resource\resource.h">
       <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Direct2dEngine.h">
-      <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="GameObjects\Snake.h">
       <Filter>Header Files\GameObjects</Filter>
@@ -83,9 +83,6 @@
     </ClInclude>
     <ClInclude Include="State\IGameState.h">
       <Filter>Header Files\State</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\IDrawable.h">
-      <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="State\GameStateMachine.h">
       <Filter>Header Files\State</Filter>
@@ -120,6 +117,33 @@
     <ClInclude Include="State\GameStates.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Direct2D\Direct2dEngine.h">
+      <Filter>Header Files\Engine\Direct2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Direct2D\Direct2dColour.h">
+      <Filter>Header Files\Engine\Direct2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Direct2D\Direct2dRenderTarget.h">
+      <Filter>Header Files\Engine\Direct2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Colour.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Coordinate2d.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\IDrawable.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\IEngine.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\IRenderTarget.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Size.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp">
@@ -127,9 +151,6 @@
     </ClCompile>
     <ClCompile Include="WinMain.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Direct2dEngine.cpp">
-      <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="GameObjects\Snake.cpp">
       <Filter>Source Files\GameObjects</Filter>
@@ -160,6 +181,15 @@
     </ClCompile>
     <ClCompile Include="GameObjects\Collision\CollisionDetector.cpp">
       <Filter>Source Files\GameObjects\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Direct2D\Direct2dColour.cpp">
+      <Filter>Source Files\Engine\Direct2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Direct2D\Direct2dEngine.cpp">
+      <Filter>Source Files\Engine\Direct2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Direct2D\Direct2dRenderTarget.cpp">
+      <Filter>Source Files\Engine\Direct2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

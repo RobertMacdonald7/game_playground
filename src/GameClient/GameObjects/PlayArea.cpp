@@ -3,7 +3,6 @@
 #include <stdexcept>
 
 #include "../Macros.h"
-#include "../Utility/Direct2dUtility.h"
 
 GameClient::GameObjects::PlayArea::PlayArea()
 {
@@ -12,72 +11,36 @@ GameClient::GameObjects::PlayArea::PlayArea()
 
 GameClient::GameObjects::PlayArea::~PlayArea()
 {
-	DiscardDeviceResources();
 }
 
-void GameClient::GameObjects::PlayArea::Draw(ID2D1HwndRenderTarget* renderTarget)
+void GameClient::GameObjects::PlayArea::Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget)
 {
 	for (auto x = 0; x < game_width_units; ++x)
 	{
 		for (auto y = 0; y < game_height_units; ++y)
 		{
-			auto rectangle = Utility::Direct2dUtility::CreateUnitRectangle(
-				0, 0, static_cast<FLOAT>(x), static_cast<FLOAT>(y), 0, 0);
-			const auto brush = GetPlayAreaBrush(_playArea[x][y]);
-			renderTarget->FillRectangle(&rectangle, brush);
+			const auto colour = GetPlayAreaColour(_playArea[x][y]);
+			renderTarget->DrawUnitRectangle({ 0,0 }, { x, y }, { 0, 0 }, colour);
 		}
 	}
 
 	for (auto x = 0; x < game_width_pixels; x+=unit_size_pixels)
 	{
 		renderTarget->DrawLine(
-				D2D1::Point2F(static_cast<FLOAT>(x), 0.0f),
-				D2D1::Point2F(static_cast<FLOAT>(x), game_height_pixels),
-				_playAreaGridBrush,
-				0.2f
+			{ static_cast<float>(x), 0.0f },
+			{ static_cast<float>(x), static_cast<float>(game_height_pixels) },
+			0.2f, Engine::Colour::Gray
 		);
 	}
 
 	for (auto y = 0; y < game_height_pixels; y+=unit_size_pixels)
 	{
 		renderTarget->DrawLine(
-					D2D1::Point2F(0.0f, static_cast<FLOAT>(y)),
-					D2D1::Point2F(game_width_pixels, static_cast<FLOAT>(y)),
-					_playAreaGridBrush,
-					0.2f
+			{0.0f, static_cast<float>(y) },
+			{ static_cast<float>(game_width_pixels), static_cast<float>(y) },
+			0.2f, Engine::Colour::Gray
 		);
 	}
-}
-
-HRESULT GameClient::GameObjects::PlayArea::CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget)
-{
-	auto result = S_OK;
-	if (!_playAreaBackgroundBrush)
-	{
-		result = renderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::White), &_playAreaBackgroundBrush);
-		RETURN_FAILED_HRESULT(result);
-	}
-
-	if (!_playAreaBoundaryBrush)
-	{
-		result = renderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::DarkRed), &_playAreaBoundaryBrush);
-		RETURN_FAILED_HRESULT(result);
-	}
-
-	if (!_playAreaGridBrush)
-	{
-		result = renderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::Gray), &_playAreaGridBrush);
-		RETURN_FAILED_HRESULT(result);
-	}
-
-	return result;
-}
-
-void GameClient::GameObjects::PlayArea::DiscardDeviceResources()
-{
-	SafeRelease(&_playAreaBackgroundBrush);
-	SafeRelease(&_playAreaBoundaryBrush);
-	SafeRelease(&_playAreaGridBrush);
 }
 
 GameClient::GameObjects::Collision::CollidableName GameClient::GameObjects::PlayArea::GetCollidableName()
@@ -115,14 +78,14 @@ bool GameClient::GameObjects::PlayArea::IsBoundary(const int x, const int y)
 	return x == 0 || x == game_width_units - 1 || y == 0 || y == game_height_units - 1;
 }
 
-ID2D1SolidColorBrush* GameClient::GameObjects::PlayArea::GetPlayAreaBrush(const PlayAreaTile area) const
+GameClient::Engine::Colour GameClient::GameObjects::PlayArea::GetPlayAreaColour(const PlayAreaTile area)
 {
 	switch (area)
 	{
 	case PlayAreaTile::BackGround:
-		return _playAreaBackgroundBrush;
+		return Engine::Colour::White;
 	case PlayAreaTile::Wall:
-		return _playAreaBoundaryBrush;
+		return Engine::Colour::DarkRed;
 	default:
 		throw std::out_of_range("PlayArea was not a handled value");
 	}

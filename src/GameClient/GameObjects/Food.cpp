@@ -1,7 +1,5 @@
 #include "Food.h"
 
-#include "../Macros.h"
-#include "../Utility/Direct2dUtility.h"
 #include "Collision/CollisionDetector.h"
 
 GameClient::GameObjects::Food::Food()
@@ -11,7 +9,6 @@ GameClient::GameObjects::Food::Food()
 
 GameClient::GameObjects::Food::~Food()
 {
-	DiscardDeviceResources();
 }
 
 void GameClient::GameObjects::Food::OnUpdate()
@@ -37,29 +34,9 @@ void GameClient::GameObjects::Food::Reset()
 	PlaceFoodAtValidCoordinates();
 }
 
-void GameClient::GameObjects::Food::Draw(ID2D1HwndRenderTarget* renderTarget)
+void GameClient::GameObjects::Food::Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget)
 {
-	const auto x = static_cast<FLOAT>(_coordinates.first);
-	const auto y = static_cast<FLOAT>(_coordinates.second);
-	const auto rectangle = Utility::Direct2dUtility::CreateUnitRectangle(0, 0, x, y, .1f, .1f);
-	renderTarget->FillRectangle(&rectangle, _foodBrush);
-}
-
-HRESULT GameClient::GameObjects::Food::CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget)
-{
-	auto result = S_OK;
-	if (!_foodBrush)
-	{
-		result = renderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::Green), &_foodBrush);
-		RETURN_FAILED_HRESULT(result);
-	}
-
-	return result;
-}
-
-void GameClient::GameObjects::Food::DiscardDeviceResources()
-{
-	SafeRelease(&_foodBrush);
+	renderTarget->DrawUnitRectangle({ 0,0 }, _coordinates, { 0.1f, 0.1f }, Engine::Colour::Green);
 }
 
 GameClient::GameObjects::Collision::CollidableName GameClient::GameObjects::Food::GetCollidableName()
@@ -69,7 +46,7 @@ GameClient::GameObjects::Collision::CollidableName GameClient::GameObjects::Food
 
 bool GameClient::GameObjects::Food::IsColliding(const int x, const int y, const Collision::CollidableName source)
 {
-	const auto isColliding = x == _coordinates.first && y == _coordinates.second;
+	const auto isColliding = x == _coordinates.x && y == _coordinates.y;
 
 	// Check if the snake has eaten me
 	if (isColliding && static_cast<bool>(source & Collision::CollidableName::Snake))
@@ -83,8 +60,8 @@ void GameClient::GameObjects::Food::PlaceFoodAtValidCoordinates()
 {
 	auto validCoordinates = false;
 
-	UINT x = 0;
-	UINT y = 0;
+	auto x = 0;
+	auto y = 0;
 	while (!validCoordinates)
 	{
 		x = _xDistribution(_rng);

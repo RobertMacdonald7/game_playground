@@ -6,31 +6,23 @@
 #include "../Engine/IDrawable.h"
 #include "../Input/Input.h"
 #include "./Collision/ICollidable.h"
+#include "../Engine/Coordinate2d.h"
 
 namespace GameClient::GameObjects
 {
-	struct Position
-	{
-		int x;
-		int y;
-
-		bool operator==(const Position& rhs) const = default;
-	};
-
-	enum class Direction
-	{
-		Up,
-		Down,
-		Left,
-		Right
-	};
-
 	class Snake final : public Engine::IDrawable, public Collision::ICollidable
 	{
 	private:
+		enum class Direction
+		{
+			Up,
+			Down,
+			Left,
+			Right
+		};
+
 		Direction _direction = Direction::Right;
-		std::vector<Position> _segments;
-		ID2D1SolidColorBrush* _snakeBrush = nullptr;
+		std::vector<Engine::Coordinate2d> _segments;
 
 		bool _growNextUpdate = false;
 		int _growSnake = 0;
@@ -48,9 +40,7 @@ namespace GameClient::GameObjects
 		bool OnInput(Input::Input input);
 		void OnUpdate();
 
-		void Draw(ID2D1HwndRenderTarget* renderTarget) override;
-		HRESULT CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget) override;
-		void DiscardDeviceResources() override;
+		void Draw(const ::std::shared_ptr<Engine::IRenderTarget>& renderTarget) override;
 
 		void Reset();
 

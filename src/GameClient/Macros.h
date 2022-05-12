@@ -34,3 +34,6 @@ EXTERN_C IMAGE_DOS_HEADER __ImageBase;
 #define RETURN_FAILED_HRESULT(result) if(FAILED((HRESULT)(result))) return result
 #endif
 
+#ifndef RETURN_TUPLE_ON_FAILED_HRESULT
+#define RETURN_TUPLE_ON_FAILED_HRESULT(result) if(FAILED((HRESULT)(std::get<0>(result)))) return result
+#endif

@@ -16,9 +16,6 @@ namespace GameClient::GameObjects
 	{
 	private:
 		std::vector<std::vector<PlayAreaTile>> _playArea{ game_width_units, std::vector<PlayAreaTile>(game_height_units) };
-		ID2D1SolidColorBrush* _playAreaBackgroundBrush = nullptr;
-		ID2D1SolidColorBrush* _playAreaBoundaryBrush = nullptr;
-		ID2D1SolidColorBrush* _playAreaGridBrush = nullptr;
 
 	public:
 		PlayArea();
@@ -30,9 +27,7 @@ namespace GameClient::GameObjects
 		PlayArea(PlayArea&& moveOther) = delete;
 		PlayArea operator=(PlayArea&& moveOther) = delete;
 
-		void Draw(ID2D1HwndRenderTarget* renderTarget) override;
-		HRESULT CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget) override;
-		void DiscardDeviceResources() override;
+		void Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget) override;
 
 		Collision::CollidableName GetCollidableName() override;
 		[[nodiscard]] bool IsColliding(int x, int y, Collision::CollidableName source) override;
@@ -40,6 +35,6 @@ namespace GameClient::GameObjects
 	private:
 		void CreatePlayArea();
 		static bool IsBoundary(int x, int y);
-		[[nodiscard]] ID2D1SolidColorBrush* GetPlayAreaBrush(const PlayAreaTile area) const;
+		[[nodiscard]] static Engine::Colour GetPlayAreaColour(PlayAreaTile area);
 	};
 }

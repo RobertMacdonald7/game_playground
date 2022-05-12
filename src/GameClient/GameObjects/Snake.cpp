@@ -3,8 +3,6 @@
 #include <chrono>
 
 #include "Collision/CollisionDetector.h"
-#include "../Macros.h"
-#include "../Utility/Direct2dUtility.h"
 #include "../State/GameStateMachine.h"
 
 GameClient::GameObjects::Snake::Snake()
@@ -14,7 +12,6 @@ GameClient::GameObjects::Snake::Snake()
 
 GameClient::GameObjects::Snake::~Snake()
 {
-	DiscardDeviceResources();
 }
 
 bool GameClient::GameObjects::Snake::OnInput(const Input::Input input)
@@ -67,30 +64,12 @@ void GameClient::GameObjects::Snake::OnUpdate()
 	MoveSnake();
 }
 
-void GameClient::GameObjects::Snake::Draw(ID2D1HwndRenderTarget* renderTarget)
+void GameClient::GameObjects::Snake::Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget)
 {
 	for (const auto& segment : _segments)
 	{
-		auto rectangle = Utility::Direct2dUtility::CreateUnitRectangle(0, 0, static_cast<FLOAT>(segment.x), static_cast<FLOAT>(segment.y), 0, 0);
-		renderTarget->FillRectangle(&rectangle, _snakeBrush);
+		renderTarget->DrawUnitRectangle({0, 0}, segment, {0, 0}, Engine::Colour::Blue);
 	}
-}
-
-HRESULT GameClient::GameObjects::Snake::CreateDeviceResources(ID2D1HwndRenderTarget* renderTarget)
-{
-	auto result = S_OK;
-	if (!_snakeBrush)
-	{
-		result = renderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::Blue), &_snakeBrush);
-		RETURN_FAILED_HRESULT(result);
-	}
-
-	return result;
-}
-
-void GameClient::GameObjects::Snake::DiscardDeviceResources()
-{
-	SafeRelease(&_snakeBrush);
 }
 
 void GameClient::GameObjects::Snake::Reset()
@@ -137,7 +116,7 @@ void GameClient::GameObjects::Snake::MoveSnake()
 
 	// Calculate the new head position
 	const auto& [x, y] = _segments.front();
-	const auto newHead = Position{ x + deltaX, y + deltaY };
+	const auto newHead = Engine::Coordinate2d{ x + deltaX, y + deltaY };
 
 	// Check collision
 	if (Collision::CollisionDetector::GetInstance().IsColliding(newHead.x, newHead.y, GetCollidableName(), Collision::CollidableName::PlayArea | Collision::CollidableName::Snake))
@@ -167,19 +146,19 @@ void GameClient::GameObjects::Snake::MoveSnake()
 void GameClient::GameObjects::Snake::CreatePlayer()
 {
 	constexpr auto initialX = 10;
-	constexpr auto initialSnakeHead = Position{ initialX, game_height_units / 2 };
+	constexpr auto initialSnakeHead = Engine::Coordinate2d{ initialX, game_height_units / 2 };
 	_segments.push_back(initialSnakeHead);
 
 	for (auto x = initialX - 1; x > initialX - 5; --x)
 	{
-		auto segment = Position{ x, game_height_units / 2 };
+		auto segment = Engine::Coordinate2d{ x, game_height_units / 2 };
 		_segments.push_back(segment);
 	}
 }
 
 bool GameClient::GameObjects::Snake::IsColliding(const int x, const int y, Collision::CollidableName source)
 {
-	if (const auto findIt = std::ranges::find(_segments, Position{ x, y }); findIt != _segments.end())
+	if (const auto findIt = std::ranges::find(_segments, Engine::Coordinate2d{ x, y }); findIt != _segments.end())
 		return true;
 
 	return false;
