@@ -1,23 +1,20 @@
 #pragma once
-#include "GameStateType.h"
 #include "IGameState.h"
 #include "GameStates.h"
+#include "IStateMachine.h"
 
 namespace GameClient::State
 {
-	class GameStateMachine
+	class GameStateMachine final : public IStateMachine
 	{
 	private:
-		static GameStateMachine _instance;
-
 		std::shared_ptr<IGameState> _currentState = nullptr;
 		std::shared_ptr<Playing> _playingState = nullptr;
 		std::shared_ptr<GameOver> _gameOverState = nullptr;
 
-		GameStateMachine();
-
 	public:
-		~GameStateMachine() = default;
+		GameStateMachine();
+		~GameStateMachine() override = default;
 
 		GameStateMachine(GameStateMachine& copyOther) = delete;
 		GameStateMachine operator=(GameStateMachine& copyOther) = delete;
@@ -25,12 +22,9 @@ namespace GameClient::State
 		GameStateMachine(GameStateMachine&& moveOther) = delete;
 		GameStateMachine operator=(GameStateMachine&& moveOther) = delete;
 
-		static GameStateMachine& GetInstance();
-
-		void ChangeState(GameStateType state);
-
-		void OnInput(Input::Input input) const;
-		void OnUpdate() const;
+		void ChangeState(int state) override;
+		void OnInput(Input::Input input) override;
+		void OnUpdate() override;
 		[[nodiscard]] std::vector<std::shared_ptr<Engine::IDrawable>>& GetDrawableEntities() const;
 	};
 }

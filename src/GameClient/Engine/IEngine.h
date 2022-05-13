@@ -8,7 +8,7 @@
 
 namespace GameClient::Engine
 {
-	class IEngine  // NOLINT(cppcoreguidelines-special-member-functions)
+	class IEngine // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	private:
 		HWND _windowHandle = nullptr;
@@ -18,7 +18,8 @@ namespace GameClient::Engine
 
 		explicit IEngine(HWND windowHandle) :
 			_windowHandle(windowHandle)
-		{ }
+		{
+		}
 
 	public:
 		virtual ~IEngine() = default;

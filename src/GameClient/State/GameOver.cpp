@@ -1,12 +1,10 @@
 #include "GameOver.h"
 
-#include "GameStateMachine.h"
-
-void GameClient::State::GameOver::OnInput(const Input::Input input)
+void GameClient::State::GameOver::OnInput(IStateMachine& context, const Input::Input input)
 {
 	if (input == Input::Input::SpaceBar)
 	{
-		GameStateMachine::GetInstance().ChangeState(GameStateType::Playing);
+		context.ChangeState(static_cast<int>(GameStateType::Playing));
 	}
 }
 
@@ -37,5 +35,4 @@ void GameClient::State::GameOver::Enter(const std::shared_ptr<IGameState> previo
 void GameClient::State::GameOver::Leave()
 {
 	GetDrawables().clear();
-
 }

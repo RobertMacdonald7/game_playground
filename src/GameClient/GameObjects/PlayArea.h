@@ -3,24 +3,28 @@
 
 #include "../GameDefinitions.h"
 #include "../Engine/IDrawable.h"
-#include "./Collision/ICollidable.h"
+#include "Collision/CollidableBase.h"
 
 namespace GameClient::GameObjects
 {
-	enum class PlayAreaTile {
+	enum class PlayAreaTile
+	{
 		BackGround,
 		Wall
 	};
 
-	class PlayArea final : public Engine::IDrawable, public Collision::ICollidable
+	class PlayArea final : public Engine::IDrawable, public Collision::CollidableBase
 	{
 	private:
-		std::vector<std::vector<PlayAreaTile>> _playArea{ game_width_units, std::vector<PlayAreaTile>(game_height_units) };
+		std::vector<std::vector<PlayAreaTile>> _playArea{
+			game_width_units, std::vector<PlayAreaTile>(game_height_units)
+		};
 
 	public:
-		PlayArea();
-		~PlayArea() override = default;
+		explicit PlayArea(std::shared_ptr<Collision::CollisionDetector> collisionDetector);
+		~PlayArea() override;
 
+		PlayArea() = delete;
 		PlayArea(PlayArea& copyOther) = delete;
 		PlayArea operator=(PlayArea& copyOther) = delete;
 

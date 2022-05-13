@@ -2,12 +2,19 @@
 
 #include <chrono>
 
-#include "Collision/CollisionDetector.h"
-#include "../State/GameStateMachine.h"
+#include "../GameDefinitions.h"
+#include "../State/GameStateType.h"
 
-GameClient::GameObjects::Snake::Snake()
+GameClient::GameObjects::Snake::Snake(std::shared_ptr<Collision::CollisionDetector> collisionDetector) :
+	CollidableBase(std::move(collisionDetector))
 {
+	GetCollisionDetector()->AddCollidable(GetCollidableName(), this);
 	CreatePlayer();
+}
+
+GameClient::GameObjects::Snake::~Snake()
+{
+	GetCollisionDetector()->RemoveCollidable(GetCollidableName());
 }
 
 bool GameClient::GameObjects::Snake::OnInput(const Input::Input input)
@@ -49,7 +56,7 @@ bool GameClient::GameObjects::Snake::OnInput(const Input::Input input)
 	return _direction != originalDirection;
 }
 
-void GameClient::GameObjects::Snake::OnUpdate()
+void GameClient::GameObjects::Snake::OnUpdate(State::IStateMachine& context)
 {
 	if (_growNextUpdate)
 	{
@@ -57,7 +64,7 @@ void GameClient::GameObjects::Snake::OnUpdate()
 		_growNextUpdate = false;
 	}
 
-	MoveSnake();
+	return MoveSnake(context);
 }
 
 void GameClient::GameObjects::Snake::Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget)
@@ -85,10 +92,10 @@ GameClient::GameObjects::Collision::CollidableName GameClient::GameObjects::Snak
 
 bool GameClient::GameObjects::Snake::AteFood(const int x, const int y)
 {
-	return Collision::CollisionDetector::GetInstance().IsColliding(x, y, GetCollidableName(), Collision::CollidableName::Food);
+	return GetCollisionDetector()->IsColliding(x, y, GetCollidableName(), Collision::CollidableName::Food);
 }
 
-void GameClient::GameObjects::Snake::MoveSnake()
+void GameClient::GameObjects::Snake::MoveSnake(State::IStateMachine& context)
 {
 	int deltaX = 0;
 	int deltaY = 0;
@@ -112,12 +119,13 @@ void GameClient::GameObjects::Snake::MoveSnake()
 
 	// Calculate the new head position
 	const auto& [x, y] = _segments.front();
-	const auto newHead = Engine::Coordinate2d{ x + deltaX, y + deltaY };
+	const auto newHead = Engine::Coordinate2d{x + deltaX, y + deltaY};
 
 	// Check collision
-	if (Collision::CollisionDetector::GetInstance().IsColliding(newHead.x, newHead.y, GetCollidableName(), Collision::CollidableName::PlayArea | Collision::CollidableName::Snake))
+	if (GetCollisionDetector()->IsColliding(newHead.x, newHead.y, GetCollidableName(),
+	                                        Collision::CollidableName::PlayArea | Collision::CollidableName::Snake))
 	{
-		State::GameStateMachine::GetInstance().ChangeState(State::GameStateType::GameOver);
+		context.ChangeState(static_cast<int>(State::GameStateType::GameOver));
 		return;
 	}
 
@@ -142,19 +150,19 @@ void GameClient::GameObjects::Snake::MoveSnake()
 void GameClient::GameObjects::Snake::CreatePlayer()
 {
 	constexpr auto initialX = 10;
-	constexpr auto initialSnakeHead = Engine::Coordinate2d{ initialX, game_height_units / 2 };
+	constexpr auto initialSnakeHead = Engine::Coordinate2d{initialX, game_height_units / 2};
 	_segments.push_back(initialSnakeHead);
 
 	for (auto x = initialX - 1; x > initialX - 5; --x)
 	{
-		auto segment = Engine::Coordinate2d{ x, game_height_units / 2 };
+		auto segment = Engine::Coordinate2d{x, game_height_units / 2};
 		_segments.push_back(segment);
 	}
 }
 
 bool GameClient::GameObjects::Snake::IsColliding(const int x, const int y, Collision::CollidableName source)
 {
-	if (const auto findIt = std::ranges::find(_segments, Engine::Coordinate2d{ x, y }); findIt != _segments.end())
+	if (const auto findIt = std::ranges::find(_segments, Engine::Coordinate2d{x, y}); findIt != _segments.end())
 		return true;
 
 	return false;

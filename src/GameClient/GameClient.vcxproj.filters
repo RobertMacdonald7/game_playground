@@ -144,6 +144,12 @@
     <ClInclude Include="Engine\Size.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="State\IStateMachine.h">
+      <Filter>Header Files\State</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Collision\CollidableBase.h">
+      <Filter>Header Files\GameObjects\Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp">
@@ -190,6 +196,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Direct2D\Direct2dRenderTarget.cpp">
       <Filter>Source Files\Engine\Direct2D</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Collision\CollidableBase.cpp">
+      <Filter>Source Files\GameObjects\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@
 
 namespace GameClient::Engine
 {
-	class IRenderTarget  // NOLINT(cppcoreguidelines-special-member-functions)
+	class IRenderTarget // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	public:
 		virtual ~IRenderTarget() = default;

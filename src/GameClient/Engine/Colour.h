@@ -1,6 +1,7 @@
 #pragma once
 
-namespace GameClient::Engine {
+namespace GameClient::Engine
+{
 	enum class Colour
 	{
 		White,

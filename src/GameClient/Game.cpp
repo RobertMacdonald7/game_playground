@@ -4,8 +4,9 @@
 
 #include "State/GameStateMachine.h"
 
-GameClient::Game::Game(std::unique_ptr<Engine::IEngine> engine):
-_engine(std::move(engine))
+GameClient::Game::Game(std::unique_ptr<Engine::IEngine> engine, std::unique_ptr<State::GameStateMachine> stateMachine):
+	_engine(std::move(engine)),
+	_stateMachine(std::move(stateMachine))
 {
 	if (const HRESULT result = _engine->Initialize(); FAILED(result))
 	{
@@ -38,7 +39,7 @@ void GameClient::Game::OnInput(const Input::Input input)
 	default:
 		break;
 	}
-	State::GameStateMachine::GetInstance().OnInput(input);
+	_stateMachine->OnInput(input);
 }
 
 void GameClient::Game::ProcessFrame()
@@ -52,9 +53,9 @@ void GameClient::Game::ProcessFrame()
 	while (numberOfUpdates < _maxUpdatesPerFrame && _accumulatedFrameTime > _timeStep)
 	{
 		_accumulatedFrameTime -= _timeStep;
-		State::GameStateMachine::GetInstance().OnUpdate();
+		_stateMachine->OnUpdate();
 		++numberOfUpdates;
 	}
 
-	_engine->Draw(State::GameStateMachine::GetInstance().GetDrawableEntities());
+	_engine->Draw(_stateMachine->GetDrawableEntities());
 }
