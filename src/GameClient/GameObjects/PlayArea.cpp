@@ -2,7 +2,8 @@
 
 #include <stdexcept>
 
-GameClient::GameObjects::PlayArea::PlayArea(std::shared_ptr<Collision::CollisionDetector> collisionDetector) : CollidableBase(std::move(collisionDetector))
+GameClient::GameObjects::PlayArea::PlayArea(std::shared_ptr<Collision::CollisionDetector> collisionDetector) :
+	CollidableBase(std::move(collisionDetector))
 {
 	GetCollisionDetector()->AddCollidable(GetCollidableName(), this);
 	CreatePlayArea();
@@ -20,24 +21,24 @@ void GameClient::GameObjects::PlayArea::Draw(const std::shared_ptr<Engine::IRend
 		for (auto y = 0; y < game_height_units; ++y)
 		{
 			const auto colour = GetPlayAreaColour(_playArea[x][y]);
-			renderTarget->DrawUnitRectangle({ 0,0 }, { x, y }, { 0, 0 }, colour);
+			renderTarget->DrawUnitRectangle({0, 0}, {x, y}, {0, 0}, colour);
 		}
 	}
 
-	for (auto x = 0; x < game_width_pixels; x+=unit_size_pixels)
+	for (auto x = 0; x < game_width_pixels; x += unit_size_pixels)
 	{
 		renderTarget->DrawLine(
-			{ static_cast<float>(x), 0.0f },
-			{ static_cast<float>(x), static_cast<float>(game_height_pixels) },
+			{static_cast<float>(x), 0.0f},
+			{static_cast<float>(x), static_cast<float>(game_height_pixels)},
 			0.2f, Engine::Colour::Gray
 		);
 	}
 
-	for (auto y = 0; y < game_height_pixels; y+=unit_size_pixels)
+	for (auto y = 0; y < game_height_pixels; y += unit_size_pixels)
 	{
 		renderTarget->DrawLine(
-			{0.0f, static_cast<float>(y) },
-			{ static_cast<float>(game_width_pixels), static_cast<float>(y) },
+			{0.0f, static_cast<float>(y)},
+			{static_cast<float>(game_width_pixels), static_cast<float>(y)},
 			0.2f, Engine::Colour::Gray
 		);
 	}

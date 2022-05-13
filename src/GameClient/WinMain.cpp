@@ -15,7 +15,8 @@ HRESULT RunGameLoop(HINSTANCE hInstance)
 	return result;
 }
 
-int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE /*hPrevInstance*/, _In_ LPSTR /*lpCmdLine*/, _In_ int /*nCmdShow*/)
+int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE /*hPrevInstance*/, _In_ LPSTR /*lpCmdLine*/,
+                   _In_ int /*nCmdShow*/)
 {
 	HeapSetInformation(nullptr, HeapEnableTerminationOnCorruption, nullptr, 0);
 

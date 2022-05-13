@@ -35,5 +35,4 @@ void GameClient::State::GameOver::Enter(const std::shared_ptr<IGameState> previo
 void GameClient::State::GameOver::Leave()
 {
 	GetDrawables().clear();
-
 }

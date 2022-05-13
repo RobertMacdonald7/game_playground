@@ -21,7 +21,8 @@ void GameClient::State::GameStateMachine::OnUpdate()
 	_currentState->OnUpdate(*this);
 }
 
-std::vector<std::shared_ptr<GameClient::Engine::IDrawable>>& GameClient::State::GameStateMachine::GetDrawableEntities() const
+std::vector<std::shared_ptr<GameClient::Engine::IDrawable>>&
+GameClient::State::GameStateMachine::GetDrawableEntities() const
 {
 	return _currentState->GetDrawables();
 }
