@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "GameStateType.h"
-#include "../Input/Input.h"
+#include "IStateMachine.h"
 #include "../Engine/IDrawable.h"
 
 namespace GameClient::State
@@ -18,8 +18,8 @@ namespace GameClient::State
 		virtual void Enter(std::shared_ptr<IGameState> previousState) = 0;
 		virtual void Leave() = 0;
 
-		virtual void OnUpdate() = 0;
-		virtual void OnInput(Input::Input input) = 0;
+		virtual void OnUpdate(IStateMachine& context) = 0;
+		virtual void OnInput(IStateMachine& context, Input::Input input) = 0;
 
 		virtual std::vector<std::shared_ptr<Engine::IDrawable>>& GetDrawables() = 0;
 	};

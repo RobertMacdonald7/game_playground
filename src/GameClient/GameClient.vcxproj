@@ -154,6 +154,7 @@
     <ClInclude Include="Engine\Size.h" />
     <ClInclude Include="GameObjects\GameObjects.h" />
     <ClInclude Include="Engine\Coordinate2d.h" />
+    <ClInclude Include="State\IStateMachine.h" />
     <ClInclude Include="State\GameStates.h" />
     <ClInclude Include="Input\VirtualKeyCodes.h" />
     <ClInclude Include="GameObjects\Collision\ICollidable.h" />

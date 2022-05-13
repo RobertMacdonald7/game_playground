@@ -14,8 +14,8 @@ namespace GameClient::State
 		GameStateType GetType() override = 0;
 		void Enter(std::shared_ptr<IGameState> previousState) override;
 		void Leave() override;
-		void OnUpdate() override;
-		void OnInput(Input::Input input) override;
+		void OnUpdate(IStateMachine& context) override;
+		void OnInput(IStateMachine& context, Input::Input input) override;
 		std::vector<std::shared_ptr<Engine::IDrawable>>& GetDrawables() override;
 
 	protected:

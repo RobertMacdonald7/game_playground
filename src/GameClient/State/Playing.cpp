@@ -33,11 +33,11 @@ void GameClient::State::Playing::Leave()
 	_blockInputUntilNextUpdate = false;
 }
 
-void GameClient::State::Playing::OnUpdate()
+void GameClient::State::Playing::OnUpdate(IStateMachine& context)
 {
 	_blockInputUntilNextUpdate = false;
 
-	_snake->OnUpdate();
+	_snake->OnUpdate(context);
 	_food->OnUpdate();
 
 	if (_cachedInput != Input::Input::None)
@@ -50,7 +50,7 @@ void GameClient::State::Playing::OnUpdate()
 	}
 }
 
-void GameClient::State::Playing::OnInput(const Input::Input input)
+void GameClient::State::Playing::OnInput(IStateMachine& context, const Input::Input input)
 {
 	if (_blockInputUntilNextUpdate)
 	{
