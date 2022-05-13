@@ -144,6 +144,9 @@
     <ClInclude Include="Engine\Size.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="State\IStateMachine.h">
+      <Filter>Header Files\State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp">

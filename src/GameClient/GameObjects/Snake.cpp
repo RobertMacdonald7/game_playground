@@ -3,7 +3,8 @@
 #include <chrono>
 
 #include "Collision/CollisionDetector.h"
-#include "../State/GameStateMachine.h"
+#include "../GameDefinitions.h"
+#include "../State/GameStateType.h"
 
 GameClient::GameObjects::Snake::Snake()
 {
@@ -49,7 +50,7 @@ bool GameClient::GameObjects::Snake::OnInput(const Input::Input input)
 	return _direction != originalDirection;
 }
 
-void GameClient::GameObjects::Snake::OnUpdate()
+void GameClient::GameObjects::Snake::OnUpdate(State::IStateMachine& context)
 {
 	if (_growNextUpdate)
 	{
@@ -57,7 +58,7 @@ void GameClient::GameObjects::Snake::OnUpdate()
 		_growNextUpdate = false;
 	}
 
-	MoveSnake();
+	return MoveSnake(context);
 }
 
 void GameClient::GameObjects::Snake::Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget)
@@ -88,7 +89,7 @@ bool GameClient::GameObjects::Snake::AteFood(const int x, const int y)
 	return Collision::CollisionDetector::GetInstance().IsColliding(x, y, GetCollidableName(), Collision::CollidableName::Food);
 }
 
-void GameClient::GameObjects::Snake::MoveSnake()
+void GameClient::GameObjects::Snake::MoveSnake(State::IStateMachine& context)
 {
 	int deltaX = 0;
 	int deltaY = 0;
@@ -117,7 +118,7 @@ void GameClient::GameObjects::Snake::MoveSnake()
 	// Check collision
 	if (Collision::CollisionDetector::GetInstance().IsColliding(newHead.x, newHead.y, GetCollidableName(), Collision::CollidableName::PlayArea | Collision::CollidableName::Snake))
 	{
-		State::GameStateMachine::GetInstance().ChangeState(State::GameStateType::GameOver);
+		context.ChangeState(static_cast<int>(State::GameStateType::GameOver));
 		return;
 	}
 

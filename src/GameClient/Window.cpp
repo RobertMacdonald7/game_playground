@@ -61,7 +61,8 @@ HRESULT GameClient::Window::Initialize(HINSTANCE hInstance)
 	{
 		try
 		{
-			_game = std::make_unique<Game>(std::make_unique<Engine::Direct2D::Direct2dEngine>(_hwnd));
+			_game = std::make_unique<Game>(std::make_unique<Engine::Direct2D::Direct2dEngine>(_hwnd),
+										   std::make_unique<State::GameStateMachine>());
 
 		}
 		catch (std::exception const&)

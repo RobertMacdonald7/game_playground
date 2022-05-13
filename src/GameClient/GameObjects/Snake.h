@@ -6,6 +6,7 @@
 #include "../Input/Input.h"
 #include "./Collision/ICollidable.h"
 #include "../Engine/Coordinate2d.h"
+#include "../State/IStateMachine.h"
 
 namespace GameClient::GameObjects
 {
@@ -37,9 +38,9 @@ namespace GameClient::GameObjects
 		Snake operator=(Snake&& moveOther) = delete;
 
 		bool OnInput(Input::Input input);
-		void OnUpdate();
+		void OnUpdate(State::IStateMachine& context);
 
-		void Draw(const ::std::shared_ptr<Engine::IRenderTarget>& renderTarget) override;
+		void Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget) override;
 
 		void Reset();
 
@@ -48,7 +49,7 @@ namespace GameClient::GameObjects
 
 	private:
 		bool AteFood(int x, int y);
-		void MoveSnake();
+		void MoveSnake(State::IStateMachine& context);
 		void CreatePlayer();
 	};
 	

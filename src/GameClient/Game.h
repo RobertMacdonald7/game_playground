@@ -3,7 +3,8 @@
 #include <chrono>
 
 #include "Engine/IEngine.h"
-#include "State/IGameState.h"
+#include "Input/Input.h"
+#include "State/GameStateMachine.h"
 
 namespace GameClient
 {
@@ -16,6 +17,7 @@ namespace GameClient
 		inline static int _fast = 50;
 
 		std::unique_ptr<Engine::IEngine> _engine;
+		std::unique_ptr<State::GameStateMachine> _stateMachine;
 
 		std::chrono::steady_clock::time_point _lastUpdateTime = std::chrono::steady_clock::now();
 		std::chrono::nanoseconds _accumulatedFrameTime = std::chrono::nanoseconds(0);
@@ -23,7 +25,8 @@ namespace GameClient
 		std::chrono::milliseconds _timeStep = std::chrono::milliseconds(_normal);
 
 	public:
-		explicit Game(std::unique_ptr<Engine::IEngine> engine);
+		Game(std::unique_ptr<Engine::IEngine> engine,
+			 std::unique_ptr<State::GameStateMachine> stateMachine);
 		~Game();
 		void OnResize(int width, int height) const;
 		void OnInput(Input::Input input);
