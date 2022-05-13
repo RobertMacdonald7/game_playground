@@ -1,10 +1,15 @@
 #include "Food.h"
 
-#include "Collision/CollisionDetector.h"
-
-GameClient::GameObjects::Food::Food()
+GameClient::GameObjects::Food::Food(std::shared_ptr<Collision::CollisionDetector> collisionDetector) :
+CollidableBase(std::move(collisionDetector))
 {
+	GetCollisionDetector()->AddCollidable(GetCollidableName(), this);
 	PlaceFoodAtValidCoordinates();
+}
+
+GameClient::GameObjects::Food::~Food()
+{
+	GetCollisionDetector()->RemoveCollidable(GetCollidableName());
 }
 
 void GameClient::GameObjects::Food::OnUpdate()
@@ -63,8 +68,7 @@ void GameClient::GameObjects::Food::PlaceFoodAtValidCoordinates()
 		x = _xDistribution(_rng);
 		y = _yDistribution(_rng);
 
-		validCoordinates = !Collision::CollisionDetector::GetInstance()
-		.IsColliding(
+		validCoordinates = !GetCollisionDetector()->IsColliding(
 			x, y, GetCollidableName(),
 			Collision::CollidableName::PlayArea | Collision::CollidableName::Snake
 		);

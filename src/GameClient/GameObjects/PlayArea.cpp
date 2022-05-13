@@ -2,9 +2,15 @@
 
 #include <stdexcept>
 
-GameClient::GameObjects::PlayArea::PlayArea()
+GameClient::GameObjects::PlayArea::PlayArea(std::shared_ptr<Collision::CollisionDetector> collisionDetector) : CollidableBase(std::move(collisionDetector))
 {
+	GetCollisionDetector()->AddCollidable(GetCollidableName(), this);
 	CreatePlayArea();
+}
+
+GameClient::GameObjects::PlayArea::~PlayArea()
+{
+	GetCollisionDetector()->RemoveCollidable(GetCollidableName());
 }
 
 void GameClient::GameObjects::PlayArea::Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget)

@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="GameObjects\Collision\CollidableBase.h" />
     <ClInclude Include="Engine\Direct2D\Direct2dRenderTarget.h" />
     <ClInclude Include="Engine\Colour.h" />
     <ClInclude Include="Engine\Direct2D\Direct2dColour.h" />
@@ -182,6 +183,7 @@
   <ItemGroup>
     <ClCompile Include="Engine\Direct2D\Direct2dRenderTarget.cpp" />
     <ClCompile Include="Engine\Direct2D\Direct2dColour.cpp" />
+    <ClCompile Include="GameObjects\Collision\CollidableBase.cpp" />
     <ClCompile Include="GameObjects\Collision\CollisionDetector.cpp" />
     <ClCompile Include="Utility\Direct2dUtility.cpp" />
     <ClCompile Include="GameObjects\Food.cpp" />
