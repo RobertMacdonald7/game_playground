@@ -4,11 +4,11 @@
 #include "../GameDefinitions.h"
 #include "../Engine/IDrawable.h"
 #include "../Input/Input.h"
-#include "Collision/ICollidable.h"
+#include "Collision/CollidableBase.h"
 
 namespace GameClient::GameObjects
 {
-	class Food final : public Engine::IDrawable, public Collision::ICollidable
+	class Food final : public Engine::IDrawable, public Collision::CollidableBase
 	{
 	private:
 		Engine::Coordinate2d _coordinates{ 0, 0 };
@@ -18,11 +18,12 @@ namespace GameClient::GameObjects
 		std::uniform_int_distribution<int> _yDistribution{ 1, game_height_units - 2 };
 
 	public:
-		Food();
-		~Food() override = default;
+		explicit Food(std::shared_ptr<Collision::CollisionDetector> collisionDetector);
+		~Food() override;
 		void OnUpdate();
 		bool OnInput(Input::Input input);
 
+		Food() = delete;
 		Food(Food& copyOther) = delete;
 		Food operator=(Food& copyOther) = delete;
 

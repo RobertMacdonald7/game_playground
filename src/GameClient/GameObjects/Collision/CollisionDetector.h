@@ -1,6 +1,5 @@
 #pragma once
-#include <memory>
-#include <vector>
+#include <map>
 
 #include "ICollidable.h"
 
@@ -9,12 +8,10 @@ namespace GameClient::GameObjects::Collision
 	class CollisionDetector
 	{
 	private:
-		static CollisionDetector _instance;
-		CollisionDetector() = default;
-
-		std::vector<std::shared_ptr<ICollidable>> _collidables;
+		std::map<CollidableName, ICollidable*> _collidables;
 
 	public:
+		CollisionDetector() = default;
 		~CollisionDetector() = default;
 
 		CollisionDetector(CollisionDetector& copyOther) = delete;
@@ -23,9 +20,8 @@ namespace GameClient::GameObjects::Collision
 		CollisionDetector(CollisionDetector&& moveOther) = delete;
 		CollisionDetector operator=(CollisionDetector&& moveOther) = delete;
 
-		static CollisionDetector& GetInstance();
-
-		void AddCollidable(const std::shared_ptr<ICollidable>& collidable);
+		void AddCollidable(CollidableName name, ICollidable* collidable);
+		void RemoveCollidable(CollidableName name);
 		bool IsColliding(int x, int y, CollidableName source, CollidableName target);
 	};
 }
