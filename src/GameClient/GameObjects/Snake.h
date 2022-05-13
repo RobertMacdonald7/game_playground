@@ -6,7 +6,6 @@
 #include "../Input/Input.h"
 #include "../Engine/Coordinate2d.h"
 #include "../State/IStateMachine.h"
-#include "Collision/CollisionDetector.h"
 #include "Collision/CollidableBase.h"
 
 namespace GameClient::GameObjects
