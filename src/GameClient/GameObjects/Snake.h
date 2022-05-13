@@ -53,5 +53,4 @@ namespace GameClient::GameObjects
 		void MoveSnake(State::IStateMachine& context);
 		void CreatePlayer();
 	};
-	
 }

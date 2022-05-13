@@ -1,7 +1,7 @@
 #include "Food.h"
 
 GameClient::GameObjects::Food::Food(std::shared_ptr<Collision::CollisionDetector> collisionDetector) :
-CollidableBase(std::move(collisionDetector))
+	CollidableBase(std::move(collisionDetector))
 {
 	GetCollisionDetector()->AddCollidable(GetCollidableName(), this);
 	PlaceFoodAtValidCoordinates();
@@ -37,7 +37,7 @@ void GameClient::GameObjects::Food::Reset()
 
 void GameClient::GameObjects::Food::Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget)
 {
-	renderTarget->DrawUnitRectangle({ 0,0 }, _coordinates, { 0.1f, 0.1f }, Engine::Colour::Green);
+	renderTarget->DrawUnitRectangle({0, 0}, _coordinates, {0.1f, 0.1f}, Engine::Colour::Green);
 }
 
 GameClient::GameObjects::Collision::CollidableName GameClient::GameObjects::Food::GetCollidableName()
@@ -73,7 +73,7 @@ void GameClient::GameObjects::Food::PlaceFoodAtValidCoordinates()
 			Collision::CollidableName::PlayArea | Collision::CollidableName::Snake
 		);
 	}
-	
-	_coordinates = { x, y };
+
+	_coordinates = {x, y};
 	_eaten = false;
 }

@@ -1,7 +1,7 @@
 #pragma once
 namespace GameClient::State
 {
-	enum class GameStateType : int
+	enum class GameStateType
 	{
 		Playing,
 		GameOver

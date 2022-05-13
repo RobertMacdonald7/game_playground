@@ -41,14 +41,16 @@ HRESULT GameClient::Engine::Direct2D::Direct2dRenderTarget::EndDraw()
 	return _pRenderTarget->EndDraw();
 }
 
-void GameClient::Engine::Direct2D::Direct2dRenderTarget::DrawUnitRectangle(const Coordinate2d offset, const Coordinate2d position, const Coordinate2dF scale, const Colour colour)
+void GameClient::Engine::Direct2D::Direct2dRenderTarget::DrawUnitRectangle(
+	const Coordinate2d offset, const Coordinate2d position, const Coordinate2dF scale, const Colour colour)
 {
 	const auto rectangle = Utility::Direct2dUtility::CreateUnitRectangle(offset, position, scale);
 
 	_pRenderTarget->FillRectangle(&rectangle, _brushes[colour]);
 }
 
-void GameClient::Engine::Direct2D::Direct2dRenderTarget::DrawLine(const Coordinate2dF p0, const Coordinate2dF p1, const float strokeWidth, const Colour colour)
+void GameClient::Engine::Direct2D::Direct2dRenderTarget::DrawLine(const Coordinate2dF p0, const Coordinate2dF p1,
+                                                                  const float strokeWidth, const Colour colour)
 {
 	const auto d2Point0 = D2D1::Point2F(p0.x, p0.y);
 	const auto d2Point1 = D2D1::Point2F(p1.x, p1.y);

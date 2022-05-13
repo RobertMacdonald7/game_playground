@@ -14,5 +14,3 @@ namespace GameClient::State
 		void OnInput(IStateMachine& context, Input::Input input) override;
 	};
 }
-
-

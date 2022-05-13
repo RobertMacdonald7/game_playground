@@ -6,7 +6,7 @@
 
 namespace GameClient::GameObjects::Collision
 {
-	class CollidableBase : public ICollidable  // NOLINT(cppcoreguidelines-special-member-functions)
+	class CollidableBase : public ICollidable // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	private:
 		std::shared_ptr<CollisionDetector> _collisionDetector;

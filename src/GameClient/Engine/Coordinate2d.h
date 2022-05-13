@@ -1,6 +1,7 @@
 #pragma once
 
-namespace GameClient::Engine {
+namespace GameClient::Engine
+{
 	struct Coordinate2d
 	{
 		int x;

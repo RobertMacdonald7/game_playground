@@ -3,7 +3,7 @@
 
 namespace GameClient::State
 {
-	class IStateMachine  // NOLINT(cppcoreguidelines-special-member-functions)
+	class IStateMachine // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	public:
 		virtual ~IStateMachine() = default;

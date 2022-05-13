@@ -12,7 +12,7 @@ GameClient::Window::~Window() = default;
 HRESULT GameClient::Window::Initialize(HINSTANCE hInstance)
 {
 	// Register the window class.
-	WNDCLASSEX windowClassEx = { };
+	WNDCLASSEX windowClassEx = {};
 	windowClassEx.cbSize = sizeof(WNDCLASSEX);
 	windowClassEx.style = CS_HREDRAW | CS_VREDRAW;
 	windowClassEx.lpfnWndProc = WndProc;
@@ -35,7 +35,7 @@ HRESULT GameClient::Window::Initialize(HINSTANCE hInstance)
 
 	// Adjust the window to fit desired resolution
 	constexpr DWORD windowStyle = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX;
-	RECT windowRectangle = { 0, 0, game_width_pixels, game_height_pixels };
+	RECT windowRectangle = {0, 0, game_width_pixels, game_height_pixels};
 	AdjustWindowRectEx(&windowRectangle, windowStyle, FALSE, 0);
 
 	// Create the window
@@ -62,8 +62,7 @@ HRESULT GameClient::Window::Initialize(HINSTANCE hInstance)
 		try
 		{
 			_game = std::make_unique<Game>(std::make_unique<Engine::Direct2D::Direct2dEngine>(_hwnd),
-										   std::make_unique<State::GameStateMachine>());
-
+			                               std::make_unique<State::GameStateMachine>());
 		}
 		catch (std::exception const&)
 		{
@@ -95,7 +94,6 @@ void GameClient::Window::Run() const
 		}
 		else
 		{
-			
 			_game->ProcessFrame();
 		}
 	}

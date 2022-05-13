@@ -5,8 +5,8 @@
 #include "State/GameStateMachine.h"
 
 GameClient::Game::Game(std::unique_ptr<Engine::IEngine> engine, std::unique_ptr<State::GameStateMachine> stateMachine):
-_engine(std::move(engine)),
-_stateMachine(std::move(stateMachine))
+	_engine(std::move(engine)),
+	_stateMachine(std::move(stateMachine))
 {
 	if (const HRESULT result = _engine->Initialize(); FAILED(result))
 	{

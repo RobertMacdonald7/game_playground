@@ -7,7 +7,8 @@
 
 namespace GameClient::GameObjects
 {
-	enum class PlayAreaTile {
+	enum class PlayAreaTile
+	{
 		BackGround,
 		Wall
 	};
@@ -15,7 +16,9 @@ namespace GameClient::GameObjects
 	class PlayArea final : public Engine::IDrawable, public Collision::CollidableBase
 	{
 	private:
-		std::vector<std::vector<PlayAreaTile>> _playArea{ game_width_units, std::vector<PlayAreaTile>(game_height_units) };
+		std::vector<std::vector<PlayAreaTile>> _playArea{
+			game_width_units, std::vector<PlayAreaTile>(game_height_units)
+		};
 
 	public:
 		explicit PlayArea(std::shared_ptr<Collision::CollisionDetector> collisionDetector);

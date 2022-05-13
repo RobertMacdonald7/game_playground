@@ -3,7 +3,7 @@
 
 namespace GameClient::State
 {
-	class GameStateBase : public IGameState  // NOLINT(cppcoreguidelines-special-member-functions)
+	class GameStateBase : public IGameState // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	private:
 		std::vector<std::shared_ptr<Engine::IDrawable>> _drawables = {};

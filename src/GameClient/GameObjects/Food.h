@@ -11,11 +11,11 @@ namespace GameClient::GameObjects
 	class Food final : public Engine::IDrawable, public Collision::CollidableBase
 	{
 	private:
-		Engine::Coordinate2d _coordinates{ 0, 0 };
+		Engine::Coordinate2d _coordinates{0, 0};
 		bool _eaten = false;
-		std::mt19937 _rng{ std::random_device{}() };
-		std::uniform_int_distribution<int> _xDistribution{ 1, game_width_units - 2 };
-		std::uniform_int_distribution<int> _yDistribution{ 1, game_height_units - 2 };
+		std::mt19937 _rng{std::random_device{}()};
+		std::uniform_int_distribution<int> _xDistribution{1, game_width_units - 2};
+		std::uniform_int_distribution<int> _yDistribution{1, game_height_units - 2};
 
 	public:
 		explicit Food(std::shared_ptr<Collision::CollisionDetector> collisionDetector);
@@ -43,5 +43,3 @@ namespace GameClient::GameObjects
 		void PlaceFoodAtValidCoordinates();
 	};
 }
-
-
