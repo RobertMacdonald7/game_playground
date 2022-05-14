@@ -28,7 +28,7 @@ void GameClient::Engine::Direct2D::Direct2dEngine::Resize(const int width, const
 		return;
 	}
 
-	const auto size = Size(width, height);
+	const auto size = Size{ width, height };
 	_renderTarget->Resize(size);
 }
 
