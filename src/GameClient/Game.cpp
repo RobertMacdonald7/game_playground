@@ -10,7 +10,7 @@ GameClient::Game::Game(std::unique_ptr<Engine::IEngine> engine, std::unique_ptr<
 {
 	if (const HRESULT result = _engine->Initialize(); FAILED(result))
 	{
-		const auto message = "Engine failed to initialize: " + std::to_string(result);
+		const auto message = "Engine failed to initialize: " +  std::to_string(result);
 		throw std::exception(message.c_str());
 	}
 }
