@@ -45,7 +45,7 @@ jobs:
         # Artifact name
         name: Snake_x64
         # A file, directory or wildcard pattern that describes what to upload
-        path: ./src/GameClient/bin/${{ev.BUILD_PLATFORM}}/${{env.BUILD_CONFIGURATION}}/*
+        path: ./src/GameClient/bin/${{env.BUILD_PLATFORM}}/${{env.BUILD_CONFIGURATION}}/*
         # The desired behavior if no files are found using the provided path.
         #Available Options:
           #warn: Output a warning but do not fail the action
