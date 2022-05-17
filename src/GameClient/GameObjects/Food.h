@@ -8,6 +8,9 @@
 
 namespace GameClient::GameObjects
 {
+	/**
+	 * \brief Defines a "food" game object used for growing the snake and calculating game score.
+	 */
 	class Food final : public Engine::IDrawable, public Collision::CollidableBase
 	{
 	private:
@@ -30,16 +33,20 @@ namespace GameClient::GameObjects
 		Food(Food&& moveOther) = delete;
 		Food operator=(Food&& moveOther) = delete;
 
+		/**
+		 * \brief Reset's the object's state.
+		 */
 		void Reset();
 
-		// IDrawable
 		void Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget) override;
 
-		// ICollidable
 		Collision::CollidableName GetCollidableName() override;
 		[[nodiscard]] bool IsColliding(int x, int y, Collision::CollidableName source) override;
 
 	private:
+		/**
+		 * \brief Generates a random, non-colliding, 2D coordinate to place the food at.
+		 */
 		void PlaceFoodAtValidCoordinates();
 	};
 }

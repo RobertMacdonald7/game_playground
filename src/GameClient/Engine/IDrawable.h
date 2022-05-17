@@ -11,6 +11,10 @@ namespace GameClient::Engine
 	public:
 		virtual ~IDrawable() = default;
 
+		/**
+		 * \brief Draws the object
+		 * \param renderTarget The engine's render target
+		 */
 		virtual void Draw(const std::shared_ptr<IRenderTarget>& renderTarget) = 0;
 	};
 }

@@ -2,6 +2,9 @@
 
 namespace GameClient::Engine
 {
+	/**
+	 * \brief Basic, engine agnostic, colours.
+	 */
 	enum class Colour
 	{
 		White,

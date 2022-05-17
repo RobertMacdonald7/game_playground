@@ -7,6 +7,9 @@
 
 namespace GameClient::Engine::Direct2D
 {
+	/**
+	 * \brief Direct2D implementation of IRenderTarget
+	 */
 	class Direct2dRenderTarget final : public IRenderTarget
 	{
 	private:
@@ -33,6 +36,11 @@ namespace GameClient::Engine::Direct2D
 		void Resize(Size size) override;
 
 	private:
+		/**
+		 * \brief Creates and adds a Direct2D colour brush to _brushes.
+		 * \param colour The colour of brush to create.
+		 * \return The result of the operation.
+		 */
 		HRESULT CreateAndAddBrush(Colour colour);
 	};
 }

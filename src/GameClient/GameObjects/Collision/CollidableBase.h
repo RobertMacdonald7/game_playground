@@ -6,6 +6,9 @@
 
 namespace GameClient::GameObjects::Collision
 {
+	/**
+	 * \brief Base class of ICollidable.
+	 */
 	class CollidableBase : public ICollidable // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	private:

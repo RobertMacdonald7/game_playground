@@ -10,9 +10,15 @@
 
 namespace GameClient::GameObjects
 {
+	/**
+	 * \brief Defines the "snake" controlled by the user.
+	 */
 	class Snake final : public Engine::IDrawable, public Collision::CollidableBase
 	{
 	private:
+		/**
+		 * \brief The direction the snake can travel in.
+		 */
 		enum class Direction
 		{
 			Up,
@@ -38,19 +44,47 @@ namespace GameClient::GameObjects
 		Snake(Snake&& moveOther) = delete;
 		Snake operator=(Snake&& moveOther) = delete;
 
+		/**
+		 * \brief Handles key presses.
+		 * \param input The pressed key.
+		 * \return Whether the input was handled.
+		 */
 		bool OnInput(Input::Input input);
+
+		/**
+		 * \brief Updates the snake's position and length
+		 * \param context The game state context
+		 */
 		void OnUpdate(State::IStateMachine& context);
 
 		void Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget) override;
 
+		/**
+		 * \brief Reset's the snake to default values.
+		 */
 		void Reset();
 
 		Collision::CollidableName GetCollidableName() override;
 		[[nodiscard]] bool IsColliding(int x, int y, Collision::CollidableName source) override;
 
 	private:
+		/**
+		 * \brief Tests whether the coordinates collide with any food.
+		 * \param x The X coordinate to test.
+		 * \param y The Y coordinate to test.
+		 * \return Whether the snake is colliding with food.
+		 */
 		bool AteFood(int x, int y);
+
+		/**
+		 * \brief Moves the snake one unit.
+		 * \param context The game state context.
+		 */
 		void MoveSnake(State::IStateMachine& context);
+
+		/**
+		 * \brief Creates the snake with default values
+		 */
 		void CreatePlayer();
 	};
 }
