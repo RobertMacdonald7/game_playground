@@ -34,7 +34,7 @@ void GameClient::Engine::Direct2D::Direct2dEngine::Resize(const int width, const
 
 HRESULT GameClient::Engine::Direct2D::Direct2dEngine::Draw(const std::vector<std::shared_ptr<IDrawable>>& drawables)
 {
-	// Create any resources needed before drawing.
+	// Create any resources needed before drawing
 	auto result = CreateDeviceResources();
 	RETURN_FAILED_HRESULT(result);
 
@@ -64,11 +64,11 @@ HRESULT GameClient::Engine::Direct2D::Direct2dEngine::CreateDeviceResources()
 
 	if (_renderTarget)
 	{
-		// render target is already created, no need to re-create.
+		// render target is already created, no need to re-create
 		return result;
 	}
 
-	// Make the render target buffer equal to the window size.
+	// Make the render target buffer equal to the window size
 	RECT rect;
 	GetClientRect(GetWindowHandle(), &rect);
 	const D2D1_SIZE_U size = D2D1::SizeU(rect.right - rect.left, rect.bottom - rect.top);
@@ -80,10 +80,10 @@ HRESULT GameClient::Engine::Direct2D::Direct2dEngine::CreateDeviceResources()
 		D2D1::HwndRenderTargetProperties(GetWindowHandle(), size),
 		&renderTarget);
 
-	// Assumes renderTarget is nullptr if CreateHwndRenderTarget fails.
+	// Assumes renderTarget is nullptr if CreateHwndRenderTarget fails
 	RETURN_FAILED_HRESULT(result);
 
-	// Wrap the render target and create all brushes.
+	// Wrap the render target and create all brushes
 	_renderTarget = std::make_shared<Direct2dRenderTarget>(renderTarget);
 	result = _renderTarget->CreateDeviceResources();
 
@@ -97,6 +97,6 @@ void GameClient::Engine::Direct2D::Direct2dEngine::DiscardDeviceIndependentResou
 
 void GameClient::Engine::Direct2D::Direct2dEngine::DiscardDeviceResources()
 {
-	// Safe discard of the underlying render target happens in Direct2dRenderTarget's destructor.
+	// Safe discard of the underlying render target happens in Direct2dRenderTarget's destructor
 	_renderTarget = nullptr;
 }

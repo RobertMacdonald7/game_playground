@@ -16,6 +16,7 @@ GameClient::GameObjects::PlayArea::~PlayArea()
 
 void GameClient::GameObjects::PlayArea::Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget)
 {
+	// Draw each tile with their representative colour
 	for (auto x = 0; x < game_width_units; ++x)
 	{
 		for (auto y = 0; y < game_height_units; ++y)
@@ -25,6 +26,7 @@ void GameClient::GameObjects::PlayArea::Draw(const std::shared_ptr<Engine::IRend
 		}
 	}
 
+	// Draw the vertical grid lines TODO - can this be combined in the first nested for-loop?
 	for (auto x = 0; x < game_width_pixels; x += unit_size_pixels)
 	{
 		renderTarget->DrawLine(
@@ -34,6 +36,7 @@ void GameClient::GameObjects::PlayArea::Draw(const std::shared_ptr<Engine::IRend
 		);
 	}
 
+	// Draw the horizontal grid lines TODO - can this be combined in the first nested for-loop?
 	for (auto y = 0; y < game_height_pixels; y += unit_size_pixels)
 	{
 		renderTarget->DrawLine(
@@ -64,6 +67,7 @@ bool GameClient::GameObjects::PlayArea::IsColliding(const int x, const int y, Co
 
 void GameClient::GameObjects::PlayArea::CreatePlayArea()
 {
+	// Create the 2D play area, with walls on the boundary
 	for (auto x = 0; x < game_width_units; ++x)
 	{
 		for (auto y = 0; y < game_height_units; ++y)

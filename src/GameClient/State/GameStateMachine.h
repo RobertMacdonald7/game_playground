@@ -5,6 +5,9 @@
 
 namespace GameClient::State
 {
+	/**
+	 * \brief A state machine that defines the overall game state.
+	 */
 	class GameStateMachine final : public IStateMachine
 	{
 	private:
@@ -25,6 +28,11 @@ namespace GameClient::State
 		void ChangeState(int state) override;
 		void OnInput(Input::Input input) override;
 		void OnUpdate() override;
+
+		/**
+		 * \brief Gets the IDrawable objects.
+		 * \return A vector of IDrawables.
+		 */
 		[[nodiscard]] std::vector<std::shared_ptr<Engine::IDrawable>>& GetDrawableEntities() const;
 	};
 }

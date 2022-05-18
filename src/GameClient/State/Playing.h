@@ -4,6 +4,9 @@
 
 namespace GameClient::State
 {
+	/**
+	 * \brief Defines the state when the game is in progress, and the player can move the snake.
+	 */
 	class Playing final : public GameStateBase
 	{
 	private:

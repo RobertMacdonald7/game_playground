@@ -3,20 +3,26 @@
 GameClient::GameObjects::Food::Food(std::shared_ptr<Collision::CollisionDetector> collisionDetector) :
 	CollidableBase(std::move(collisionDetector))
 {
+	// Add this instance to the CollisionDetector
 	GetCollisionDetector()->AddCollidable(GetCollidableName(), this);
+
+	// Place a new food
 	PlaceFoodAtValidCoordinates();
 }
 
 GameClient::GameObjects::Food::~Food()
 {
+	// Remove this instance from the CollisionDetector
 	GetCollisionDetector()->RemoveCollidable(GetCollidableName());
 }
 
 void GameClient::GameObjects::Food::OnUpdate()
 {
+	// Place new food if the last one was eaten
 	if (_eaten)
 	{
 		PlaceFoodAtValidCoordinates();
+		_eaten = false;
 	}
 }
 
@@ -24,6 +30,7 @@ bool GameClient::GameObjects::Food::OnInput(const Input::Input input)
 {
 	if (input == Input::Input::SpaceBar)
 	{
+		// Reset if space bar was pressed
 		Reset();
 		return true;
 	}
@@ -32,11 +39,16 @@ bool GameClient::GameObjects::Food::OnInput(const Input::Input input)
 
 void GameClient::GameObjects::Food::Reset()
 {
+	// Place new food
 	PlaceFoodAtValidCoordinates();
+
+	// Reset eaten status
+	_eaten = false;
 }
 
 void GameClient::GameObjects::Food::Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget)
 {
+	// Draw a simple square to represent food
 	renderTarget->DrawUnitRectangle({0, 0}, _coordinates, {0.1f, 0.1f}, Engine::Colour::Green);
 }
 
@@ -49,9 +61,9 @@ bool GameClient::GameObjects::Food::IsColliding(const int x, const int y, const 
 {
 	const auto isColliding = x == _coordinates.x && y == _coordinates.y;
 
-	// Check if the snake has eaten me
 	if (isColliding && static_cast<bool>(source & Collision::CollidableName::Snake))
 	{
+		// If the snake is colliding, the food has been eaten
 		_eaten = true;
 	}
 	return isColliding;
@@ -60,9 +72,10 @@ bool GameClient::GameObjects::Food::IsColliding(const int x, const int y, const 
 void GameClient::GameObjects::Food::PlaceFoodAtValidCoordinates()
 {
 	auto validCoordinates = false;
-
 	auto x = 0;
 	auto y = 0;
+
+	// Generate random coordinates until it no longer collides with anything
 	while (!validCoordinates)
 	{
 		x = _xDistribution(_rng);
@@ -75,5 +88,4 @@ void GameClient::GameObjects::Food::PlaceFoodAtValidCoordinates()
 	}
 
 	_coordinates = {x, y};
-	_eaten = false;
 }

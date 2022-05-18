@@ -3,6 +3,9 @@
 
 namespace GameClient::State
 {
+	/**
+	 * \brief Base class that defines default (empty) behaviour.
+	 */
 	class GameStateBase : public IGameState // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	private:

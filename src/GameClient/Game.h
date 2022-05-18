@@ -37,6 +37,9 @@ namespace GameClient
 		Game(Game&& moveOther) = delete;
 		Game operator=(Game&& moveOther) = delete;
 
+		/**
+		 * \brief Processes a frame by calling Update then Draw.
+		 */
 		void ProcessFrame();
 	};
 }

@@ -24,25 +24,76 @@ namespace GameClient
 
 		~Window();
 
-		// Register the window class and call methods for instantiating drawing resources
+		/**
+		 * \brief Registers the window class and creates the game.
+		 * \param hInstance The module handle.
+		 * \return The result of the operation.
+		 */
 		HRESULT Initialize(HINSTANCE hInstance);
 
-		// Process and dispatch messages
+		/**
+		 * \brief Message loop for processing and dispatching messages.
+		 */
 		void Run() const;
 
+		/**
+		 * \brief Forwards the pressed key to the game.
+		 * \param pressedKey The pressed key.
+		 */
 		void OnKeyDown(Input::Input pressedKey) const;
 
 	private:
-		// Resize the render target.
+		/**
+		 * \brief Resizes the render target.
+		 * \param width The width of the new size.
+		 * \param height The height of the new size.
+		 */
 		void OnResize(int width, int height) const;
 
+		/**
+		 * \brief Handles the WM_SIZE message.
+		 * \param pClient The window class instance.
+		 * \param lParam The message parameters.
+		 * \return A tuple of the result of the operation and whether the message was handled.
+		 */
 		static std::tuple<LRESULT, bool> OnSize(const Window& pClient, LPARAM lParam);
+
+		/**
+		 * \brief Handles the WM_DISPLAYCHANGE message.
+		 * \param hWnd The window handle.
+		 * \return A tuple of the result of the operation and whether the message was handled.
+		 */
 		static std::tuple<LRESULT, bool> OnDisplayChange(HWND hWnd);
+
+		/**
+		 * \brief Handles the WM_PAINT message.
+		 * \param hWnd The window handle.
+		 * \return A tuple of the result of the operation and whether the message was handled.
+		 */
 		static std::tuple<LRESULT, bool> OnPaint(HWND hWnd);
+
+		/**
+		 * \brief Handles the WM_DESTROY message.
+		 * \return A tuple of the result of the operation and whether the message was handled.
+		 */
 		static std::tuple<LRESULT, bool> OnDestroy();
+
+		/**
+		 * \brief Handles the WM_KEYDOWN message.
+		 * \param pClient The window class instance.
+		 * \param wParam The message parameters.
+		 * \return A tuple of the result of the operation and whether the message was handled.
+		 */
 		static std::tuple<LRESULT, bool> OnKeyDown(const Window& pClient, WPARAM wParam);
 
-		// The windows procedure.
+		/**
+		 * \brief Handles messages.
+		 * \param hWnd The window handle.
+		 * \param message The message to process.
+		 * \param wParam Message parameters.
+		 * \param lParam Message parameters.
+		 * \return The result of the operation.
+		 */
 		static LRESULT CALLBACK WndProc(
 			HWND hWnd,
 			UINT message,
