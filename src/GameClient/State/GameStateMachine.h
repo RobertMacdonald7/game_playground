@@ -6,7 +6,7 @@
 namespace GameClient::State
 {
 	/**
-	 * \brief A state machine that defines the overall game state.
+	 * \brief An IStateMachine that defines the overall game state.
 	 */
 	class GameStateMachine final : public IStateMachine
 	{
@@ -25,8 +25,19 @@ namespace GameClient::State
 		GameStateMachine(GameStateMachine&& moveOther) = delete;
 		GameStateMachine operator=(GameStateMachine&& moveOther) = delete;
 
+		/**
+		 * \copydoc IStateMachine::ChangeState
+		 */
 		void ChangeState(int state) override;
+
+		/**
+		 * \copydoc IStateMachine::OnInput
+		 */
 		void OnInput(Input::Input input) override;
+
+		/**
+		 * \copydoc IStateMachine::OnUpdate
+		 */
 		void OnUpdate() override;
 
 		/**

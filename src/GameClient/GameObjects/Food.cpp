@@ -16,16 +16,6 @@ GameClient::GameObjects::Food::~Food()
 	GetCollisionDetector()->RemoveCollidable(GetCollidableName());
 }
 
-void GameClient::GameObjects::Food::OnUpdate()
-{
-	// Place new food if the last one was eaten
-	if (_eaten)
-	{
-		PlaceFoodAtValidCoordinates();
-		_eaten = false;
-	}
-}
-
 bool GameClient::GameObjects::Food::OnInput(const Input::Input input)
 {
 	if (input == Input::Input::SpaceBar)
@@ -37,6 +27,16 @@ bool GameClient::GameObjects::Food::OnInput(const Input::Input input)
 	return false;
 }
 
+void GameClient::GameObjects::Food::OnUpdate()
+{
+	// Place new food if the last one was eaten
+	if (_eaten)
+	{
+		PlaceFoodAtValidCoordinates();
+		_eaten = false;
+	}
+}
+
 void GameClient::GameObjects::Food::Reset()
 {
 	// Place new food
@@ -46,7 +46,7 @@ void GameClient::GameObjects::Food::Reset()
 	_eaten = false;
 }
 
-void GameClient::GameObjects::Food::Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget)
+void GameClient::GameObjects::Food::Draw(std::shared_ptr<Engine::IRenderTarget>& renderTarget)
 {
 	// Draw a simple square to represent food
 	renderTarget->DrawUnitRectangle({0, 0}, _coordinates, {0.1f, 0.1f}, Engine::Colour::Green);

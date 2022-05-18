@@ -57,14 +57,24 @@ namespace GameClient::GameObjects
 		 */
 		void OnUpdate(State::IStateMachine& context);
 
-		void Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget) override;
-
 		/**
 		 * \brief Reset's the snake to default values.
 		 */
 		void Reset();
 
+		/**
+		 * \copydoc Engine::IDrawable::Draw
+		 */
+		void Draw(std::shared_ptr<Engine::IRenderTarget>& renderTarget) override;
+
+		/**
+		 * \copydoc Collision::CollidableBase::GetCollidableName
+		 */
 		Collision::CollidableName GetCollidableName() override;
+
+		/**
+		 * \copydoc Collision::CollidableBase::IsColliding
+		 */
 		[[nodiscard]] bool IsColliding(int x, int y, Collision::CollidableName source) override;
 
 	private:

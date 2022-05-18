@@ -3,6 +3,9 @@
 
 namespace GameClient::State
 {
+	/**
+	 * \brief Interface for a state machine.
+	 */
 	class IStateMachine // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	public:

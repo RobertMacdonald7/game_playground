@@ -80,15 +80,6 @@ void GameClient::GameObjects::Snake::OnUpdate(State::IStateMachine& context)
 	return MoveSnake(context);
 }
 
-void GameClient::GameObjects::Snake::Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget)
-{
-	// Draw simple squares for each snake segment
-	for (const auto& segment : _segments)
-	{
-		renderTarget->DrawUnitRectangle({0, 0}, segment, {0, 0}, Engine::Colour::Blue);
-	}
-}
-
 void GameClient::GameObjects::Snake::Reset()
 {
 	// Clear and re-create the snake
@@ -100,6 +91,15 @@ void GameClient::GameObjects::Snake::Reset()
 
 	// Reset growth
 	_growSnake = 0;
+}
+
+void GameClient::GameObjects::Snake::Draw(std::shared_ptr<Engine::IRenderTarget>& renderTarget)
+{
+	// Draw simple squares for each snake segment
+	for (const auto& segment : _segments)
+	{
+		renderTarget->DrawUnitRectangle({ 0, 0 }, segment, { 0, 0 }, Engine::Colour::Blue);
+	}
 }
 
 GameClient::GameObjects::Collision::CollidableName GameClient::GameObjects::Snake::GetCollidableName()

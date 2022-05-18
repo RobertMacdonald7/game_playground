@@ -23,8 +23,6 @@ namespace GameClient::GameObjects
 	public:
 		explicit Food(std::shared_ptr<Collision::CollisionDetector> collisionDetector);
 		~Food() override;
-		void OnUpdate();
-		bool OnInput(Input::Input input);
 
 		Food() = delete;
 		Food(Food& copyOther) = delete;
@@ -34,13 +32,35 @@ namespace GameClient::GameObjects
 		Food operator=(Food&& moveOther) = delete;
 
 		/**
+		 * \brief Handles key presses.
+		 * \param input The pressed key.
+		 * \return Whether the input was handled.
+		 */
+		bool OnInput(Input::Input input);
+
+		/**
+		 * \brief Places new food if needed.
+		 */
+		void OnUpdate();
+
+		/**
 		 * \brief Reset's the object's state.
 		 */
 		void Reset();
 
-		void Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget) override;
+		/**
+		 * \copydoc Engine::IDrawable::Draw
+		 */
+		void Draw(std::shared_ptr<Engine::IRenderTarget>& renderTarget) override;
 
+		/**
+		 * \copydoc Collision::CollidableBase::GetCollidableName
+		 */
 		Collision::CollidableName GetCollidableName() override;
+
+		/**
+		 * \copydoc Collision::CollidableBase::IsColliding
+		 */
 		[[nodiscard]] bool IsColliding(int x, int y, Collision::CollidableName source) override;
 
 	private:

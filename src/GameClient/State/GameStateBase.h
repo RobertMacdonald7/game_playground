@@ -4,7 +4,7 @@
 namespace GameClient::State
 {
 	/**
-	 * \brief Base class that defines default (empty) behaviour.
+	 * \brief Base class of IGameState
 	 */
 	class GameStateBase : public IGameState // NOLINT(cppcoreguidelines-special-member-functions)
 	{

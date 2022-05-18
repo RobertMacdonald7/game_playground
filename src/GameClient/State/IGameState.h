@@ -8,6 +8,9 @@
 
 namespace GameClient::State
 {
+	/**
+	 * \brief Interface describing a game state.
+	 */
 	class IGameState // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	public:

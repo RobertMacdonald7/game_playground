@@ -8,6 +8,9 @@
 
 namespace GameClient::Engine
 {
+	/**
+	 * \brief Interface for the game engine.
+	 */
 	class IEngine // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	private:

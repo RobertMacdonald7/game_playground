@@ -8,7 +8,7 @@
 namespace GameClient::Engine::Direct2D
 {
 	/**
-	 * \brief Direct2D implementation of IRenderTarget
+	 * \brief %Direct2D implementation of IRenderTarget
 	 */
 	class Direct2dRenderTarget final : public IRenderTarget
 	{
@@ -28,11 +28,34 @@ namespace GameClient::Engine::Direct2D
 		Direct2dRenderTarget(Direct2dRenderTarget&& moveOther) = delete;
 		Direct2dRenderTarget operator=(Direct2dRenderTarget&& moveOther) = delete;
 
+		/**
+		 * \copydoc IRenderTarget::CreateDeviceResources
+		 */
 		HRESULT CreateDeviceResources() override;
+
+		/**
+		 * \copydoc IRenderTarget::BeginDraw
+		 */
 		void BeginDraw() override;
+
+		/**
+		 * \copydoc IRenderTarget::EndDraw
+		 */
 		HRESULT EndDraw() override;
+
+		/**
+		 * \copydoc IRenderTarget::DrawUnitRectangle
+		 */
 		void DrawUnitRectangle(Coordinate2d offset, Coordinate2d position, Coordinate2dF scale, Colour colour) override;
+
+		/**
+		 * \copydoc IRenderTarget::DrawLine
+		 */
 		void DrawLine(Coordinate2dF p0, Coordinate2dF p1, float strokeWidth, Colour colour) override;
+
+		/**
+		 * \copydoc IRenderTarget::Resize
+		 */
 		void Resize(Size size) override;
 
 	private:

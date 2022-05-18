@@ -37,9 +37,19 @@ namespace GameClient::GameObjects
 		PlayArea(PlayArea&& moveOther) = delete;
 		PlayArea operator=(PlayArea&& moveOther) = delete;
 
-		void Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget) override;
+		/**
+		 * \copydoc Engine::IDrawable::Draw
+		 */
+		void Draw(std::shared_ptr<Engine::IRenderTarget>& renderTarget) override;
 
+		/**
+		 * \copydoc Collision::CollidableBase::GetCollidableName
+		 */
 		Collision::CollidableName GetCollidableName() override;
+
+		/**
+		 * \copydoc Collision::CollidableBase::IsColliding
+		 */
 		[[nodiscard]] bool IsColliding(int x, int y, Collision::CollidableName source) override;
 
 	private:

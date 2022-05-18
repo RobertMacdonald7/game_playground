@@ -7,6 +7,9 @@
 
 namespace GameClient
 {
+	/**
+	 * \brief The module associated with the window handle. Processes and dispatches messages.
+	 */
 	class Window
 	{
 	private:

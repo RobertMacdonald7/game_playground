@@ -7,6 +7,9 @@
 
 namespace GameClient::Engine
 {
+	/**
+	 * \brief Interface for the engine's render target.
+	 */
 	class IRenderTarget // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	public:

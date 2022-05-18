@@ -6,7 +6,7 @@
 namespace GameClient::Engine::Direct2D
 {
 	/**
-	 * \brief Converter from generic colour to Direct2D colours
+	 * \brief Converter from generic colour to %Direct2D colours
 	 */
 	class Direct2dColour
 	{

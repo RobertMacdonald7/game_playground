@@ -7,7 +7,7 @@
 namespace GameClient::Utility
 {
 	/**
-	 * \brief Utility methods used by the Direct2D engine.
+	 * \brief %Utility methods used by the Direct2D engine.
 	 */
 	class Direct2dUtility
 	{

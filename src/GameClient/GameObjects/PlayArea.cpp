@@ -14,7 +14,7 @@ GameClient::GameObjects::PlayArea::~PlayArea()
 	GetCollisionDetector()->RemoveCollidable(GetCollidableName());
 }
 
-void GameClient::GameObjects::PlayArea::Draw(const std::shared_ptr<Engine::IRenderTarget>& renderTarget)
+void GameClient::GameObjects::PlayArea::Draw(std::shared_ptr<Engine::IRenderTarget>& renderTarget)
 {
 	// Draw each tile with their representative colour
 	for (auto x = 0; x < game_width_units; ++x)

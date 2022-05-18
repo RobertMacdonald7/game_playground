@@ -28,6 +28,9 @@ namespace GameClient::GameObjects::Collision
 		);
 	}
 
+	/**
+	 * \brief Interface for game objects with collision.
+	 */
 	class ICollidable // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	public:
