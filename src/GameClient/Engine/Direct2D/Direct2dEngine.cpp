@@ -16,19 +16,37 @@ GameClient::Engine::Direct2D::Direct2dEngine::~Direct2dEngine()
 HRESULT GameClient::Engine::Direct2D::Direct2dEngine::Initialize()
 {
 	// Create a Direct2D factory
-	const auto result = D2D1CreateFactory(
+	auto result = D2D1CreateFactory(
 		D2D1_FACTORY_TYPE_SINGLE_THREADED,
 		&_pDirect2dFactory
 	);
-
 	RETURN_FAILED_HRESULT(result);
 
 	// Create a DWrite factory
-	DWriteCreateFactory(
+	result = DWriteCreateFactory(
 		DWRITE_FACTORY_TYPE_SHARED,
 		__uuidof(IDWriteFactory),  // NOLINT(clang-diagnostic-language-extension-token)
 		std::bit_cast<IUnknown**>(&_pDWriteFactory)
 	);
+	RETURN_FAILED_HRESULT(result);
+
+	result = _pDWriteFactory->CreateTextFormat(
+		L"",
+		nullptr,
+		DWRITE_FONT_WEIGHT_REGULAR,
+		DWRITE_FONT_STYLE_NORMAL,
+		DWRITE_FONT_STRETCH_NORMAL,
+		72.0f,
+		L"en-us",
+		&_pTextFormat
+	);
+	RETURN_FAILED_HRESULT(result);
+
+	result = _pTextFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+	RETURN_FAILED_HRESULT(result);
+
+	result = _pTextFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
+	RETURN_FAILED_HRESULT(result);
 
 	return result;
 }
@@ -90,6 +108,24 @@ void GameClient::Engine::Direct2D::Direct2dEngine::DrawLine(const Coordinate2dF 
 	_pRenderTarget->DrawLine(d2Point0, d2Point1, _brushes[colour], strokeWidth);
 }
 
+void GameClient::Engine::Direct2D::Direct2dEngine::DrawString()
+{
+	const auto text = L"Hello World using DirectWrite!";
+	const auto textLength = wcslen(text);
+
+	RECT rc;
+	GetClientRect(GetWindowHandle(), &rc);
+
+	const D2D1_RECT_F layoutRect = D2D1::RectF(
+		static_cast<float>(rc.left),
+		static_cast<float>(rc.top),
+		static_cast<float>(rc.right - rc.left),
+		static_cast<float>(rc.bottom - rc.top)
+	);
+
+	_pRenderTarget->DrawTextW(text, textLength, _pTextFormat, layoutRect, _brushes[Colour::Blue]);
+}
+
 HRESULT GameClient::Engine::Direct2D::Direct2dEngine::CreateDeviceResources()
 {
 	auto result = S_OK;
@@ -126,8 +162,9 @@ HRESULT GameClient::Engine::Direct2D::Direct2dEngine::CreateDeviceResources()
 
 void GameClient::Engine::Direct2D::Direct2dEngine::DiscardDeviceIndependentResources()
 {
-	SafeRelease(&_pDirect2dFactory);
+	SafeRelease(&_pTextFormat);
 	SafeRelease(&_pDWriteFactory);
+	SafeRelease(&_pDirect2dFactory);
 }
 
 void GameClient::Engine::Direct2D::Direct2dEngine::DiscardDeviceResources()

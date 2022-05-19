@@ -19,6 +19,8 @@ namespace GameClient::Engine::Direct2D
 	private:
 		ID2D1Factory* _pDirect2dFactory = nullptr;
 		IDWriteFactory* _pDWriteFactory = nullptr;
+		IDWriteTextFormat* _pTextFormat = nullptr;
+
 		ID2D1HwndRenderTarget* _pRenderTarget = nullptr;
 		std::map<Colour, ID2D1SolidColorBrush*> _brushes = {};
 
@@ -56,6 +58,8 @@ namespace GameClient::Engine::Direct2D
 		 * \copydoc IRender::DrawLine
 		 */
 		void DrawLine(Coordinate2dF p0, Coordinate2dF p1, float strokeWidth, Colour colour) override;
+
+		void DrawString() override;
 
 	private:
 		/**

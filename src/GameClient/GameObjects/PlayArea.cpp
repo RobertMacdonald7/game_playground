@@ -45,6 +45,8 @@ void GameClient::GameObjects::PlayArea::Draw(Engine::IRender& renderEngine)
 			0.2f, Engine::Colour::Gray
 		);
 	}
+
+	renderEngine.DrawString();
 }
 
 GameClient::GameObjects::Collision::CollidableName GameClient::GameObjects::PlayArea::GetCollidableName()

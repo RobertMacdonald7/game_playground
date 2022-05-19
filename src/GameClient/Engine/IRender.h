@@ -31,5 +31,7 @@ namespace GameClient::Engine
 		 * \param colour The colour of the line.
 		 */
 		virtual void DrawLine(Coordinate2dF p0, Coordinate2dF p1, float strokeWidth, Colour colour) = 0;
+
+		virtual void DrawString() = 0;
 	};
 }
