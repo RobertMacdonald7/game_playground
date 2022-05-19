@@ -27,11 +27,6 @@ namespace GameClient::State
 		void Leave() override;
 
 		/**
-		 * \copydoc GameStateBase::OnUpdate
-		 */
-		void OnUpdate(IStateMachine& context) override;
-
-		/**
 		 * \copydoc GameStateBase::OnInput
 		 */
 		void OnInput(IStateMachine& context, Input::Input input) override;
