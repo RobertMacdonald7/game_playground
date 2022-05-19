@@ -123,9 +123,6 @@
     <ClInclude Include="Engine\Direct2D\Direct2dColour.h">
       <Filter>Header Files\Engine\Direct2D</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Direct2D\Direct2dRenderTarget.h">
-      <Filter>Header Files\Engine\Direct2D</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Colour.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
@@ -138,9 +135,6 @@
     <ClInclude Include="Engine\IEngine.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\IRenderTarget.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Size.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
@@ -149,6 +143,9 @@
     </ClInclude>
     <ClInclude Include="GameObjects\Collision\CollidableBase.h">
       <Filter>Header Files\GameObjects\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\IRender.h">
+      <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -192,9 +189,6 @@
       <Filter>Source Files\Engine\Direct2D</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Direct2D\Direct2dEngine.cpp">
-      <Filter>Source Files\Engine\Direct2D</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Direct2D\Direct2dRenderTarget.cpp">
       <Filter>Source Files\Engine\Direct2D</Filter>
     </ClCompile>
     <ClCompile Include="GameObjects\Collision\CollidableBase.cpp">

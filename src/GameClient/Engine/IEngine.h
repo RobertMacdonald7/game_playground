@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "IDrawable.h"
+#include "IRender.h"
 #include "../Macros.h"
 
 namespace GameClient::Engine
@@ -11,7 +12,7 @@ namespace GameClient::Engine
 	/**
 	 * \brief Interface for the game engine.
 	 */
-	class IEngine // NOLINT(cppcoreguidelines-special-member-functions)
+	class IEngine : public IRender // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	private:
 		HWND _windowHandle = nullptr;
@@ -25,7 +26,7 @@ namespace GameClient::Engine
 		}
 
 	public:
-		virtual ~IEngine() = default;
+		~IEngine() override = default;
 
 		/**
 		 * \brief Initializes Engine resources.

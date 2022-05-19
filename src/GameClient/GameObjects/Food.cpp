@@ -46,10 +46,10 @@ void GameClient::GameObjects::Food::Reset()
 	_eaten = false;
 }
 
-void GameClient::GameObjects::Food::Draw(std::shared_ptr<Engine::IRenderTarget>& renderTarget)
+void GameClient::GameObjects::Food::Draw(Engine::IRender& renderEngine)
 {
 	// Draw a simple square to represent food
-	renderTarget->DrawUnitRectangle({0, 0}, _coordinates, {0.1f, 0.1f}, Engine::Colour::Green);
+	renderEngine.DrawUnitRectangle({0, 0}, _coordinates, {0.1f, 0.1f}, Engine::Colour::Green);
 }
 
 GameClient::GameObjects::Collision::CollidableName GameClient::GameObjects::Food::GetCollidableName()

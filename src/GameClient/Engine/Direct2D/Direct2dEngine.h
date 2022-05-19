@@ -1,10 +1,13 @@
 #pragma once
 
 #include <d2d1.h>
+#include <dwrite.h>
+#include <map>
 
 #include "../IEngine.h"
 
 #pragma comment(lib, "d2d1")
+#pragma comment(lib, "Dwrite")
 
 namespace GameClient::Engine::Direct2D
 {
@@ -15,7 +18,9 @@ namespace GameClient::Engine::Direct2D
 	{
 	private:
 		ID2D1Factory* _pDirect2dFactory = nullptr;
-		std::shared_ptr<IRenderTarget> _renderTarget = nullptr;
+		IDWriteFactory* _pDWriteFactory = nullptr;
+		ID2D1HwndRenderTarget* _pRenderTarget = nullptr;
+		std::map<Colour, ID2D1SolidColorBrush*> _brushes = {};
 
 	public:
 		explicit Direct2dEngine(HWND windowHandle);
@@ -42,6 +47,16 @@ namespace GameClient::Engine::Direct2D
 		 */
 		HRESULT Draw(const std::vector<std::shared_ptr<IDrawable>>& drawables) override;
 
+		/**
+		 * \copydoc IRender::DrawUnitRectangle
+		 */
+		void DrawUnitRectangle(Coordinate2d offset, Coordinate2d position, Coordinate2dF scale, Colour colour) override;
+
+		/**
+		 * \copydoc IRender::DrawLine
+		 */
+		void DrawLine(Coordinate2dF p0, Coordinate2dF p1, float strokeWidth, Colour colour) override;
+
 	private:
 		/**
 		 * \brief Creates the render target and it's device resources.
@@ -58,5 +73,12 @@ namespace GameClient::Engine::Direct2D
 		 * \brief Safely discards the render target
 		 */
 		void DiscardDeviceResources();
+
+		/**
+		 * \brief Creates and adds a Direct2D colour brush to _brushes.
+		 * \param colour The colour of brush to create.
+		 * \return The result of the operation.
+		 */
+		HRESULT CreateAndAddBrush(Colour colour);
 	};
 }

@@ -93,12 +93,12 @@ void GameClient::GameObjects::Snake::Reset()
 	_growSnake = 0;
 }
 
-void GameClient::GameObjects::Snake::Draw(std::shared_ptr<Engine::IRenderTarget>& renderTarget)
+void GameClient::GameObjects::Snake::Draw(Engine::IRender& renderEngine)
 {
 	// Draw simple squares for each snake segment
 	for (const auto& segment : _segments)
 	{
-		renderTarget->DrawUnitRectangle({ 0, 0 }, segment, { 0, 0 }, Engine::Colour::Blue);
+		renderEngine.DrawUnitRectangle({ 0, 0 }, segment, { 0, 0 }, Engine::Colour::Blue);
 	}
 }
 
