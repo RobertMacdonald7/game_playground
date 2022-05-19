@@ -6,11 +6,18 @@
 
 namespace GameClient::Engine
 {
+	/**
+	 * \brief Interface for drawable game objects.
+	 */
 	class IDrawable // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	public:
 		virtual ~IDrawable() = default;
 
-		virtual void Draw(const std::shared_ptr<IRenderTarget>& renderTarget) = 0;
+		/**
+		 * \brief Draws the object
+		 * \param renderTarget The engine's render target
+		 */
+		virtual void Draw(std::shared_ptr<IRenderTarget>& renderTarget) = 0;
 	};
 }

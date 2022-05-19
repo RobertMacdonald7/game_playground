@@ -11,7 +11,7 @@ GameClient::Window::~Window() = default;
 
 HRESULT GameClient::Window::Initialize(HINSTANCE hInstance)
 {
-	// Register the window class.
+	// Register the window class
 	WNDCLASSEX windowClassEx = {};
 	windowClassEx.cbSize = sizeof(WNDCLASSEX);
 	windowClassEx.style = CS_HREDRAW | CS_VREDRAW;
@@ -29,7 +29,7 @@ HRESULT GameClient::Window::Initialize(HINSTANCE hInstance)
 
 
 	// Because the CreateWindow function takes its size in pixels,
-	// obtain the system DPI and use it to scale the window size.
+	// obtain the system DPI and use it to scale the window size
 	const auto dpiX = static_cast<float>(GetDpiForWindow(GetDesktopWindow()));
 	const auto dpiY = dpiX;
 
@@ -85,6 +85,7 @@ void GameClient::Window::Run() const
 	auto nextFrame = std::chrono::steady_clock::now();
 	nextFrame += std::chrono::milliseconds(1);
 
+	// Process messages. If there are none, process a frame
 	while (message.message != WM_QUIT)
 	{
 		if (PeekMessage(&message, nullptr, 0, 0, PM_REMOVE))
@@ -113,7 +114,7 @@ void GameClient::Window::OnResize(const int width, const int height) const
 	{
 		// Note: This method can fail, but it's okay to ignore the
 		// error here, because the error will be returned again
-		// the next time EndDraw is called.
+		// the next time EndDraw is called
 		_game->OnResize(width, height);
 	}
 }
@@ -147,6 +148,7 @@ std::tuple<LRESULT, bool> GameClient::Window::OnDestroy()
 
 std::tuple<LRESULT, bool> GameClient::Window::OnKeyDown(const Window& pClient, const WPARAM wParam)
 {
+	// Map input messages to Input enums
 	Input::Input pressedKey;
 	switch (wParam)
 	{
@@ -188,6 +190,7 @@ std::tuple<LRESULT, bool> GameClient::Window::OnKeyDown(const Window& pClient, c
 		return std::make_tuple(0, false);
 	}
 
+	// Forward the pressed key to the window instance
 	pClient.OnKeyDown(pressedKey);
 	return std::make_tuple(0, true);
 }
@@ -198,6 +201,7 @@ LRESULT CALLBACK GameClient::Window::WndProc(HWND hWnd, UINT message, WPARAM wPa
 
 	if (message == WM_CREATE)
 	{
+		// Associate our window instance with the window handle
 		const auto pcs = std::bit_cast<LPCREATESTRUCT>(lParam);
 		const auto pClient = static_cast<Window*>(pcs->lpCreateParams);
 
@@ -208,11 +212,11 @@ LRESULT CALLBACK GameClient::Window::WndProc(HWND hWnd, UINT message, WPARAM wPa
 	else
 	{
 		const auto pClient = std::bit_cast<Window*>(GetWindowLongPtrW(hWnd, GWLP_USERDATA));
-
 		auto wasHandled = false;
 
 		if (pClient)
 		{
+			// Process messages
 			std::tuple<LRESULT, bool> ret;
 			switch (message)
 			{
@@ -241,6 +245,7 @@ LRESULT CALLBACK GameClient::Window::WndProc(HWND hWnd, UINT message, WPARAM wPa
 
 		if (!wasHandled)
 		{
+			// Forward any unhandled messages back to Windows
 			result = DefWindowProc(hWnd, message, wParam, lParam);
 		}
 	}

@@ -1,6 +1,9 @@
 #pragma once
 namespace GameClient::Input
 {
+	/**
+	 * \brief Available keys
+	 */
 	enum class Input
 	{
 		None,

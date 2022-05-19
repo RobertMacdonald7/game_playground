@@ -2,6 +2,9 @@
 
 namespace GameClient::Engine
 {
+	/**
+	 * \brief 2D integer coordinate.
+	 */
 	struct Coordinate2d
 	{
 		int x;
@@ -10,6 +13,9 @@ namespace GameClient::Engine
 		bool operator==(const Coordinate2d& rhs) const = default;
 	};
 
+	/**
+	 * \brief 2D floating point coordinate.
+	 */
 	struct Coordinate2dF
 	{
 		float x;

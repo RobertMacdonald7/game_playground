@@ -8,6 +8,9 @@
 
 namespace GameClient
 {
+	/**
+	 * \brief Wraps the Engine::IEngine and State::GameStateMachine, processes frames, controls game update speed, and forwards input.
+	 */
 	class Game
 	{
 	private:
@@ -37,6 +40,9 @@ namespace GameClient
 		Game(Game&& moveOther) = delete;
 		Game operator=(Game&& moveOther) = delete;
 
+		/**
+		 * \brief Processes a frame by calling Update then Draw.
+		 */
 		void ProcessFrame();
 	};
 }
