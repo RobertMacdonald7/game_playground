@@ -22,7 +22,7 @@ void GameClient::GameObjects::PlayArea::Draw(Engine::IRender& renderEngine)
 		for (auto y = 0; y < game_height_units; ++y)
 		{
 			const auto colour = GetPlayAreaColour(_playArea[x][y]);
-			renderEngine.DrawUnitRectangle({0, 0}, {x, y}, {0, 0}, colour);
+			renderEngine.FillUnitRectangle({0, 0}, {x, y}, {0, 0}, colour);
 		}
 	}
 
@@ -45,8 +45,6 @@ void GameClient::GameObjects::PlayArea::Draw(Engine::IRender& renderEngine)
 			0.2f, Engine::Colour::Gray
 		);
 	}
-
-	renderEngine.DrawString();
 }
 
 GameClient::GameObjects::Collision::CollidableName GameClient::GameObjects::PlayArea::GetCollidableName()

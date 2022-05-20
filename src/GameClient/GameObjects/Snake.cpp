@@ -98,7 +98,7 @@ void GameClient::GameObjects::Snake::Draw(Engine::IRender& renderEngine)
 	// Draw simple squares for each snake segment
 	for (const auto& segment : _segments)
 	{
-		renderEngine.DrawUnitRectangle({ 0, 0 }, segment, { 0, 0 }, Engine::Colour::Blue);
+		renderEngine.FillUnitRectangle({ 0, 0 }, segment, { 0, 0 }, Engine::Colour::Blue);
 	}
 }
 

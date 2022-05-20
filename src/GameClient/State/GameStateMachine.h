@@ -14,6 +14,7 @@ namespace GameClient::State
 		std::shared_ptr<IGameState> _currentState = nullptr;
 		std::shared_ptr<Playing> _playingState = nullptr;
 		std::shared_ptr<GameOver> _gameOverState = nullptr;
+		std::shared_ptr<StartMenuState> _startMenuState = nullptr;
 
 	public:
 		GameStateMachine();

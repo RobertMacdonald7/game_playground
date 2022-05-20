@@ -50,16 +50,29 @@ namespace GameClient::Engine::Direct2D
 		HRESULT Draw(const std::vector<std::shared_ptr<IDrawable>>& drawables) override;
 
 		/**
-		 * \copydoc IRender::DrawUnitRectangle
+		 * \copydoc IRender::FillUnitRectangle
 		 */
-		void DrawUnitRectangle(Coordinate2d offset, Coordinate2d position, Coordinate2dF scale, Colour colour) override;
+		void FillUnitRectangle(Coordinate2d offset, Coordinate2d position, Coordinate2dF scale, Colour colour) override;
+
+		/**
+		 * \copydoc IRender::DrawRectangle
+		 */
+		void DrawRectangle(Coordinate2d location, Size size, float strokeWidth, Colour colour) override;
+
+		/**
+		 * \copydoc IRender::FillRectangle
+		 */
+		void FillRectangle(Coordinate2d location, Size size, Colour colour) override;
 
 		/**
 		 * \copydoc IRender::DrawLine
 		 */
 		void DrawLine(Coordinate2dF p0, Coordinate2dF p1, float strokeWidth, Colour colour) override;
 
-		void DrawString() override;
+		/**
+		 * \copydoc IRender::DrawString
+		 */
+		void DrawString(const std::wstring& text, Coordinate2d location, Size size, Colour colour) override;
 
 	private:
 		/**
@@ -84,5 +97,7 @@ namespace GameClient::Engine::Direct2D
 		 * \return The result of the operation.
 		 */
 		HRESULT CreateAndAddBrush(Colour colour);
+	public:
+		
 	};
 }

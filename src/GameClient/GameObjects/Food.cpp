@@ -49,7 +49,7 @@ void GameClient::GameObjects::Food::Reset()
 void GameClient::GameObjects::Food::Draw(Engine::IRender& renderEngine)
 {
 	// Draw a simple square to represent food
-	renderEngine.DrawUnitRectangle({0, 0}, _coordinates, {0.1f, 0.1f}, Engine::Colour::Green);
+	renderEngine.FillUnitRectangle({0, 0}, _coordinates, {0.1f, 0.1f}, Engine::Colour::Green);
 }
 
 GameClient::GameObjects::Collision::CollidableName GameClient::GameObjects::Food::GetCollidableName()

@@ -7,8 +7,9 @@ GameClient::State::GameStateMachine::GameStateMachine()
 	// TODO - Inject these
 	_playingState = std::make_shared<Playing>();
 	_gameOverState = std::make_shared<GameOver>();
+	_startMenuState = std::make_shared<StartMenuState>(std::make_unique<GameObjects::StartMenu>());
 
-	GameStateMachine::ChangeState(static_cast<int>(GameStateType::Playing));
+	GameStateMachine::ChangeState(static_cast<int>(GameStateType::StartMenu));
 }
 
 void GameClient::State::GameStateMachine::OnInput(const Input::Input input)
@@ -44,6 +45,9 @@ void GameClient::State::GameStateMachine::ChangeState(int state)
 		break;
 	case GameStateType::GameOver:
 		_currentState = _gameOverState;
+		break;
+	case GameStateType::StartMenu:
+		_currentState = _startMenuState;
 		break;
 	default:
 		// This indicates a serious issue with the code if we're attempting to enter a state this state machine can't handle

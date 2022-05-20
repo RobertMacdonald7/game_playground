@@ -36,7 +36,7 @@ HRESULT GameClient::Engine::Direct2D::Direct2dEngine::Initialize()
 		DWRITE_FONT_WEIGHT_REGULAR,
 		DWRITE_FONT_STYLE_NORMAL,
 		DWRITE_FONT_STRETCH_NORMAL,
-		72.0f,
+		50.0f,
 		L"en-us",
 		&_pTextFormat
 	);
@@ -91,12 +91,35 @@ HRESULT GameClient::Engine::Direct2D::Direct2dEngine::Draw(const std::vector<std
 	return result;
 }
 
-void GameClient::Engine::Direct2D::Direct2dEngine::DrawUnitRectangle(const Coordinate2d offset, const Coordinate2d position,
+void GameClient::Engine::Direct2D::Direct2dEngine::FillUnitRectangle(const Coordinate2d offset, const Coordinate2d position,
                                                                      const Coordinate2dF scale, const Colour colour)
 {
 	// Create and draw
 	const auto rectangle = Utility::Direct2dUtility::CreateUnitRectangle(offset, position, scale);
-	_pRenderTarget->FillRectangle(&rectangle, _brushes[colour]);
+	_pRenderTarget->FillRectangle(rectangle, _brushes[colour]);
+}
+
+void GameClient::Engine::Direct2D::Direct2dEngine::DrawRectangle(const Coordinate2d location, const Size size, float strokeWidth, const Colour colour)
+{
+	const D2D1_RECT_F rectangle = D2D1::RectF(
+		static_cast<float>(location.x),
+		static_cast<float>(location.y),
+		static_cast<float>(location.x + size.width),
+		static_cast<float>(location.y + size.height)
+	);
+	_pRenderTarget->DrawRectangle(rectangle, _brushes[colour], strokeWidth);
+}
+
+void GameClient::Engine::Direct2D::Direct2dEngine::FillRectangle(const Coordinate2d location, const Size size,
+                                                                 const Colour colour)
+{
+	const D2D1_RECT_F rectangle = D2D1::RectF(
+		static_cast<float>(location.x),
+		static_cast<float>(location.y),
+		static_cast<float>(location.x + size.width),
+		static_cast<float>(location.y + size.height)
+	);
+	_pRenderTarget->FillRectangle(rectangle, _brushes[colour]);
 }
 
 void GameClient::Engine::Direct2D::Direct2dEngine::DrawLine(const Coordinate2dF p0, const Coordinate2dF p1, const float strokeWidth,
@@ -108,22 +131,16 @@ void GameClient::Engine::Direct2D::Direct2dEngine::DrawLine(const Coordinate2dF 
 	_pRenderTarget->DrawLine(d2Point0, d2Point1, _brushes[colour], strokeWidth);
 }
 
-void GameClient::Engine::Direct2D::Direct2dEngine::DrawString()
+void GameClient::Engine::Direct2D::Direct2dEngine::DrawString(const std::wstring& text, const Coordinate2d location, const Size size, const Colour colour)
 {
-	const auto text = L"Hello World using DirectWrite!";
-	const auto textLength = wcslen(text);
-
-	RECT rc;
-	GetClientRect(GetWindowHandle(), &rc);
-
+	const auto textLength = static_cast<UINT32>(text.length());
 	const D2D1_RECT_F layoutRect = D2D1::RectF(
-		static_cast<float>(rc.left),
-		static_cast<float>(rc.top),
-		static_cast<float>(rc.right - rc.left),
-		static_cast<float>(rc.bottom - rc.top)
+		static_cast<float>(location.x),
+		static_cast<float>(location.y),
+		static_cast<float>(location.x + size.width),
+		static_cast<float>(location.y + size.height)
 	);
-
-	_pRenderTarget->DrawTextW(text, textLength, _pTextFormat, layoutRect, _brushes[Colour::Blue]);
+	_pRenderTarget->DrawTextW(text.data(), textLength, _pTextFormat, layoutRect, _brushes[colour]);
 }
 
 HRESULT GameClient::Engine::Direct2D::Direct2dEngine::CreateDeviceResources()

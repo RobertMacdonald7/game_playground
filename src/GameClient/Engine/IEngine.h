@@ -35,7 +35,7 @@ namespace GameClient::Engine
 		virtual HRESULT Initialize() = 0;
 
 		/**
-		 * \brief Resizes the buffer underlying the render target. TODO - Expose render target through a getter.
+		 * \brief Resizes the buffer underlying the render target.
 		 * \param width width of available render area.
 		 * \param height Height of available render area.
 		 */
