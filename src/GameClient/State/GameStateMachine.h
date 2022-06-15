@@ -11,13 +11,12 @@ namespace GameClient::State
 	class GameStateMachine final : public IStateMachine
 	{
 	private:
+		std::map<int, std::shared_ptr<IGameState>> _states;
 		std::shared_ptr<IGameState> _currentState = nullptr;
-		std::shared_ptr<Playing> _playingState = nullptr;
-		std::shared_ptr<GameOver> _gameOverState = nullptr;
-		std::shared_ptr<StartMenuState> _startMenuState = nullptr;
 
 	public:
-		GameStateMachine();
+		GameStateMachine() = delete;
+		explicit GameStateMachine(const std::vector<std::shared_ptr<IGameState>>& states);
 		~GameStateMachine() override = default;
 
 		GameStateMachine(GameStateMachine& copyOther) = delete;

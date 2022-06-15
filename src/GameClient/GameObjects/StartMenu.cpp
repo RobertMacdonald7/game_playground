@@ -42,6 +42,9 @@ void GameClient::GameObjects::StartMenu::OnInput(State::IStateMachine& context, 
 		{
 			PostQuitMessage(0);
 		}
+		break;
+	default:
+		return;
 	}
 }
 

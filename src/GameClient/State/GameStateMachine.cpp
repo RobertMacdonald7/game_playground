@@ -2,12 +2,12 @@
 
 #include <stdexcept>
 
-GameClient::State::GameStateMachine::GameStateMachine()
+GameClient::State::GameStateMachine::GameStateMachine(const std::vector<std::shared_ptr<IGameState>>& states)
 {
-	// TODO - Inject these
-	_playingState = std::make_shared<Playing>();
-	_gameOverState = std::make_shared<GameOver>();
-	_startMenuState = std::make_shared<StartMenuState>(std::make_unique<GameObjects::StartMenu>());
+	for (const auto& state : states)
+	{
+		_states[static_cast<int>(state->GetType())] = state;
+	}
 
 	GameStateMachine::ChangeState(static_cast<int>(GameStateType::StartMenu));
 }
@@ -28,32 +28,24 @@ GameClient::State::GameStateMachine::GetDrawableEntities() const
 	return _currentState->GetDrawables();
 }
 
-void GameClient::State::GameStateMachine::ChangeState(int state)
+void GameClient::State::GameStateMachine::ChangeState(const int state)
 {
+	if (!_states.contains(state))
+	{
+		// This indicates a serious issue with the code if we're attempting to enter a state this state machine can't handle
+		throw std::out_of_range("GameStateType was out of range");
+	}
+
 	// Leave the current state if there is one
 	if (_currentState != nullptr)
 	{
 		_currentState->Leave();
 	}
 
-	// Determine which state to enter
+	// Save the previous state
 	const std::shared_ptr<IGameState> previousState = _currentState;
-	switch (static_cast<GameStateType>(state))
-	{
-	case GameStateType::Playing:
-		_currentState = _playingState;
-		break;
-	case GameStateType::GameOver:
-		_currentState = _gameOverState;
-		break;
-	case GameStateType::StartMenu:
-		_currentState = _startMenuState;
-		break;
-	default:
-		// This indicates a serious issue with the code if we're attempting to enter a state this state machine can't handle
-		throw std::out_of_range("GameStateType was out of range");
-	}
 
 	// Enter the new state
+	_currentState = _states[state];
 	_currentState->Enter(previousState);
 }

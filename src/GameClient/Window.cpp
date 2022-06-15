@@ -61,8 +61,13 @@ HRESULT GameClient::Window::Initialize(HINSTANCE hInstance)
 	{
 		try
 		{
+			auto states = std::vector<std::shared_ptr<State::IGameState>>{
+				std::make_shared<State::StartMenuState>(std::make_unique<GameObjects::StartMenu>()),
+				std::make_shared<State::Playing>(),
+				std::make_shared<State::GameOver>()
+			};
 			_game = std::make_unique<Game>(std::make_unique<Engine::Direct2D::Direct2dEngine>(_hwnd),
-			                               std::make_unique<State::GameStateMachine>());
+			                               std::make_unique<State::GameStateMachine>(states));
 		}
 		catch (std::exception const&)
 		{
