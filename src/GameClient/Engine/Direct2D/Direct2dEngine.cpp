@@ -63,7 +63,7 @@ void GameClient::Engine::Direct2D::Direct2dEngine::Resize(const int width, const
 	_pRenderTarget->Resize(d2Size);
 }
 
-HRESULT GameClient::Engine::Direct2D::Direct2dEngine::Draw(const std::vector<std::shared_ptr<IDrawable>>& drawables)
+HRESULT GameClient::Engine::Direct2D::Direct2dEngine::Draw(const std::list<std::shared_ptr<IDrawable>>& drawables)
 {
 	// Create any resources needed before drawing
 	auto result = CreateDeviceResources();

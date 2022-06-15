@@ -47,7 +47,7 @@ namespace GameClient::Engine::Direct2D
 		/**
 		 * \copydoc IEngine::Draw
 		 */
-		HRESULT Draw(const std::vector<std::shared_ptr<IDrawable>>& drawables) override;
+		HRESULT Draw(const std::list<std::shared_ptr<IDrawable>>& drawables) override;
 
 		/**
 		 * \copydoc IRender::FillUnitRectangle

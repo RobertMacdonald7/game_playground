@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include <vector>
+#include <list>
 
 #include "IDrawable.h"
 #include "IRender.h"
@@ -46,7 +46,7 @@ namespace GameClient::Engine
 		 * \param drawables A list of drawable objects.
 		 * \return Result of the operation.
 		 */
-		virtual HRESULT Draw(const std::vector<std::shared_ptr<IDrawable>>& drawables) = 0;
+		virtual HRESULT Draw(const std::list<std::shared_ptr<IDrawable>>& drawables) = 0;
 	};
 
 	/**
