@@ -30,7 +30,7 @@ GameClient::State::GameStateMachine::GetDrawableEntities() const
 
 void GameClient::State::GameStateMachine::ChangeState(const int state)
 {
-	assert(!_states.contains(state));
+	assert(_states.contains(state));
 
 	// Leave the current state if there is one
 	if (_currentState != nullptr)
