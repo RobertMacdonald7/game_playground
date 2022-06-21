@@ -97,7 +97,5 @@ namespace GameClient::Engine::Direct2D
 		 * \return The result of the operation.
 		 */
 		HRESULT CreateAndAddBrush(Colour colour);
-	public:
-		
 	};
 }

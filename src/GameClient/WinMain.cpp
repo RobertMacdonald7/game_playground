@@ -11,15 +11,7 @@ HRESULT RunMessageLoop(HINSTANCE hInstance)
 	RETURN_FAILED_HRESULT(result);
 
 	// Run the loop
-	try
-	{
-		window->Run();
-	}
-	catch (std::exception)
-	{
-		// Something bad happened that means the app has to close
-		return E_FAIL;
-	}
+	window->Run();
 
 	return result;
 }
@@ -34,7 +26,16 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE /*hPrevInstance*
 		return -1;
 	}
 
-	const auto result = RunMessageLoop(hInstance);
+	HRESULT result;
+	try
+	{
+		result = RunMessageLoop(hInstance);
+	}
+	catch (...)
+	{
+		// Something bad happened that means the app has to close
+		result = E_FAIL;
+	}
 
 	CoUninitialize();
 

@@ -50,6 +50,7 @@ void GameClient::GameObjects::StartMenu::OnInput(State::IStateMachine& context, 
 
 void GameClient::GameObjects::StartMenu::OnUpdate(State::IStateMachine& context)
 {
+	/* NO OP */
 }
 
 void GameClient::GameObjects::StartMenu::Draw(Engine::IRender& renderEngine)
