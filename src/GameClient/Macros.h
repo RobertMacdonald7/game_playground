@@ -16,14 +16,6 @@ void SafeRelease(Interface** ppInterfaceToRelease)
 	}
 }
 
-#ifndef ASSERT
-#if defined( DEBUG ) || defined( _DEBUG )
-#define ASSERT(b) do {if (!(b)) {OutputDebugStringA("Assert: " #b "\n");}} while(0)
-#else
-#define ASSERT(b)
-#endif //DEBUG || _DEBUG
-#endif
-
 #ifndef HINST_THISCOMPONENT
 EXTERN_C const IMAGE_DOS_HEADER __ImageBase;
 // NOLINT(clang-diagnostic-reserved-identifier, bugprone-reserved-identifier)

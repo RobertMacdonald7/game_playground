@@ -1,5 +1,7 @@
 #include "Direct2dEngine.h"
 
+#include <stdexcept>
+
 #include "Direct2dColour.h"
 #include "../../Utility/Direct2dUtility.h"
 
@@ -200,7 +202,16 @@ void GameClient::Engine::Direct2D::Direct2dEngine::DiscardDeviceResources()
 HRESULT GameClient::Engine::Direct2D::Direct2dEngine::CreateAndAddBrush(const Colour colour)
 {
 	// Convert the colour
-	const auto brushColour = Direct2dColour::GetDirect2dColour(colour);
+	D2D1_COLOR_F brushColour;
+	try
+	{
+		brushColour = Direct2dColour::GetDirect2dColour(colour);
+	}
+	catch (const std::out_of_range&)
+	{
+		// The colour is not supported, bubble up the failure and abort.
+		return E_FAIL;
+	}
 
 	// Create the brush
 	ID2D1SolidColorBrush* brush = nullptr;

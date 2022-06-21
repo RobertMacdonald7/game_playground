@@ -57,28 +57,21 @@ HRESULT GameClient::Window::Initialize(HINSTANCE hInstance)
 	);
 
 	auto result = _hwnd ? S_OK : E_FAIL;
-	if (SUCCEEDED(result))
-	{
-		try
-		{
-			auto states = std::vector<std::shared_ptr<State::IGameState>>{
-				std::make_shared<State::StartMenuState>(std::make_unique<GameObjects::StartMenu>()),
-				std::make_shared<State::Playing>(),
-				std::make_shared<State::GameOver>()
-			};
-			_game = std::make_unique<Game>(std::make_unique<Engine::Direct2D::Direct2dEngine>(_hwnd),
-			                               std::make_unique<State::GameStateMachine>(states));
-		}
-		catch (std::exception const&)
-		{
-			result = E_FAIL;
-		}
+	RETURN_FAILED_HRESULT(result);
 
-		RETURN_FAILED_HRESULT(result);
+	auto states = std::vector<std::shared_ptr<State::IGameState>>{
+		std::make_shared<State::StartMenuState>(std::make_unique<GameObjects::StartMenu>()),
+		std::make_shared<State::Playing>(),
+		std::make_shared<State::GameOver>()
+	};
+	_game = std::make_unique<Game>(std::make_unique<Engine::Direct2D::Direct2dEngine>(_hwnd),
+	                               std::make_unique<State::GameStateMachine>(states));
 
-		ShowWindow(_hwnd, SW_SHOWNORMAL);
-		UpdateWindow(_hwnd);
-	}
+	result = _game->Initialize();
+	RETURN_FAILED_HRESULT(result);
+
+	ShowWindow(_hwnd, SW_SHOWNORMAL);
+	UpdateWindow(_hwnd);
 
 	return result;
 }

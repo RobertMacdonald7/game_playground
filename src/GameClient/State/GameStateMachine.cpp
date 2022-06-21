@@ -1,6 +1,6 @@
 #include "GameStateMachine.h"
 
-#include <stdexcept>
+#include <cassert>
 
 GameClient::State::GameStateMachine::GameStateMachine(const std::vector<std::shared_ptr<IGameState>>& states)
 {
@@ -30,11 +30,7 @@ GameClient::State::GameStateMachine::GetDrawableEntities() const
 
 void GameClient::State::GameStateMachine::ChangeState(const int state)
 {
-	if (!_states.contains(state))
-	{
-		// This indicates a serious issue with the code if we're attempting to enter a state this state machine can't handle
-		throw std::out_of_range("GameStateType was out of range");
-	}
+	assert(!_states.contains(state));
 
 	// Leave the current state if there is one
 	if (_currentState != nullptr)

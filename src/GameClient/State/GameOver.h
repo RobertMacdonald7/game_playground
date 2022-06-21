@@ -8,8 +8,6 @@ namespace GameClient::State
 	 */
 	class GameOver final : public GameStateBase
 	{
-	private:
-		std::shared_ptr<IGameState> _previousPlayingState;
 	public:
 		/**
 		 * \copydoc GameStateBase::GetType

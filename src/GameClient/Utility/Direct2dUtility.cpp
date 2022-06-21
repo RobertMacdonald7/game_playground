@@ -1,6 +1,6 @@
 #include "Direct2dUtility.h"
 
-#include <stdexcept>
+#include <cassert>
 
 #include "../GameDefinitions.h"
 
@@ -9,10 +9,7 @@ D2D1_RECT_F GameClient::Utility::Direct2dUtility::CreateUnitRectangle(const Engi
                                                                       const Engine::Coordinate2dF scale)
 {
 	// TODO - Make scale a "size" instead to control how many units are used to construct the rectangle
-	if (!(scale.x >= 0 && scale.x < .5f) || !(scale.y >= 0 && scale.y < .5f))
-	{
-		throw std::out_of_range("Scaling factor was not valid");
-	}
+	assert(!(scale.x >= 0 && scale.x < .5f) || !(scale.y >= 0 && scale.y < .5f));
 
 	const auto left = static_cast<float>(offset.x + (unit_size_pixels * position.x));
 	const auto top = static_cast<float>(offset.y + (unit_size_pixels * position.y));
