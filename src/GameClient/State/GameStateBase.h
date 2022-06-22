@@ -1,4 +1,5 @@
 #pragma once
+
 #include "IGameState.h"
 
 namespace GameClient::State
@@ -9,7 +10,7 @@ namespace GameClient::State
 	class GameStateBase : public IGameState // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	private:
-		std::vector<std::shared_ptr<Engine::IDrawable>> _drawables = {};
+		std::list<std::shared_ptr<Engine::IDrawable>> _drawables = {};
 
 	public:
 		~GameStateBase() override = default;
@@ -19,7 +20,7 @@ namespace GameClient::State
 		void Leave() override;
 		void OnUpdate(IStateMachine& context) override;
 		void OnInput(IStateMachine& context, Input::Input input) override;
-		std::vector<std::shared_ptr<Engine::IDrawable>>& GetDrawables() override;
+		std::list<std::shared_ptr<Engine::IDrawable>>& GetDrawables() override;
 
 	protected:
 		GameStateBase() = default;

@@ -15,6 +15,8 @@ D2D1::ColorF GameClient::Engine::Direct2D::Direct2dColour::GetDirect2dColour(con
 		return D2D1::ColorF::Green;
 	case Colour::Blue:
 		return D2D1::ColorF::Blue;
+	case Colour::Black:
+		return D2D1::ColorF::Black;
 	default:
 		throw std::out_of_range("Colour not supported");
 	}

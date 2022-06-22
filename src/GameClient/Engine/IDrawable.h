@@ -1,8 +1,6 @@
 #pragma once
 
-#include <memory>
-
-#include "IRenderTarget.h"
+#include "IRender.h"
 
 namespace GameClient::Engine
 {
@@ -16,8 +14,8 @@ namespace GameClient::Engine
 
 		/**
 		 * \brief Draws the object
-		 * \param renderTarget The engine's render target
+		 * \param renderEngine The engine's render target
 		 */
-		virtual void Draw(std::shared_ptr<IRenderTarget>& renderTarget) = 0;
+		virtual void Draw(IRender& renderEngine) = 0;
 	};
 }

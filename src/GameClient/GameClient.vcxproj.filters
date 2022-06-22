@@ -52,6 +52,12 @@
     <Filter Include="Header Files\Engine\Direct2D">
       <UniqueIdentifier>{7cee228b-9b8e-491c-9e47-9ff09e6b7ef5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameObjects\UIControls">
+      <UniqueIdentifier>{317a4c5e-0261-48bf-bac5-7456100078d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\UIControls">
+      <UniqueIdentifier>{a15481cd-edd5-410a-adeb-263b58359c31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -123,9 +129,6 @@
     <ClInclude Include="Engine\Direct2D\Direct2dColour.h">
       <Filter>Header Files\Engine\Direct2D</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Direct2D\Direct2dRenderTarget.h">
-      <Filter>Header Files\Engine\Direct2D</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Colour.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
@@ -138,9 +141,6 @@
     <ClInclude Include="Engine\IEngine.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\IRenderTarget.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Size.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
@@ -149,6 +149,18 @@
     </ClInclude>
     <ClInclude Include="GameObjects\Collision\CollidableBase.h">
       <Filter>Header Files\GameObjects\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\IRender.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="State\StartMenuState.h">
+      <Filter>Header Files\State</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\StartMenu.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\UIControls\Button.h">
+      <Filter>Header Files\GameObjects\UIControls</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -194,11 +206,17 @@
     <ClCompile Include="Engine\Direct2D\Direct2dEngine.cpp">
       <Filter>Source Files\Engine\Direct2D</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Direct2D\Direct2dRenderTarget.cpp">
-      <Filter>Source Files\Engine\Direct2D</Filter>
-    </ClCompile>
     <ClCompile Include="GameObjects\Collision\CollidableBase.cpp">
       <Filter>Source Files\GameObjects\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\StartMenu.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="State\StartMenuState.cpp">
+      <Filter>Source Files\State</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\UIControls\Button.cpp">
+      <Filter>Source Files\GameObjects\UIControls</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

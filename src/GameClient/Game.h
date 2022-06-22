@@ -31,6 +31,7 @@ namespace GameClient
 		Game(std::unique_ptr<Engine::IEngine> engine,
 		     std::unique_ptr<State::GameStateMachine> stateMachine);
 		~Game();
+		HRESULT Initialize() const;
 		void OnResize(int width, int height) const;
 		void OnInput(Input::Input input);
 

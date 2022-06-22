@@ -11,12 +11,12 @@ namespace GameClient::State
 	class GameStateMachine final : public IStateMachine
 	{
 	private:
+		std::map<int, std::shared_ptr<IGameState>> _states;
 		std::shared_ptr<IGameState> _currentState = nullptr;
-		std::shared_ptr<Playing> _playingState = nullptr;
-		std::shared_ptr<GameOver> _gameOverState = nullptr;
 
 	public:
-		GameStateMachine();
+		GameStateMachine() = delete;
+		explicit GameStateMachine(const std::vector<std::shared_ptr<IGameState>>& states);
 		~GameStateMachine() override = default;
 
 		GameStateMachine(GameStateMachine& copyOther) = delete;
@@ -42,8 +42,8 @@ namespace GameClient::State
 
 		/**
 		 * \brief Gets the IDrawable objects.
-		 * \return A vector of IDrawables.
+		 * \return A list of IDrawables.
 		 */
-		[[nodiscard]] std::vector<std::shared_ptr<Engine::IDrawable>>& GetDrawableEntities() const;
+		[[nodiscard]] std::list<std::shared_ptr<Engine::IDrawable>>& GetDrawableEntities() const;
 	};
 }

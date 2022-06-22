@@ -14,7 +14,7 @@ GameClient::GameObjects::PlayArea::~PlayArea()
 	GetCollisionDetector()->RemoveCollidable(GetCollidableName());
 }
 
-void GameClient::GameObjects::PlayArea::Draw(std::shared_ptr<Engine::IRenderTarget>& renderTarget)
+void GameClient::GameObjects::PlayArea::Draw(Engine::IRender& renderEngine)
 {
 	// Draw each tile with their representative colour
 	for (auto x = 0; x < game_width_units; ++x)
@@ -22,14 +22,14 @@ void GameClient::GameObjects::PlayArea::Draw(std::shared_ptr<Engine::IRenderTarg
 		for (auto y = 0; y < game_height_units; ++y)
 		{
 			const auto colour = GetPlayAreaColour(_playArea[x][y]);
-			renderTarget->DrawUnitRectangle({0, 0}, {x, y}, {0, 0}, colour);
+			renderEngine.FillUnitRectangle({0, 0}, {x, y}, {0, 0}, colour);
 		}
 	}
 
 	// Draw the vertical grid lines TODO - can this be combined in the first nested for-loop?
 	for (auto x = 0; x < game_width_pixels; x += unit_size_pixels)
 	{
-		renderTarget->DrawLine(
+		renderEngine.DrawLine(
 			{static_cast<float>(x), 0.0f},
 			{static_cast<float>(x), static_cast<float>(game_height_pixels)},
 			0.2f, Engine::Colour::Gray
@@ -39,7 +39,7 @@ void GameClient::GameObjects::PlayArea::Draw(std::shared_ptr<Engine::IRenderTarg
 	// Draw the horizontal grid lines TODO - can this be combined in the first nested for-loop?
 	for (auto y = 0; y < game_height_pixels; y += unit_size_pixels)
 	{
-		renderTarget->DrawLine(
+		renderEngine.DrawLine(
 			{0.0f, static_cast<float>(y)},
 			{static_cast<float>(game_width_pixels), static_cast<float>(y)},
 			0.2f, Engine::Colour::Gray

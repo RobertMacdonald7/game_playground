@@ -20,7 +20,7 @@ void GameClient::State::GameStateBase::OnInput(IStateMachine& context, const Inp
 	// NoOp
 }
 
-std::vector<std::shared_ptr<GameClient::Engine::IDrawable>>& GameClient::State::GameStateBase::GetDrawables()
+std::list<std::shared_ptr<GameClient::Engine::IDrawable>>& GameClient::State::GameStateBase::GetDrawables()
 {
 	return _drawables;
 }

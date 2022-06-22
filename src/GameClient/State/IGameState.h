@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include <vector>
+#include <list>
 
 #include "GameStateType.h"
 #include "IStateMachine.h"
@@ -48,8 +48,8 @@ namespace GameClient::State
 
 		/**
 		 * \brief Gets the IDrawable objects.
-		 * \return A vector of IDrawables.
+		 * \return A list of IDrawables.
 		 */
-		virtual std::vector<std::shared_ptr<Engine::IDrawable>>& GetDrawables() = 0;
+		virtual std::list<std::shared_ptr<Engine::IDrawable>>& GetDrawables() = 0;
 	};
 }

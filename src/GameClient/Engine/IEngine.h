@@ -1,9 +1,10 @@
 #pragma once
 
 #include <memory>
-#include <vector>
+#include <list>
 
 #include "IDrawable.h"
+#include "IRender.h"
 #include "../Macros.h"
 
 namespace GameClient::Engine
@@ -11,7 +12,7 @@ namespace GameClient::Engine
 	/**
 	 * \brief Interface for the game engine.
 	 */
-	class IEngine // NOLINT(cppcoreguidelines-special-member-functions)
+	class IEngine : public IRender // NOLINT(cppcoreguidelines-special-member-functions)
 	{
 	private:
 		HWND _windowHandle = nullptr;
@@ -25,7 +26,7 @@ namespace GameClient::Engine
 		}
 
 	public:
-		virtual ~IEngine() = default;
+		~IEngine() override = default;
 
 		/**
 		 * \brief Initializes Engine resources.
@@ -34,7 +35,7 @@ namespace GameClient::Engine
 		virtual HRESULT Initialize() = 0;
 
 		/**
-		 * \brief Resizes the buffer underlying the render target. TODO - Expose render target through a getter.
+		 * \brief Resizes the buffer underlying the render target.
 		 * \param width width of available render area.
 		 * \param height Height of available render area.
 		 */
@@ -45,7 +46,7 @@ namespace GameClient::Engine
 		 * \param drawables A list of drawable objects.
 		 * \return Result of the operation.
 		 */
-		virtual HRESULT Draw(const std::vector<std::shared_ptr<IDrawable>>& drawables) = 0;
+		virtual HRESULT Draw(const std::list<std::shared_ptr<IDrawable>>& drawables) = 0;
 	};
 
 	/**

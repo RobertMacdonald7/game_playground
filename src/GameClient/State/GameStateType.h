@@ -4,6 +4,7 @@ namespace GameClient::State
 	enum class GameStateType
 	{
 		Playing,
-		GameOver
+		GameOver,
+		StartMenu
 	};
 }

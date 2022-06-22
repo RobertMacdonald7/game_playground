@@ -65,7 +65,7 @@ namespace GameClient::GameObjects
 		/**
 		 * \copydoc Engine::IDrawable::Draw
 		 */
-		void Draw(std::shared_ptr<Engine::IRenderTarget>& renderTarget) override;
+		void Draw(Engine::IRender& renderEngine) override;
 
 		/**
 		 * \copydoc Collision::CollidableBase::GetCollidableName

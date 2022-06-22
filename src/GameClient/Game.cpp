@@ -7,15 +7,14 @@
 GameClient::Game::Game(std::unique_ptr<Engine::IEngine> engine, std::unique_ptr<State::GameStateMachine> stateMachine):
 	_engine(std::move(engine)),
 	_stateMachine(std::move(stateMachine))
-{
-	if (const HRESULT result = _engine->Initialize(); FAILED(result))
-	{
-		const auto message = "Engine failed to initialize: " + std::to_string(result);
-		throw std::exception(message.c_str());
-	}
-}
+{ }
 
 GameClient::Game::~Game() = default;
+
+HRESULT GameClient::Game::Initialize() const
+{
+	return _engine->Initialize();
+}
 
 void GameClient::Game::OnResize(const int width, const int height) const
 {
