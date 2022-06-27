@@ -1,17 +1,17 @@
 #pragma once
 
 #include "GameStateBase.h"
-#include "../GameObjects/StartMenu.h"
+#include "../UI/StartMenu.h"
 
 namespace GameClient::State
 {
 	class StartMenuState final : public GameStateBase
 	{
 	private:
-		std::shared_ptr<GameObjects::StartMenu> _menu;
+		std::shared_ptr<UI::StartMenu> _menu;
 
 	public:
-		explicit StartMenuState(std::shared_ptr<GameObjects::StartMenu> menu);
+		explicit StartMenuState(std::shared_ptr<UI::StartMenu> menu);
 		StartMenuState() = delete;
 
 		GameStateType GetType() override;

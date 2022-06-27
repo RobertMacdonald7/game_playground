@@ -1,6 +1,6 @@
 #include "Button.h"
 
-void GameClient::GameObjects::UIControls::Button::Draw(Engine::IRender& renderEngine)
+void GameClient::UI::Controls::Button::Draw(Engine::IRender& renderEngine)
 {
 	if (selected)
 	{

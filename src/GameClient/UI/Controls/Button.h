@@ -4,7 +4,7 @@
 
 #include "../../Engine/IDrawable.h"
 
-namespace GameClient::GameObjects::UIControls
+namespace GameClient::UI::Controls
 {
 	template <typename T>
 	class Property

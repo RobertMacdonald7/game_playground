@@ -1,6 +1,6 @@
 #include "StartMenuState.h"
 
-GameClient::State::StartMenuState::StartMenuState(std::shared_ptr<GameObjects::StartMenu> menu) :
+GameClient::State::StartMenuState::StartMenuState(std::shared_ptr<UI::StartMenu> menu) :
 	_menu(std::move(menu))
 {
 	GameStateBase::GetDrawables().push_back(_menu);
