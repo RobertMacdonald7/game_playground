@@ -48,11 +48,6 @@ void GameClient::UI::StartMenu::OnInput(State::IStateMachine& context, const Inp
 	}
 }
 
-void GameClient::UI::StartMenu::OnUpdate(State::IStateMachine& context)
-{
-	/* NO OP */
-}
-
 void GameClient::UI::StartMenu::Draw(Engine::IRender& renderEngine)
 {
 	_startButton->Draw(renderEngine);

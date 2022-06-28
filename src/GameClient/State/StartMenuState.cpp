@@ -21,11 +21,6 @@ void GameClient::State::StartMenuState::Leave()
 	GameStateBase::Leave();
 }
 
-void GameClient::State::StartMenuState::OnUpdate(IStateMachine& context)
-{
-	_menu->OnUpdate(context);
-}
-
 void GameClient::State::StartMenuState::OnInput(IStateMachine& context, const Input::Input input)
 {
 	_menu->OnInput(context, input);

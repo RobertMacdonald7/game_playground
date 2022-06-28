@@ -7,6 +7,8 @@ D2D1::ColorF GameClient::Engine::Direct2D::Direct2dColour::GetDirect2dColour(con
 	{
 	case Colour::White:
 		return D2D1::ColorF::White;
+	case Colour::WhiteAlpha:
+		return { D2D1::ColorF::White, 0.4f };
 	case Colour::Gray:
 		return D2D1::ColorF::Gray;
 	case Colour::DarkRed:

@@ -60,10 +60,11 @@ HRESULT GameClient::Window::Initialize(HINSTANCE hInstance)
 	RETURN_FAILED_HRESULT(result);
 
 	auto states = std::vector<std::shared_ptr<State::IGameState>>{
-		std::make_shared<State::StartMenuState>(std::make_unique<UI::StartMenu>()),
+		std::make_shared<State::StartMenuState>(std::make_shared<UI::StartMenu>()),
 		std::make_shared<State::Playing>(),
-		std::make_shared<State::GameOver>()
+		std::make_shared<State::GameOverState>(std::make_shared<UI::Scoreboard>())
 	};
+
 	_game = std::make_unique<Game>(std::make_unique<Engine::Direct2D::Direct2dEngine>(_hwnd),
 	                               std::make_unique<State::GameStateMachine>(states));
 

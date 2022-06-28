@@ -8,6 +8,7 @@ namespace GameClient::Engine
 	enum class Colour
 	{
 		White,
+		WhiteAlpha,
 		Gray,
 		DarkRed,
 		Green,

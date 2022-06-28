@@ -99,7 +99,7 @@
     <ClInclude Include="State\GameStateMachine.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
-    <ClInclude Include="State\GameOver.h">
+    <ClInclude Include="State\GameOverState.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
     <ClInclude Include="State\GameStateBase.h">
@@ -168,6 +168,12 @@
     <ClInclude Include="UI\StartMenu.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
+    <ClInclude Include="UI\Scoreboard.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Controls\Label.h">
+      <Filter>Header Files\UI\Controls</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp">
@@ -191,7 +197,7 @@
     <ClCompile Include="State\GameStateBase.cpp">
       <Filter>Source Files\State</Filter>
     </ClCompile>
-    <ClCompile Include="State\GameOver.cpp">
+    <ClCompile Include="State\GameOverState.cpp">
       <Filter>Source Files\State</Filter>
     </ClCompile>
     <ClCompile Include="GameObjects\PlayArea.cpp">
@@ -223,6 +229,12 @@
     </ClCompile>
     <ClCompile Include="UI\StartMenu.cpp">
       <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Scoreboard.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Controls\Label.cpp">
+      <Filter>Source Files\UI\Controls</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
