@@ -6,17 +6,6 @@
 
 namespace GameClient::UI::Controls
 {
-	template <typename T>
-	class Property
-	{
-	private:
-		T _value;
-	public:
-		T& operator=(const T& newValue) { return _value = newValue; }  // NOLINT(misc-unconventional-assign-operator)
-		const T& operator() () const { return _value; }
-		T& operator()(const T& newValue) { return _value = newValue; }
-	};
-
 	class Button final : public Engine::IDrawable
 	{
 	public:
