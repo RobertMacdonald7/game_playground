@@ -4,6 +4,7 @@
 #include "Engine/Direct2D/Direct2dEngine.h"
 #include "Resource/resource.h"
 #include "Input/VirtualKeyCodes.h"
+#include "UI/Score.h"
 
 GameClient::Window::Window() = default;
 
@@ -61,7 +62,7 @@ HRESULT GameClient::Window::Initialize(HINSTANCE hInstance)
 
 	auto states = std::vector<std::shared_ptr<State::IGameState>>{
 		std::make_shared<State::StartMenuState>(std::make_shared<UI::StartMenu>()),
-		std::make_shared<State::Playing>(),
+		std::make_shared<State::Playing>(std::make_shared<UI::Score>()),
 		std::make_shared<State::GameOverState>(std::make_shared<UI::Scoreboard>())
 	};
 

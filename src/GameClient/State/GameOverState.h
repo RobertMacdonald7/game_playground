@@ -1,6 +1,5 @@
 #pragma once
 #include "GameStateBase.h"
-
 #include "../UI/Scoreboard.h"
 
 namespace GameClient::State

@@ -3,7 +3,7 @@
 GameClient::State::StartMenuState::StartMenuState(std::shared_ptr<UI::StartMenu> menu) :
 	_menu(std::move(menu))
 {
-	GameStateBase::GetDrawables().push_back(_menu);
+	GameStateBase::GetUIDrawables().push_back(_menu);
 }
 
 GameClient::State::GameStateType GameClient::State::StartMenuState::GetType()

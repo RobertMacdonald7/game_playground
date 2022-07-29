@@ -12,5 +12,5 @@ void GameClient::UI::Controls::Button::Draw(Engine::IRender& renderEngine)
 
 	}
 
-	renderEngine.DrawString(text, location, size, Engine::Colour::Black);
+	renderEngine.DrawString(text, location, size, Engine::Colour::Black, alignment);
 }

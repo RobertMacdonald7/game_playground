@@ -4,7 +4,7 @@
 GameClient::State::GameOverState::GameOverState(std::shared_ptr<UI::Scoreboard> scoreboard) :
 	_scoreboard(std::move(scoreboard))
 {
-	GameStateBase::GetDrawables().push_back(_scoreboard);
+	GameStateBase::GetUIDrawables().push_back(_scoreboard);
 }
 
 void GameClient::State::GameOverState::OnInput(IStateMachine& context, const Input::Input input)

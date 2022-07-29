@@ -14,6 +14,7 @@ namespace GameClient::Engine
 		Green,
 		Blue,
 		Black,
+		BlackAlpha,
 		Last // Used for detecting the end of iteration!
 	};
 }

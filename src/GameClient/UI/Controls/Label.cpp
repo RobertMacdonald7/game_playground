@@ -7,5 +7,5 @@ void GameClient::UI::Controls::Label::Draw(Engine::IRender& renderEngine)
 		renderEngine.DrawRectangle(location, size, 1.0f, Engine::Colour::Black);
 	}
 
-	renderEngine.DrawString(text, location, size, Engine::Colour::Black);
+	renderEngine.DrawString(text, location, size, colour, alignment);
 }

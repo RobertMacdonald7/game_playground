@@ -18,12 +18,16 @@ namespace GameClient::UI
 	public:
 		Scoreboard();
 		~Scoreboard() override = default;
-		void SetScore(int score);
 		Scoreboard(Scoreboard& copyOther) = delete;
 		Scoreboard operator=(Scoreboard& copyOther) = delete;
 
 		Scoreboard(Scoreboard&& moveOther) = delete;
 		Scoreboard operator=(Scoreboard&& moveOther) = delete;
+
+		/**
+		 * \brief Sets the score and high score
+		 */
+		void SetScore(int score);
 
 		/**
 		 * \copydoc Engine::IDrawable::Draw

@@ -13,6 +13,7 @@ namespace GameClient::UI::Controls
 		Engine::Coordinate2d location = {0,0};
 		Engine::Size size = {0,0};
 		bool selected = false;
+		Engine::TextAlignment alignment = Engine::TextAlignment::Center;
 
 		/**
 		 * \copydoc Engine::IDrawable::Draw

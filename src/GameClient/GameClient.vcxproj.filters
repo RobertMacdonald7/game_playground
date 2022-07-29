@@ -174,6 +174,12 @@
     <ClInclude Include="UI\Controls\Label.h">
       <Filter>Header Files\UI\Controls</Filter>
     </ClInclude>
+    <ClInclude Include="UI\Score.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\TextAlignment.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp">
@@ -235,6 +241,9 @@
     </ClCompile>
     <ClCompile Include="UI\Controls\Label.cpp">
       <Filter>Source Files\UI\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Score.cpp">
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
