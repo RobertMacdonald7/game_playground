@@ -31,6 +31,8 @@ void GameClient::State::GameOverState::Enter(const std::shared_ptr<IGameState> p
 	{
 		GetDrawables().push_front(*it);
 	}
+
+	_scoreboard->SetScore(previousState->GetScore());
 }
 
 void GameClient::State::GameOverState::Leave()

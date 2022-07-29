@@ -67,3 +67,8 @@ void GameClient::State::Playing::OnInput(IStateMachine& context, const Input::In
 	// Block addition input if either objects handled the current input
 	_blockInputUntilNextUpdate = snakeHandledInput || foodHandledInput;
 }
+
+int GameClient::State::Playing::GetScore()
+{
+	return _snake->GetScore();
+}

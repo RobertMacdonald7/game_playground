@@ -13,10 +13,12 @@ namespace GameClient::UI
 		std::unique_ptr<Controls::Label> _scoreLabel = nullptr;
 		std::unique_ptr<Controls::Label> _highScoreLabel = nullptr;
 		std::unique_ptr<Controls::Label> _restartPromptLabel = nullptr;
+		int _highScore = 0;
 
 	public:
 		Scoreboard();
 		~Scoreboard() override = default;
+		void SetScore(int score);
 		Scoreboard(Scoreboard& copyOther) = delete;
 		Scoreboard operator=(Scoreboard& copyOther) = delete;
 

@@ -51,5 +51,10 @@ namespace GameClient::State
 		 * \copydoc GameStateBase::OnInput
 		 */
 		void OnInput(IStateMachine& context, Input::Input input) override;
+
+		/**
+		 * \copydoc GameStateBase::GetScore
+		 */
+		int GetScore() override;
 	};
 }
