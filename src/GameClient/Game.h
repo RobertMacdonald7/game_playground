@@ -2,7 +2,8 @@
 #include <memory>
 #include <chrono>
 
-#include "Engine/IEngine.h"
+#include "../Macros.h"
+#include "IEngine.h"
 #include "Input/Input.h"
 #include "State/GameStateMachine.h"
 

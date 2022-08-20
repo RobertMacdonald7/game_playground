@@ -46,12 +46,6 @@
     <Filter Include="Source Files\Engine\Direct2D">
       <UniqueIdentifier>{1e1e6ac7-33d2-4af8-a60d-616bb7251ea2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Engine">
-      <UniqueIdentifier>{9d2d6a7c-042b-4e8d-81a8-78bb0fd85334}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Engine\Direct2D">
-      <UniqueIdentifier>{7cee228b-9b8e-491c-9e47-9ff09e6b7ef5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\UI">
       <UniqueIdentifier>{32cb186c-8a34-4ce6-89e6-3fe3093bc051}</UniqueIdentifier>
     </Filter>
@@ -69,9 +63,6 @@
     <ClInclude Include="Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Macros.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -80,12 +71,6 @@
     </ClInclude>
     <ClInclude Include="GameObjects\Snake.h">
       <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="GameDefinitions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility\Direct2dUtility.h">
-      <Filter>Header Files\Utility</Filter>
     </ClInclude>
     <ClInclude Include="Input\Input.h">
       <Filter>Header Files\Input</Filter>
@@ -129,35 +114,11 @@
     <ClInclude Include="State\GameStates.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Direct2D\Direct2dEngine.h">
-      <Filter>Header Files\Engine\Direct2D</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Direct2D\Direct2dColour.h">
-      <Filter>Header Files\Engine\Direct2D</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Colour.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Coordinate2d.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\IDrawable.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\IEngine.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Size.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="State\IStateMachine.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
     <ClInclude Include="GameObjects\Collision\CollidableBase.h">
       <Filter>Header Files\GameObjects\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\IRender.h">
-      <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="State\StartMenuState.h">
       <Filter>Header Files\State</Filter>
@@ -177,8 +138,11 @@
     <ClInclude Include="UI\Score.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\TextAlignment.h">
-      <Filter>Header Files\Engine</Filter>
+    <ClInclude Include="Macros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameDefinitions.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -190,9 +154,6 @@
     </ClCompile>
     <ClCompile Include="GameObjects\Snake.cpp">
       <Filter>Source Files\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Utility\Direct2dUtility.cpp">
-      <Filter>Source Files\Utility</Filter>
     </ClCompile>
     <ClCompile Include="State\Playing.cpp">
       <Filter>Source Files\State</Filter>
@@ -217,12 +178,6 @@
     </ClCompile>
     <ClCompile Include="GameObjects\Collision\CollisionDetector.cpp">
       <Filter>Source Files\GameObjects\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Direct2D\Direct2dColour.cpp">
-      <Filter>Source Files\Engine\Direct2D</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Direct2D\Direct2dEngine.cpp">
-      <Filter>Source Files\Engine\Direct2D</Filter>
     </ClCompile>
     <ClCompile Include="GameObjects\Collision\CollidableBase.cpp">
       <Filter>Source Files\GameObjects\Collision</Filter>

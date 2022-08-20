@@ -1,7 +1,7 @@
 #include "Window.h"
 
 #include "GameDefinitions.h"
-#include "Engine/Direct2D/Direct2dEngine.h"
+#include "EngineFactory.h"
 #include "Resource/resource.h"
 #include "Input/VirtualKeyCodes.h"
 #include "UI/Score.h"
@@ -66,7 +66,8 @@ HRESULT GameClient::Window::Initialize(HINSTANCE hInstance)
 		std::make_shared<State::GameOverState>(std::make_shared<UI::Scoreboard>())
 	};
 
-	_game = std::make_unique<Game>(std::make_unique<Engine::Direct2D::Direct2dEngine>(_hwnd),
+	const Engine::Direct2DEngineFactory engineFactory;
+	_game = std::make_unique<Game>(engineFactory.CreateEngine(_hwnd),
 	                               std::make_unique<State::GameStateMachine>(states));
 
 	result = _game->Initialize();

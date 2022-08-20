@@ -4,6 +4,7 @@
 
 #include "Direct2dColour.h"
 #include "../../Utility/Direct2dUtility.h"
+#include "../../Macros.h"
 
 GameClient::Engine::Direct2D::Direct2dEngine::Direct2dEngine(HWND windowHandle): IEngine(windowHandle)
 {
@@ -15,8 +16,10 @@ GameClient::Engine::Direct2D::Direct2dEngine::~Direct2dEngine()
 	DiscardDeviceResources();
 }
 
-HRESULT GameClient::Engine::Direct2D::Direct2dEngine::Initialize()
+HRESULT GameClient::Engine::Direct2D::Direct2dEngine::Initialize(int unitSizePixels)
 {
+	_unitSizePixels = unitSizePixels;
+
 	// Create a Direct2D factory
 	auto result = D2D1CreateFactory(
 		D2D1_FACTORY_TYPE_SINGLE_THREADED,
@@ -122,7 +125,7 @@ void GameClient::Engine::Direct2D::Direct2dEngine::FillUnitRectangle(const Coord
                                                                      const Coordinate2dF scale, const Colour colour)
 {
 	// Create and draw
-	const auto rectangle = Utility::Direct2dUtility::CreateUnitRectangle(offset, position, scale);
+	const auto rectangle = Utility::Direct2dUtility::CreateUnitRectangle(offset, position, scale, _unitSizePixels);
 	_pRenderTarget->FillRectangle(rectangle, _brushes[colour]);
 }
 

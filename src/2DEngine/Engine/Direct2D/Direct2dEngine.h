@@ -26,6 +26,8 @@ namespace GameClient::Engine::Direct2D
 		ID2D1HwndRenderTarget* _pRenderTarget = nullptr;
 		std::map<Colour, ID2D1SolidColorBrush*> _brushes = {};
 
+		int _unitSizePixels = 0;
+
 	public:
 		explicit Direct2dEngine(HWND windowHandle);
 		~Direct2dEngine() override;
@@ -39,7 +41,7 @@ namespace GameClient::Engine::Direct2D
 		/**
 		 * \copydoc IEngine::Initialize
 		 */
-		HRESULT Initialize() override;
+		HRESULT Initialize(int unitSizePixels) override;
 
 		/**
 		 * \copydoc IEngine::Resize
