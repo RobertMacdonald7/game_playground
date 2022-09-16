@@ -17,9 +17,10 @@ namespace GameClient::Utility
 		 * \param offset X,Y offset from the rectangle's position.
 		 * \param position X,Y position of the rectangle's top-left corner.
 		 * \param scale How much vertical/horizontal space to shrink the rectangle.
+		 * \param unitSizePixels The size of a unit in pixels.
 		 * \return A unit rectangle.
 		 */
 		static D2D1_RECT_F CreateUnitRectangle(Engine::Coordinate2d offset, Engine::Coordinate2d position,
-		                                       Engine::Coordinate2dF scale);
+		                                       Engine::Coordinate2dF scale, int unitSizePixels);
 	};
 }

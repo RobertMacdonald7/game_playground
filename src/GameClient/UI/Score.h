@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "../Engine/IDrawable.h"
+#include "IDrawable.h"
 #include "Controls/Label.h"
 
 namespace GameClient::UI

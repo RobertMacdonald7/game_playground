@@ -4,7 +4,7 @@
 
 #include "GameStateType.h"
 #include "IStateMachine.h"
-#include "../Engine/IDrawable.h"
+#include "IDrawable.h"
 
 namespace GameClient::State
 {

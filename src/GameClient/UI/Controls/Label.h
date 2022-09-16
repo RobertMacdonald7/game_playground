@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "../../Engine/IDrawable.h"
+#include "IDrawable.h"
 
 namespace GameClient::UI::Controls
 {

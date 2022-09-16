@@ -2,7 +2,7 @@
 #include <vector>
 
 #include "../GameDefinitions.h"
-#include "../Engine/IDrawable.h"
+#include "IDrawable.h"
 #include "Collision/CollidableBase.h"
 
 namespace GameClient::GameObjects

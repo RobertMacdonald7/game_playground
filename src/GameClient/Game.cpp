@@ -11,7 +11,7 @@ GameClient::Game::~Game() = default;
 
 HRESULT GameClient::Game::Initialize() const
 {
-	return _engine->Initialize();
+	return _engine->Initialize(unit_size_pixels);
 }
 
 void GameClient::Game::OnResize(const int width, const int height) const

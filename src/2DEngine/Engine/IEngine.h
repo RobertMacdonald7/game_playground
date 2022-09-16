@@ -5,7 +5,6 @@
 
 #include "IDrawable.h"
 #include "IRender.h"
-#include "../Macros.h"
 
 namespace GameClient::Engine
 {
@@ -32,7 +31,7 @@ namespace GameClient::Engine
 		 * \brief Initializes Engine resources.
 		 * \return Result of the operation.
 		 */
-		virtual HRESULT Initialize() = 0;
+		virtual HRESULT Initialize(int unitSizePixels) = 0;
 
 		/**
 		 * \brief Resizes the buffer underlying the render target.
