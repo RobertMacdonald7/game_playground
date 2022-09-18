@@ -18,3 +18,31 @@ set(SOURCES
     src/UI/Score.cpp
     src/UI/Scoreboard.cpp
 )
+
+set(HEADERS
+    src/Macros.h
+    src/GameDefinitions.h
+    src/Window.h
+    src/Game.h
+    src/GameObjects/Snake.h
+    src/GameObjects/PlayArea.h
+    src/GameObjects/Food.h
+    src/GameObjects/GameObjects.h
+    src/GameObjects/Collision/ICollidable.h
+    src/GameObjects/Collision/CollidableBase.h
+    src/GameObjects/Collision/CollisionDetector.h
+    src/State/IStateMachine.h
+    src/State/GameStateMachine.h
+    src/State/IGameState.h
+    src/State/GameStateBase.h
+    src/State/StartMenuState.h
+    src/State/Playing.h
+    src/State/GameOverState.h
+    src/State/GameStates.h
+    src/State/GameStateType.h
+    src/UI/Controls/Button.h
+    src/UI/Controls/Label.h
+    src/UI/StartMenu.h
+    src/UI/Score.h
+    src/UI/Scoreboard.h
+)

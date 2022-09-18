@@ -8,7 +8,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 project(engine VERSION 1.0)
 
 include(sourcelist.cmake)
-add_library(${PROJECT_NAME} SHARED ${SOURCES})
+add_library(${PROJECT_NAME} SHARED
+    ${SOURCES}
+    ${HEADERS}
+    ${PUBLIC_INCLUDES}
+)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE "ENGINE_2D_EXPORTS")
 

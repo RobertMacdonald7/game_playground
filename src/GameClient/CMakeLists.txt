@@ -8,7 +8,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 project(snake VERSION 1.0)
 
 include(sourcelist.cmake)
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_executable(${PROJECT_NAME}
+    ${SOURCES}
+    ${HEADERS}
+)
 
 # Enable multi-threaded compilation.
 target_compile_options(${PROJECT_NAME} PRIVATE "/MP")

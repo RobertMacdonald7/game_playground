@@ -6,13 +6,19 @@ set(SOURCES
     src/Utility/Direct2dUtility.cpp
 )
 
+set(HEADERS
+    src/Macros.h
+    src/Engine/Direct2D/Direct2dColour.h
+    src/Utility/Direct2dUtility.h
+)
+
 set(PUBLIC_INCLUDES
-    include/IEngine.h
-    include/IDrawable.h
-    include/IRender.h
-    include/EngineFactory.h
-    include/Coordinate2d.h
-    include/Colour.h
-    include/Size.h
-    include/TextAlignment.h
+    include/EngineLib/IEngine.h
+    include/EngineLib/IDrawable.h
+    include/EngineLib/IRender.h
+    include/EngineLib/EngineFactory.h
+    include/EngineLib/Coordinate2d.h
+    include/EngineLib/Colour.h
+    include/EngineLib/Size.h
+    include/EngineLib/TextAlignment.h
 )
