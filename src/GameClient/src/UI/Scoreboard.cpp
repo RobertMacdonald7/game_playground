@@ -1,4 +1,5 @@
 #include "Scoreboard.h"
+#include "Web.Client/Client.h"
 
 #include "GameDefinitions.h"
 
@@ -37,6 +38,7 @@ void GameClient::UI::Scoreboard::SetScore(const int score)
 	}
 
 	_scoreLabel->text = L"SCORE: " + std::to_wstring(score);
+	GameClient::Web::Client::SayHello();
 }
 
 void GameClient::UI::Scoreboard::Draw(Engine::IRender& renderEngine)

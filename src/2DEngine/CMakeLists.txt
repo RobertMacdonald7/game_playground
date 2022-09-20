@@ -4,6 +4,10 @@ cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 # project
 project(engine VERSION 1.0)
 
@@ -18,12 +22,6 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE "ENGINE_2D_EXPORTS")
 
 # Enable multi-threaded compilation.
 target_compile_options(${PROJECT_NAME} PRIVATE "/MP")
-
-if(CMAKE_BUILD_TYPE MATCHES Debug)
-    target_compile_options(${PROJECT_NAME} PRIVATE "/MDd")
-else()
-    target_compile_options(${PROJECT_NAME} PRIVATE "/MD")
-endif()
 
 target_compile_options(${PROJECT_NAME} PRIVATE "/D_UNICODE")
 target_compile_options(${PROJECT_NAME} PRIVATE "/DUNICODE")

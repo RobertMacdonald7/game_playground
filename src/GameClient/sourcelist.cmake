@@ -17,6 +17,7 @@ set(SOURCES
     src/UI/StartMenu.cpp
     src/UI/Score.cpp
     src/UI/Scoreboard.cpp
+    src/Web.Client/Client.cpp
 )
 
 set(HEADERS
@@ -45,4 +46,5 @@ set(HEADERS
     src/UI/StartMenu.h
     src/UI/Score.h
     src/UI/Scoreboard.h
+    src/Web.Client/Client.h
 )
