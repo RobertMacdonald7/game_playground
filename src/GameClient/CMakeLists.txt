@@ -35,8 +35,8 @@ add_custom_command(
       ARGS --grpc_out "${CMAKE_CURRENT_BINARY_DIR}/proto-gen"
            --cpp_out "${CMAKE_CURRENT_BINARY_DIR}/proto-gen"
            -I "${PROTOS_DIR}"
-           --plugin=protoc-gen-grpc="E:/REPOS/snake/build/_deps/grpc-build/Debug/grpc_cpp_plugin.exe"
-           "E:/REPOS/snake/src/Protos/*.proto"
+           --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
+           "${PROTO_FILES}"
       DEPENDS ${PROTO_FILES}
 )
 
