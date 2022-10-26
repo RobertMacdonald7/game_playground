@@ -72,6 +72,7 @@ grpc::SslCredentialsOptions getSslOptions()
 	grpc::SslCredentialsOptions result;
 
 	// Open root certificate store.
+	// NOTE: When running against an app service this should draw from "ROOT"
 	HANDLE hRootCertStore = CertOpenSystemStore(NULL, L"MY");
 	if (!hRootCertStore)
 		return result;
@@ -110,7 +111,7 @@ std::string GameClient::Web::Client::SayHello() {
     _putenv("GRPC_VERBOSITY=DEBUG");
 
     auto channel_creds = grpc::SslCredentials(getSslOptions());
-    auto channel = grpc::CreateChannel("localhost:7132", channel_creds);
+    auto channel = grpc::CreateChannel("localhost:7132", channel_creds); // WHen run against a app service, omit the protocol and port
     GreeterClient greeter(channel);
     
     std::string user = "world";
