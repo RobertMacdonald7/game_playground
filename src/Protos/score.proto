@@ -31,5 +31,6 @@ message SetScoreForUserRequest {
 }
 
 message SetScoreForUserReply {
-    Score score = 1;
+    Score current_score = 1;
+    Score high_Score = 2;
 }

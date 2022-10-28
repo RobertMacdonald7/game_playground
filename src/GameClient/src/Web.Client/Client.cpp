@@ -35,7 +35,8 @@ GameClient::Web::Client::ScoreClient::ScoreClient() {
 	stub_ = std::make_unique<score::ScoreService::Stub>(channel);
 }
 
-std::map<int, GameClient::Web::Client::Score> GameClient::Web::Client::ScoreClient::GetTopScores(int page, int resultsPerPage) {
+std::map<int, GameClient::Web::Client::Score> GameClient::Web::Client::ScoreClient::GetTopScores(int page, int resultsPerPage)
+{
 	score::GetTopScoresRequest request;
 	request.set_page(page);
 	request.set_results_per_page(resultsPerPage);
@@ -71,6 +72,55 @@ std::map<int, GameClient::Web::Client::Score> GameClient::Web::Client::ScoreClie
 		normalisedScore.userName = ConvertUtf8ToWide(score.username());
 		ret.emplace(score.position(), normalisedScore);
 	}
+
+	return ret;
+}
+
+std::pair<GameClient::Web::Client::Score, GameClient::Web::Client::Score> GameClient::Web::Client::ScoreClient::SetScoreForUser(std::wstring username, int score)
+{
+	score::SetScoreForUserRequest request;
+	request.set_username(utf8Encode(username));
+	request.set_score(score);
+
+	score::SetScoreForUserReply reply;
+	ClientContext context;
+	CompletionQueue cq;
+	Status status;
+
+	std::unique_ptr<ClientAsyncResponseReader<score::SetScoreForUserReply>> rpc(
+		stub_->PrepareAsyncSetScoreForUser(&context, request, &cq)
+	);
+    rpc->StartCall();
+    rpc->Finish(&reply, &status, (void*)1);
+
+    void* got_tag;
+    bool ok = false;
+    GPR_ASSERT(cq.Next(&got_tag, &ok));
+    GPR_ASSERT(got_tag == (void*)1);
+    GPR_ASSERT(ok);
+
+	std::pair<GameClient::Web::Client::Score, GameClient::Web::Client::Score> ret;
+    if (!status.ok()) {
+		// TODO - what does this return look like?
+		return ret;
+    }
+
+	auto currentScore = reply.current_score();
+	auto highScore = reply.high_score();
+
+	GameClient::Web::Client::Score normalizedCurrentScore;
+	GameClient::Web::Client::Score normalizedHighScore;
+
+	normalizedCurrentScore.position = currentScore.position();
+	normalizedCurrentScore.score = currentScore.score();
+	normalizedCurrentScore.userName = ConvertUtf8ToWide(currentScore.username());
+
+	normalizedHighScore.position = highScore.position();
+	normalizedHighScore.score = highScore.score();
+	normalizedHighScore.userName = ConvertUtf8ToWide(highScore.username());
+
+	ret = std::make_pair(normalizedCurrentScore, normalizedHighScore);
+	return ret;
 
 	return ret;
 }

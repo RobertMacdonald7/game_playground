@@ -20,9 +20,14 @@ namespace Score.Service.Services
 		public override Task<SetScoreForUserReply> SetScoreForUser(SetScoreForUserRequest request, ServerCallContext context)
 		{
 			var response = new SetScoreForUserReply {
-				Score = new() {
+				CurrentScore = new Score {
 					Position = 3,
 					Score_ = request.Score,
+					Username = request.Username
+				},
+				HighScore = new Score {
+					Position = 0,
+					Score_ = 100,
 					Username = request.Username
 				}
 			};

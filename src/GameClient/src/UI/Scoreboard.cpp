@@ -31,14 +31,9 @@ GameClient::UI::Scoreboard::Scoreboard()
 
 void GameClient::UI::Scoreboard::SetScore(const int score)
 {
-	if (score > _highScore)
-	{
-		_highScore = score;
-		_highScoreLabel->text = L"HIGH SCORE: " + std::to_wstring(_highScore);
-	}
-
-	_scoreLabel->text = L"SCORE: " + std::to_wstring(score);
-	auto result = _client->GetTopScores(0, 10);
+	auto result = _client->SetScoreForUser(L"Robert Macdonald", score);
+	_scoreLabel->text = L"SCORE: " + std::to_wstring(result.first.score);
+	_highScoreLabel->text = L"HIGH SCORE: " + std::to_wstring(result.second.score);
 }
 
 void GameClient::UI::Scoreboard::Draw(Engine::IRender& renderEngine)
