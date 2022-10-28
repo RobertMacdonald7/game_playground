@@ -1,9 +1,5 @@
 #include "Client.h"
 
-#include <greet.pb.h>
-#include <greet.grpc.pb.h>
-
-#include <grpcpp/grpcpp.h>
 #include <wincrypt.h>
 #include <fstream>
 
@@ -12,48 +8,6 @@ using grpc::ClientAsyncResponseReader;
 using grpc::ClientContext;
 using grpc::CompletionQueue;
 using grpc::Status;
-using greet::Greeter;
-using greet::HelloRequest;
-using greet::HelloReply;
-
-
-GameClient::Web::Client::GreeterClient::GreeterClient(std::shared_ptr<Channel> channel)
-    : stub_(Greeter::NewStub(channel)) {}
-
-std::string GameClient::Web::Client::GreeterClient::SayHello(const std::string& user) {
-    HelloRequest request;
-    request.set_name(user);
-
-    HelloReply reply;
-
-    ClientContext context;
-
-    CompletionQueue cq;
-
-    Status status;
-
-    std::unique_ptr<ClientAsyncResponseReader<HelloReply>> rpc(
-        stub_->PrepareAsyncSayHello(&context, request, &cq));
-    
-    rpc->StartCall();
-
-    rpc->Finish(&reply, &status, (void*)1);
-
-    void* got_tag;
-    bool ok = false;
-
-    GPR_ASSERT(cq.Next(&got_tag, &ok));
-
-    GPR_ASSERT(got_tag == (void*)1);
-    GPR_ASSERT(ok);
-
-    if (status.ok()) {
-        return reply.message();
-    }
-    else {
-        return "RPC failed";
-    }
-}
 
 std::string utf8Encode(const std::wstring& wstr)
 {
@@ -64,6 +18,61 @@ std::string utf8Encode(const std::wstring& wstr)
 	std::string strTo(sizeNeeded, 0);
 	WideCharToMultiByte(CP_UTF8, 0, &wstr[0], (int)wstr.size(), &strTo[0], sizeNeeded, NULL, NULL);
 	return strTo;
+}
+
+std::wstring ConvertUtf8ToWide(const std::string& str)
+{
+    int count = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), str.length(), NULL, 0);
+    std::wstring wstr(count, 0);
+    MultiByteToWideChar(CP_UTF8, 0, str.c_str(), str.length(), &wstr[0], count);
+    return wstr;
+}
+
+GameClient::Web::Client::ScoreClient::ScoreClient() {
+	_putenv("GRPC_VERBOSITY=DEBUG");
+
+	auto channel = grpc::CreateChannel("localhost:8080", grpc::InsecureChannelCredentials()); // WHen run against a app service, omit the protocol and port
+	stub_ = std::make_unique<score::ScoreService::Stub>(channel);
+}
+
+std::map<int, GameClient::Web::Client::Score> GameClient::Web::Client::ScoreClient::GetTopScores(int page, int resultsPerPage) {
+	score::GetTopScoresRequest request;
+	request.set_page(page);
+	request.set_results_per_page(resultsPerPage);
+
+	score::GetTopScoresReply reply;
+	ClientContext context;
+	CompletionQueue cq;
+	Status status;
+
+	std::unique_ptr<ClientAsyncResponseReader<score::GetTopScoresReply>> rpc(
+		stub_->PrepareAsyncGetTopScores(&context, request, &cq)
+	);
+    rpc->StartCall();
+    rpc->Finish(&reply, &status, (void*)1);
+
+    void* got_tag;
+    bool ok = false;
+    GPR_ASSERT(cq.Next(&got_tag, &ok));
+    GPR_ASSERT(got_tag == (void*)1);
+    GPR_ASSERT(ok);
+
+	std::map<int, GameClient::Web::Client::Score> ret;
+    if (!status.ok()) {
+		return ret;
+    }
+
+	auto scores = reply.scores();
+	for (auto& score : scores)
+	{
+		GameClient::Web::Client::Score normalisedScore;
+		normalisedScore.position = score.position();
+		normalisedScore.score = score.score();
+		normalisedScore.userName = ConvertUtf8ToWide(score.username());
+		ret.emplace(score.position(), normalisedScore);
+	}
+
+	return ret;
 }
 
 grpc::SslCredentialsOptions getSslOptions()
@@ -105,15 +114,4 @@ grpc::SslCredentialsOptions getSslOptionsFromCert(const std::string& path)
 
 	options.pem_root_certs = content.data();
 	return options;
-}
-
-std::string GameClient::Web::Client::SayHello() {
-    _putenv("GRPC_VERBOSITY=DEBUG");
-
-    auto channel_creds = grpc::SslCredentials(getSslOptions());
-    auto channel = grpc::CreateChannel("localhost:7132", channel_creds); // WHen run against a app service, omit the protocol and port
-    GreeterClient greeter(channel);
-    
-    std::string user = "world";
-    return greeter.SayHello(user);
 }

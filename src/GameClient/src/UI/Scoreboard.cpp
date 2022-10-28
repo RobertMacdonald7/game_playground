@@ -1,5 +1,4 @@
 #include "Scoreboard.h"
-#include "Web.Client/Client.h"
 
 #include "GameDefinitions.h"
 
@@ -8,6 +7,7 @@ GameClient::UI::Scoreboard::Scoreboard()
 	_scoreLabel = std::make_unique<Controls::Label>();
 	_highScoreLabel = std::make_unique<Controls::Label>();
 	_restartPromptLabel = std::make_unique<Controls::Label>();
+	_client = std::make_unique<Web::Client::ScoreClient>();
 
 	_scoreLabel->text = L"SCORE: 0";
 	_scoreLabel->size = { game_width_pixels, 100 };
@@ -38,7 +38,7 @@ void GameClient::UI::Scoreboard::SetScore(const int score)
 	}
 
 	_scoreLabel->text = L"SCORE: " + std::to_wstring(score);
-	GameClient::Web::Client::SayHello();
+	auto result = _client->GetTopScores(0, 10);
 }
 
 void GameClient::UI::Scoreboard::Draw(Engine::IRender& renderEngine)

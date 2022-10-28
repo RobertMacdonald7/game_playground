@@ -1,22 +1,25 @@
-#include <greet.pb.h>
-#include <greet.grpc.pb.h>
+#include <score.pb.h>
+#include <score.grpc.pb.h>
 
 #include <grpcpp/grpcpp.h>
 
-namespace GameClient::Web::Client
-{
+namespace GameClient::Web::Client {
     using grpc::Channel;
-    using greet::Greeter;
+    using score::ScoreService;
 
-    class GreeterClient {
-        private:
-            std::unique_ptr<Greeter::Stub> stub_;
-
-        public:
-            explicit GreeterClient(std::shared_ptr<Channel> channel);
-
-            std::string SayHello(const std::string& user);
+    struct Score {
+        int position;
+        int score;
+        std::wstring userName;
     };
 
-    std::string SayHello();
+    class ScoreClient {
+        private:
+            std::unique_ptr<ScoreService::Stub> stub_;
+
+        public:
+            explicit ScoreClient();
+
+            std::map<int, GameClient::Web::Client::Score> GetTopScores(int page, int resultsPerPage);
+    };
 }

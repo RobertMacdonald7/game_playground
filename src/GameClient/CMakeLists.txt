@@ -17,6 +17,7 @@ include(sourcelist.cmake)
 get_filename_component(PROTOS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Protos" ABSOLUTE)
 set(PROTO_FILES
     ${PROTOS_DIR}/greet.proto
+    ${PROTOS_DIR}/score.proto
 )
 
 # Generate file names for protoc output
@@ -36,7 +37,7 @@ add_custom_command(
            --cpp_out "${CMAKE_CURRENT_BINARY_DIR}/proto-gen"
            -I "${PROTOS_DIR}"
            --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
-           "${PROTO_FILES}"
+           ${PROTO_FILES}
       DEPENDS ${PROTO_FILES}
 )
 

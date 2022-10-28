@@ -4,6 +4,7 @@
 
 #include "EngineLib/IDrawable.h"
 #include "Controls/Label.h"
+#include "Web.Client/Client.h"
 
 namespace GameClient::UI
 {
@@ -14,6 +15,8 @@ namespace GameClient::UI
 		std::unique_ptr<Controls::Label> _highScoreLabel = nullptr;
 		std::unique_ptr<Controls::Label> _restartPromptLabel = nullptr;
 		int _highScore = 0;
+		std::unique_ptr<GameClient::Web::Client::ScoreClient> _client = nullptr;
+
 
 	public:
 		Scoreboard();

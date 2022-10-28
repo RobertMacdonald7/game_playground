@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option csharp_namespace = "Score.Service";
+
+package score;
+
+service ScoreService {
+    rpc GetTopScores (GetTopScoresRequest) returns (GetTopScoresReply);
+
+    rpc SetScoreForUser (SetScoreForUserRequest) returns (SetScoreForUserReply);
+}
+
+message GetTopScoresRequest {
+    int32 page = 1;
+    int32 results_per_page = 2;
+}
+
+message GetTopScoresReply {
+    repeated Score scores = 1;
+}
+
+message Score {
+    int32 position = 1;
+    string username = 2;
+    int32 score = 3;
+}
+
+message SetScoreForUserRequest {
+    string username = 1;
+    int32 score = 2;
+}
+
+message SetScoreForUserReply {
+    Score score = 1;
+}
