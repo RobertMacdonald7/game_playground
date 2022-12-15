@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Score.Service", "Score.Service/Score.Service.csproj", "{D15B1E06-6E5B-4925-A8B7-66991DDFDC28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScoreService", "ScoreService\ScoreService.csproj", "{D15B1E06-6E5B-4925-A8B7-66991DDFDC28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

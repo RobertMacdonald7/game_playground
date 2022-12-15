@@ -1,7 +1,7 @@
-using Score.Service;
 using Grpc.Core;
+using ScoreService.Grpc.Service;
 
-namespace Score.Service.Services
+namespace ScoreService.Services
 {
 	public class GreeterService : Greeter.GreeterBase
 	{

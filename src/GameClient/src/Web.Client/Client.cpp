@@ -22,16 +22,14 @@ std::string utf8Encode(const std::wstring& wstr)
 
 std::wstring ConvertUtf8ToWide(const std::string& str)
 {
-    int count = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), str.length(), NULL, 0);
+    auto count = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), str.length(), NULL, 0);
     std::wstring wstr(count, 0);
     MultiByteToWideChar(CP_UTF8, 0, str.c_str(), str.length(), &wstr[0], count);
     return wstr;
 }
 
 GameClient::Web::Client::ScoreClient::ScoreClient() {
-	_putenv("GRPC_VERBOSITY=DEBUG");
-
-	auto channel = grpc::CreateChannel("localhost:8080", grpc::InsecureChannelCredentials()); // WHen run against a app service, omit the protocol and port
+	auto channel = grpc::CreateChannel("localhost:8080", grpc::InsecureChannelCredentials()); // When run against a app service, omit the protocol and port
 	stub_ = std::make_unique<score::ScoreService::Stub>(channel);
 }
 

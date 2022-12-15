@@ -95,5 +95,19 @@
     },
     "cmake.configureArgs": [
         "-DgRPC_BUILD_GRPC_CSHARP_PLUGIN=OFF"
-    ]
+    ],
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/build": true,
+    },
+    "C_Cpp.files.exclude": {
+        "**/build": true,
+        "**/.vscode": true,
+        "**/.vs": true
+    },
 }
