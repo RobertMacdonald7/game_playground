@@ -10,8 +10,8 @@ namespace GameClient::UI::Controls
 	{
 	public:
 		std::wstring text;
-		Engine::Coordinate2d location = { 0,0 };
-		Engine::Size size = { 0,0 };
+		Engine::Coordinate2d location = {0, 0};
+		Engine::Size size = {0, 0};
 		bool border = false;
 		Engine::TextAlignment alignment = Engine::TextAlignment::Center;
 		Engine::Colour colour = Engine::Colour::Black;

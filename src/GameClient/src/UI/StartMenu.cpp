@@ -21,7 +21,8 @@ GameClient::UI::StartMenu::StartMenu()
 	_exitButton->size = {300, 100};
 	_exitButton->location = {
 		_startButton->location.x,
-		game_height_pixels * 2 / 3 - _exitButton->size.height / 2};
+		game_height_pixels * 2 / 3 - _exitButton->size.height / 2
+	};
 }
 
 void GameClient::UI::StartMenu::OnInput(State::IStateMachine& context, const Input::Input input) const

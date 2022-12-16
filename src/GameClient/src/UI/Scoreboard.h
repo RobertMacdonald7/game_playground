@@ -14,12 +14,11 @@ namespace GameClient::UI
 		std::unique_ptr<Controls::Label> _scoreLabel = nullptr;
 		std::unique_ptr<Controls::Label> _highScoreLabel = nullptr;
 		std::unique_ptr<Controls::Label> _restartPromptLabel = nullptr;
-		int _highScore = 0;
 		std::unique_ptr<GameClient::Web::Client::ScoreClient> _client = nullptr;
 
-
 	public:
-		Scoreboard();
+		Scoreboard() = delete;
+		explicit Scoreboard(std::unique_ptr<GameClient::Web::Client::ScoreClient> scoreClient);
 		~Scoreboard() override = default;
 		Scoreboard(Scoreboard& copyOther) = delete;
 		Scoreboard operator=(Scoreboard& copyOther) = delete;
@@ -30,11 +29,11 @@ namespace GameClient::UI
 		/**
 		 * \brief Sets the score and high score
 		 */
-		void SetScore(int score);
+		void SetScore(int score) const;
 
 		/**
 		 * \copydoc Engine::IDrawable::Draw
 		 */
-		void Draw(Engine::IRender & renderEngine) override;
+		void Draw(Engine::IRender& renderEngine) override;
 	};
 }

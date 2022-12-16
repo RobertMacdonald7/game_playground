@@ -25,7 +25,7 @@ namespace GameClient::UI
 		/**
 		 * \brief Sets the score
 		 */
-		void SetScore(int score);
+		void SetScore(int score) const;
 
 		/**
 		 * \copydoc Engine::IDrawable::Draw

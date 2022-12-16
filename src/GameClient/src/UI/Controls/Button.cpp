@@ -9,7 +9,6 @@ void GameClient::UI::Controls::Button::Draw(Engine::IRender& renderEngine)
 	else
 	{
 		renderEngine.DrawRectangle(location, size, 1.0f, Engine::Colour::Black);
-
 	}
 
 	renderEngine.DrawString(text, location, size, Engine::Colour::Black, alignment);

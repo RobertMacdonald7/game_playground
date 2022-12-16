@@ -27,6 +27,7 @@ namespace ScoreService.Services
 
 		public override async Task<SetScoreForUserReply> SetScoreForUser(SetScoreForUserRequest request, ServerCallContext context)
 		{
+			await Task.Delay(10000);
 			var score  = new UserScore {
 				Username = request.Username,
 				Score = request.Score,

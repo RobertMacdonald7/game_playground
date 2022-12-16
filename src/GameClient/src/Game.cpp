@@ -5,7 +5,8 @@
 GameClient::Game::Game(std::unique_ptr<Engine::IEngine> engine, std::unique_ptr<State::GameStateMachine> stateMachine):
 	_engine(std::move(engine)),
 	_stateMachine(std::move(stateMachine))
-{ }
+{
+}
 
 GameClient::Game::~Game() = default;
 

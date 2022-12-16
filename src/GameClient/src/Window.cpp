@@ -63,7 +63,9 @@ HRESULT GameClient::Window::Initialize(HINSTANCE hInstance)
 	auto states = std::vector<std::shared_ptr<State::IGameState>>{
 		std::make_shared<State::StartMenuState>(std::make_shared<UI::StartMenu>()),
 		std::make_shared<State::Playing>(std::make_shared<UI::Score>()),
-		std::make_shared<State::GameOverState>(std::make_shared<UI::Scoreboard>())
+		std::make_shared<State::GameOverState>(std::make_shared<UI::Scoreboard>(
+			std::make_unique<Web::Client::ScoreClient>()
+		))
 	};
 
 	const Engine::Direct2DEngineFactory engineFactory;

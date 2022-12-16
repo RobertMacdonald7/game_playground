@@ -15,6 +15,7 @@ namespace GameClient
 	private:
 		HWND _hwnd = nullptr;
 		std::unique_ptr<Game> _game = nullptr;
+		std::unique_ptr<std::thread> _rpcThread = nullptr;
 		const float _defaultDpi = 96.f;
 
 	public:

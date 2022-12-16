@@ -32,7 +32,7 @@ namespace GameClient::GameObjects
 
 		bool _growNextUpdate = false;
 		int _growSnake = 0;
-		size_t _initialSize;
+		size_t _initialSize{};
 
 	public:
 		explicit Snake(std::shared_ptr<Collision::CollisionDetector> collisionDetector);
