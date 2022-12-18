@@ -6,7 +6,7 @@ namespace ScoreService.Repositories
 	{
 		Task<IEnumerable<UserScoreWithPosition>> GetByUserName(string userName);
 
-		Task<UserScoreWithPosition> Add(UserScore score);
+		Task<UserScoreWithPosition> Add(UserScore newScore);
 
 		Task<UserScore> Delete(UserScore score);
 

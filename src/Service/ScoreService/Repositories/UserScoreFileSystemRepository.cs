@@ -73,13 +73,13 @@ namespace ScoreService.Repositories
 			return new UserScoreWithPosition { Score = newScore, Position = position };
 		}
 
-		public async Task<UserScore> Delete(UserScore score)
+		public Task<UserScore> Delete(UserScore score)
 		{
 			// 1. Read all
 			// 2. Find matching entry (return if none found)
 			// 3. Remove entry
 			// 4. Write entries back to the file
-			return score;
+			return Task.FromResult(score);
 		}
 
 		public async Task<IEnumerable<UserScoreWithPosition>> GetByUserName(string userName)

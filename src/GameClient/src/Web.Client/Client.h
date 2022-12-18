@@ -39,5 +39,7 @@ namespace GameClient::Web::Client
 			grpc::ClientContext context;
 			grpc::Status status;
 		};
+
+		grpc::SslCredentialsOptions GetSslOptions() const;
 	};
 }

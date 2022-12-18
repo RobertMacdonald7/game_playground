@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using ScoreService.Repositories;
 using ScoreService.Services;
 
@@ -5,13 +6,24 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Configure for app service deployment: https://github.com/Azure/app-service-linux-docs/blob/master/HowTo/gRPC/use_gRPC_with_dotnet.md
 builder.WebHost.ConfigureKestrel(options => {
-	options.ListenAnyIP(8080, listenOptions => {
-		listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http2;
-	});
-	options.ListenAnyIP(8585, listenOptions => {
-		listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http2;
-		//listenOptions.UseHttps(); // This is needed for local debugging of HTTPS
-	});
+	if (builder.Environment.IsDevelopment()) {
+		// Configure the HTTP development port.
+		options.ListenAnyIP(8080);
+
+		// Configure the HTTPS development port
+		options.ListenAnyIP(8585, listenOptions => {
+			listenOptions.Protocols = HttpProtocols.Http2;
+			listenOptions.UseHttps();
+		});
+	}
+	else if(builder.Environment.EnvironmentName == "AppService") {
+		// Configure ports for app-service deployment.
+		// IMPORTANT - port 8080 is needed for some reason. I assume for https redirection? The service won't work without it.
+		options.ListenAnyIP(8080);
+		options.ListenAnyIP(8585, listenOptions => {
+			listenOptions.Protocols = HttpProtocols.Http2;
+		}); 
+	}
 });
 
 // Add services to the container.

@@ -50,6 +50,10 @@ void GameClient::Web::Client::ScoreClient::SetScoreForUser(const std::wstring& u
 
 	auto call = std::make_shared<AsyncClientCall<score::SetScoreForUserReply>>();
 
+	// Request timeout of 5s
+	auto deadline = std::chrono::system_clock::now() + std::chrono::seconds(5);
+	call->context.set_deadline(deadline);
+
 	_stub->async()->SetScoreForUser(&call->context, &request, &call->reply,
 		[call, callback](grpc::Status status)
 		{
@@ -57,6 +61,7 @@ void GameClient::Web::Client::ScoreClient::SetScoreForUser(const std::wstring& u
 			if (!call->status.ok())
 			{
 				callback(false, {}, {});
+				return;
 			}
 
 			try
@@ -78,12 +83,14 @@ void GameClient::Web::Client::ScoreClient::SetScoreForUser(const std::wstring& u
 			}
 			catch (...)
 			{
+				// Something bad happened when handling the response.
+				// TODO - separate into an onError callback?
 				callback(false, {}, {});
 			}
 		});
 }
 
-grpc::SslCredentialsOptions getSslOptions()
+grpc::SslCredentialsOptions GameClient::Web::Client::ScoreClient::GetSslOptions() const
 {
 	// Fetch root certificate as required on Windows (s. issue 25533).
 	grpc::SslCredentialsOptions result;
@@ -111,15 +118,4 @@ grpc::SslCredentialsOptions getSslOptions()
 
 	CertCloseStore(hRootCertStore, 0);
 	return result;
-}
-
-grpc::SslCredentialsOptions getSslOptionsFromCert(const std::string& path)
-{
-	grpc::SslCredentialsOptions options;
-
-	std::ifstream ifs(path);
-	const std::string content((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
-
-	options.pem_root_certs = content;
-	return options;
 }
