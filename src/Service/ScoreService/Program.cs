@@ -8,7 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.ConfigureKestrel(options => {
 	if (builder.Environment.IsDevelopment()) {
 		// Configure the HTTP development port.
-		options.ListenAnyIP(8080);
+		options.ListenAnyIP(8080, listenOptions => {
+			listenOptions.Protocols = HttpProtocols.Http2;
+		});
 
 		// Configure the HTTPS development port
 		options.ListenAnyIP(8585, listenOptions => {
@@ -28,7 +30,13 @@ builder.WebHost.ConfigureKestrel(options => {
 
 // Add services to the container.
 builder.Services.AddGrpc();
-builder.Services.AddSingleton<IUserScoreRepository, UserScoreFileSystemRepository>();
+if (builder.Environment.IsDevelopment()) {
+	builder.Services.AddSingleton<IUserScoreRepository, UserScoreFileSystemRepository>();
+}
+else {
+	// app-service does not like the file system implementation, should use implement a DB repository. Use the dummy implementation for now.
+	builder.Services.AddSingleton<IUserScoreRepository, UserScoreDummyRepository>();
+}
 
 var app = builder.Build();
 

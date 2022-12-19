@@ -37,6 +37,7 @@ void GameClient::UI::Scoreboard::SetScore(const int score) const
 	_scoreLabel->text = L"SCORE: " + std::to_wstring(score);
 	_highScoreLabel->text = L"HIGH SCORE: ...";
 
+	// Callback executes on a background thread!
 	_client->SetScoreForUser(L"Robert Macdonald", score,
 		[this, score](const bool success, const Web::Client::Score& currentScore, const Web::Client::Score& highScore)
 		{
